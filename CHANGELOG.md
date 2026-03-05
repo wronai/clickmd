@@ -39,6 +39,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Box/panel rendering
 - More language highlighters
 
+## [1.0.2] - 2026-03-05
+
+### Docs
+- Update project/README.md
+- Update project/context.md
+
+### Other
+- Update Makefile
+- Update project/analysis.toon
+- Update project/calls.mmd
+- Update project/calls.png
+- Update project/compact_flow.mmd
+- Update project/compact_flow.png
+- Update project/dashboard.html
+- Update project/evolution.toon
+- Update project/flow.mmd
+- Update project/flow.png
+- ... and 5 more files
+
 ## [1.0.1] - 2026-03-05
 
 ### Docs

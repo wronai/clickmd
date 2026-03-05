@@ -1,0 +1,494 @@
+version: '1'
+project:
+  name: clickmd
+  repo: /home/tom/github/wronai/clickmd
+  language: python
+  analyzed_at: '2026-03-05T21:07:06Z'
+  tool: code2llm
+  stats:
+    files: 9
+    lines: 5292
+    functions: 163
+    classes: 10
+health:
+  cc_avg: 3.4
+  critical_count: 13
+  critical_limit: 10
+  duplicates: 0
+  cycles: 3
+  alerts:
+  - type: high_fan_out
+    target: markdown_to_html
+    value: 29
+    limit: 10
+    severity: critical
+  - type: cc_exceeded
+    target: MarkdownRenderer.table
+    value: 28
+    limit: 15
+    severity: critical
+  - type: high_fan_out
+    target: MarkdownRenderer._highlight_line
+    value: 21
+    limit: 10
+    severity: critical
+  - type: cc_exceeded
+    target: _format_debug_value
+    value: 24
+    limit: 15
+    severity: error
+  - type: cc_exceeded
+    target: MarkdownRenderer._highlight_line
+    value: 21
+    limit: 15
+    severity: error
+  - type: cc_exceeded
+    target: markdown_to_html
+    value: 21
+    limit: 15
+    severity: error
+  - type: cc_exceeded
+    target: MarkdownRenderer._highlight_log
+    value: 20
+    limit: 15
+    severity: error
+  - type: high_fan_out
+    target: _format_debug_value
+    value: 16
+    limit: 10
+    severity: error
+  - type: cc_exceeded
+    target: menu
+    value: 15
+    limit: 15
+    severity: warning
+  - type: high_fan_out
+    target: render_table
+    value: 14
+    limit: 10
+    severity: warning
+  - type: high_fan_out
+    target: menu
+    value: 13
+    limit: 10
+    severity: warning
+  - type: high_fan_out
+    target: MarkdownRenderer.table
+    value: 13
+    limit: 10
+    severity: warning
+  - type: high_fan_out
+    target: MarkdownRenderer.render_markdown_with_fences
+    value: 12
+    limit: 10
+    severity: warning
+  - type: high_fan_out
+    target: countdown
+    value: 11
+    limit: 10
+    severity: warning
+  - type: high_fan_out
+    target: inspect_obj
+    value: 11
+    limit: 10
+    severity: warning
+  - type: high_fan_out
+    target: tree
+    value: 11
+    limit: 10
+    severity: warning
+  - type: high_fan_out
+    target: render_panel
+    value: 10
+    limit: 10
+    severity: warning
+modules:
+- path: renderer.py
+  lines: 900
+  classes: 1
+  methods: 43
+  cc_max: 28
+  inbound_deps: 6
+  exports:
+  - name: MarkdownRenderer
+    type: class
+    cc_avg: 5.4
+    methods:
+    - name: render_markdown_with_fences
+      cc: 8
+      fan_out: 12
+    - name: _highlight_line
+      cc: 21
+      flag: split
+      fan_out: 21
+    - name: _highlight_log
+      cc: 20
+      flag: split
+    - name: _highlight_yaml
+      cc: 11
+    - name: table
+      cc: 28
+      flag: split
+      fan_out: 13
+  - name: strip_ansi
+    type: function
+    cc: 1
+  - name: get_renderer
+    type: function
+    cc: 2
+  - name: render_markdown
+    type: function
+    cc: 1
+  - name: table
+    type: function
+    cc: 1
+  - name: panel
+    type: function
+    cc: 1
+  - name: blockquote
+    type: function
+    cc: 1
+  - name: hr
+    type: function
+    cc: 1
+  - name: checklist
+    type: function
+    cc: 1
+- path: devtools.py
+  lines: 574
+  classes: 2
+  methods: 15
+  cc_max: 24
+  inbound_deps: 0
+  exports:
+  - name: PrettyExceptionFormatter
+    type: class
+    cc_avg: 2.8
+  - name: ClickmdHandler
+    type: class
+    cc_avg: 3.0
+  - name: install_excepthook
+    type: function
+    cc: 1
+  - name: uninstall_excepthook
+    type: function
+    cc: 1
+  - name: debug
+    type: function
+    cc: 4
+  - name: inspect_obj
+    type: function
+    cc: 11
+    fan_out: 11
+  - name: diff
+    type: function
+    cc: 11
+  - name: tree
+    type: function
+    cc: 13
+    fan_out: 11
+- path: tools/md_to_html.py
+  lines: 248
+  classes: 0
+  methods: 5
+  cc_max: 21
+  inbound_deps: 0
+  exports:
+  - name: markdown_to_html
+    type: function
+    cc: 21
+    flag: split
+    fan_out: 29
+  - name: convert_directory
+    type: function
+    cc: 2
+  - name: main
+    type: function
+    cc: 3
+- path: __init__.py
+  lines: 445
+  classes: 0
+  methods: 4
+  cc_max: 15
+  inbound_deps: 9
+  exports:
+  - name: menu
+    type: function
+    cc: 15
+    flag: split
+    fan_out: 13
+  - name: select
+    type: function
+    cc: 1
+  - name: echo
+    type: function
+    cc: 12
+  - name: md
+    type: function
+    cc: 1
+- path: rich_backend.py
+  lines: 306
+  classes: 1
+  methods: 13
+  cc_max: 14
+  inbound_deps: 9
+  exports:
+  - name: _FallbackConsole
+    type: class
+    cc_avg: 1.7
+  - name: is_rich_available
+    type: function
+    cc: 1
+  - name: get_console
+    type: function
+    cc: 8
+  - name: render_md
+    type: function
+    cc: 7
+  - name: render_panel
+    type: function
+    cc: 6
+    fan_out: 10
+  - name: render_syntax
+    type: function
+    cc: 3
+  - name: render_table
+    type: function
+    cc: 14
+    fan_out: 14
+  - name: print_md
+    type: function
+    cc: 1
+  - name: print_panel
+    type: function
+    cc: 1
+  - name: print_syntax
+    type: function
+    cc: 1
+  - name: print_table
+    type: function
+    cc: 1
+- path: progress.py
+  lines: 511
+  classes: 4
+  methods: 30
+  cc_max: 10
+  inbound_deps: 0
+  exports:
+  - name: ProgressBar
+    type: class
+    cc_avg: 2.9
+    methods:
+    - name: _render
+      cc: 10
+  - name: Spinner
+    type: class
+    cc_avg: 2.0
+  - name: LiveUpdate
+    type: class
+    cc_avg: 1.8
+  - name: StatusIndicator
+    type: class
+    cc_avg: 2.0
+  - name: progress
+    type: function
+    cc: 6
+  - name: spinner
+    type: function
+    cc: 3
+  - name: live
+    type: function
+    cc: 2
+  - name: countdown
+    type: function
+    cc: 4
+    fan_out: 11
+- path: themes.py
+  lines: 482
+  classes: 1
+  methods: 14
+  cc_max: 8
+  inbound_deps: 0
+  exports:
+  - name: Theme
+    type: class
+    cc_avg: 2.0
+  - name: get_theme
+    type: function
+    cc: 1
+  - name: set_theme
+    type: function
+    cc: 2
+  - name: register_theme
+    type: function
+    cc: 1
+  - name: list_themes
+    type: function
+    cc: 1
+  - name: is_no_color
+    type: function
+    cc: 1
+  - name: get_color_support
+    type: function
+    cc: 1
+  - name: color
+    type: function
+    cc: 7
+  - name: init_theme_from_env
+    type: function
+    cc: 2
+- path: help.py
+  lines: 522
+  classes: 0
+  methods: 9
+  cc_max: 4
+  inbound_deps: 0
+  exports:
+  - name: success
+    type: function
+    cc: 2
+  - name: warning
+    type: function
+    cc: 2
+  - name: error
+    type: function
+    cc: 2
+  - name: info
+    type: function
+    cc: 2
+  - name: echo_md
+    type: function
+    cc: 3
+- path: logger.py
+  lines: 302
+  classes: 1
+  methods: 30
+  cc_max: 4
+  inbound_deps: 1
+  exports:
+  - name: Logger
+    type: class
+    cc_avg: 1.6
+  - name: get_logger
+    type: function
+    cc: 2
+  - name: set_logger
+    type: function
+    cc: 1
+  - name: log_info
+    type: function
+    cc: 1
+  - name: log_success
+    type: function
+    cc: 1
+  - name: log_warning
+    type: function
+    cc: 1
+  - name: log_error
+    type: function
+    cc: 1
+  - name: log_action
+    type: function
+    cc: 1
+- path: decorators.py
+  lines: 286
+  classes: 0
+  methods: 0
+  cc_max: 0
+  inbound_deps: 0
+hotspots:
+- name: markdown_to_html
+  fan_out: 29
+  note: Orchestrates 29 calls
+- name: MarkdownRenderer._highlight_line
+  fan_out: 21
+  note: Orchestrates 21 calls
+- name: _format_debug_value
+  fan_out: 16
+  note: 16-way dispatch
+- name: render_table
+  fan_out: 14
+  note: "Render a formatted table.\n\nArgs:\n    headers: Column headers\n    rows:\
+    \ Table row"
+- name: menu
+  fan_out: 13
+  note: "Display a numbered markdown menu and prompt for selection.\n\nArgs:\n   \
+    \ title: Men"
+- name: MarkdownRenderer.table
+  fan_out: 13
+  note: "Render a table with configurable style.\n\nArgs:\n    headers: Column headers\n\
+    \    r"
+- name: MarkdownRenderer.render_markdown_with_fences
+  fan_out: 12
+  note: Orchestrates 12 calls
+- name: countdown
+  fan_out: 11
+  note: "Display a countdown timer.\n\nArgs:\n    seconds: Number of seconds to count\
+    \ down\n "
+- name: inspect_obj
+  fan_out: 11
+  note: "Inspect an object showing its type, methods, and attributes.\n\nArgs:\n \
+    \   obj: Obj"
+- name: tree
+  fan_out: 11
+  note: "Display data in a tree structure.\n\nArgs:\n    data: Dictionary to display\
+    \ as tree"
+refactoring:
+  priorities:
+  - action: Split MarkdownRenderer.table (CC=28 → target CC<10)
+    impact: high
+    effort: low
+    module: renderer.py
+  - action: Split god module renderer.py (900L, 1 classes)
+    impact: high
+    effort: high
+  - action: Split god module devtools.py (574L, 2 classes)
+    impact: high
+    effort: high
+  - action: Split god module progress.py (511L, 4 classes)
+    impact: high
+    effort: high
+  - action: Split god module help.py (522L, 0 classes)
+    impact: high
+    effort: high
+  - action: Split menu (CC=15 → target CC<10)
+    impact: medium
+    effort: low
+    module: __init__.py
+  - action: Split MarkdownRenderer._highlight_line (CC=21 → target CC<10)
+    impact: medium
+    effort: low
+    module: renderer.py
+  - action: Split MarkdownRenderer._highlight_log (CC=20 → target CC<10)
+    impact: medium
+    effort: low
+    module: renderer.py
+  - action: Split markdown_to_html (CC=21 → target CC<10)
+    impact: medium
+    effort: low
+    module: md_to_html.py
+  - action: Split _format_debug_value (CC=24 → target CC<10)
+    impact: medium
+    effort: low
+    module: devtools.py
+  - action: 'Break circular dependency: rich_backend._FallbackConsole.print'
+    impact: medium
+    effort: low
+  - action: 'Break circular dependency: devtools._format_debug_value'
+    impact: medium
+    effort: low
+  - action: 'Break circular dependency: devtools.tree'
+    impact: medium
+    effort: low
+  - action: Reduce markdown_to_html fan-out (currently 29)
+    impact: medium
+    effort: medium
+  - action: Reduce MarkdownRenderer._highlight_line fan-out (currently 21)
+    impact: medium
+    effort: medium
+evolution:
+- date: '2026-03-05'
+  cc_avg: 3.4
+  critical: 13
+  lines: 5292
+  note: Automated analysis

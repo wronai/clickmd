@@ -1,0 +1,308 @@
+# code2llm | 10f 4576L | py:10 | 2026-03-05
+# CC̄=3.4 | critical:13/220 | dups:0 | cycles:3
+
+HEALTH[7]:
+  🔴 GOD   progress.py = 511L, 4 classes, 30m, max CC=10
+  🟡 CC    menu CC=15 (limit:15)
+  🟡 CC    _highlight_line CC=21 (limit:15)
+  🟡 CC    _highlight_log CC=20 (limit:15)
+  🟡 CC    table CC=28 (limit:15)
+  🟡 CC    markdown_to_html CC=21 (limit:15)
+  🟡 CC    _format_debug_value CC=24 (limit:15)
+
+REFACTOR[3]:
+  1. split progress.py  (god module)
+  2. split 6 high-CC methods  (CC>15)
+  3. break 3 circular dependencies
+
+COUPLING:
+                rich_backend      devtools      renderer      progress          help       clickmd        logger
+  rich_backend            ──           ←33            ←1           ←13            ←8            ←2            ←1  hub
+      devtools            33            ──             6                                                          !! fan-out
+      renderer             1            ←6            ──            ←5            ←4            ←2             2  hub
+      progress            13                           5            ──                                            !! fan-out
+          help             8                           4                          ──                              !! fan-out
+       clickmd             2                           2                                        ──              
+        logger             1                           1                                                      ──
+  CYCLES: 3
+  HUB: renderer/ (fan-in=18)
+  HUB: rich_backend/ (fan-in=58)
+  SMELL: devtools/ fan-out=39 → split needed
+  SMELL: help/ fan-out=12 → split needed
+  SMELL: progress/ fan-out=18 → split needed
+
+LAYERS:
+  tools/                          CC̄=5.6    ←in:0  →out:0
+  │ !! md_to_html                 248L  0C    5m  CC=21     ←0
+  │
+  ./                              CC̄=3.4    ←in:0  →out:0
+  │ !! renderer                   900L  1C   43m  CC=28     ←6
+  │ !! devtools                   574L  2C   15m  CC=24     ←0
+  │ !! help                       522L  0C    9m  CC=4      ←0
+  │ !! progress                   511L  4C   30m  CC=10     ←0
+  │ themes                     482L  1C   14m  CC=8      ←0
+  │ !! __init__                   445L  0C    4m  CC=15     ←9
+  │ !  rich_backend               306L  1C   13m  CC=14     ←9
+  │ logger                     302L  1C   30m  CC=4      ←1
+  │ decorators                 286L  0C    0m  CC=0.0    ←0
+  │
+
+DUPLICATES[0]: none
+
+FUNCTIONS (CC≥10, 13 of 163):
+   28.0  MarkdownRenderer.table                     27n   2exit  loops+cond+ret  !! split
+   24.0  _format_debug_value                        50n  14exit  loops+cond+ret  !! split
+   21.0  MarkdownRenderer._highlight_line           60n  21exit  cond+ret  !! split
+   21.0  markdown_to_html                           24n   2exit  loops+cond+ret  !! split
+   20.0  MarkdownRenderer._highlight_log            36n  13exit  cond+ret  !! split
+   15.0  menu                                       13n   2exit  loops+cond+ret  !! split
+   14.0  render_table                               11n   1exit  loops+cond
+   13.0  tree                                       18n   2exit  loops+cond+ret
+   12.0  echo                                       16n   3exit  cond+ret
+   11.0  MarkdownRenderer._highlight_yaml           22n   5exit  cond+ret
+   11.0  inspect_obj                                13n   1exit  loops+cond
+   11.0  diff                                       13n   1exit  loops+cond
+   10.0  ProgressBar._render                        17n   2exit  cond+ret
+
+  summary:
+    critical(≥10): 13 | high(5-10): 18 | medium(2-5): 68 | low(<2): 64
+    8% CC≥10  19% CC≥5
+
+HOTSPOTS:
+  #1  markdown_to_html                     fan=29   "calls 29 functions"
+  #2  MarkdownRenderer._highlight_line     fan=21   "MarkdownRenderer method, fan-out=21"
+  #3  _format_debug_value                  fan=16   "16-way dispatch"
+  #4  render_table                         fan=14   "calls 14 functions"
+  #5  menu                                 fan=13   "calls 13 functions"
+  #6  MarkdownRenderer.table               fan=13   "MarkdownRenderer method, fan-out=13"
+  #7  MarkdownRenderer.render_markdown_with_fences  fan=12   "MarkdownRenderer method, fan-out=12"
+  #8  countdown                            fan=11   "calls 11 functions"
+  #9  inspect_obj                          fan=11   "calls 11 functions"
+  #10 tree                                 fan=11   "calls 11 functions"
+
+CLASSES:
+  MarkdownRenderer               ████████████████████████  35m  CC̄=5.4   max=28    !!
+  Logger                         ███████████████           23m  CC̄=1.6   max=4   
+  ProgressBar                    ████                       7m  CC̄=2.9   max=10  
+  Spinner                        ████                       6m  CC̄=2.0   max=5   
+  LiveUpdate                     ███                        5m  CC̄=1.8   max=3   
+  StatusIndicator                ███                        5m  CC̄=2.0   max=3   
+  PrettyExceptionFormatter       ███                        5m  CC̄=2.8   max=7   
+  _FallbackConsole               ██                         3m  CC̄=1.7   max=2   
+  ClickmdHandler                 ██                         3m  CC̄=3.0   max=5   
+  Theme                                                     1m  CC̄=2.0   max=2   
+
+D:
+  renderer.py:
+    e: MarkdownRenderer,strip_ansi,get_renderer,render_markdown,table,panel,blockquote,hr,checklist
+    MarkdownRenderer
+      __init__(2)  CC=4.0
+    strip_ansi(text)
+    get_renderer(stream,use_colors)
+    render_markdown(text,text_lang,stream,use_colors)
+    table(headers,rows)
+    panel(content)
+    blockquote(content)
+    hr(char,width)
+    checklist(items)
+  devtools.py:
+    e: PrettyExceptionFormatter,ClickmdHandler,install_excepthook,uninstall_excepthook,debug,_format_debug_value,inspect_obj,diff,tree
+    PrettyExceptionFormatter  # Format exceptions with syntax highlighting and context.
+
+Fea...
+      __init__(4)  CC=1.0
+    ClickmdHandler  # Logging handler that formats logs with clickmd styling.
+
+Usa...
+      __init__(5)  CC=2.0
+        → __init__(5)  CC=2.0
+    install_excepthook(show_locals,context_lines)
+    uninstall_excepthook()
+    debug(obj,name,max_depth,max_items,stream,markdown_safe)
+    _format_debug_value(obj,renderer,depth,max_depth,max_items)
+    inspect_obj(obj,markdown_safe)
+    diff(old,new,old_name,new_name,markdown_safe)
+    tree(data,prefix,is_last,name,_is_root)
+  tools/md_to_html.py:
+    e: _inline_md_to_html,_escape_text,markdown_to_html,convert_directory,main
+    _inline_md_to_html(text)
+    _escape_text(text)
+    markdown_to_html(markdown_text,title)
+    convert_directory(md_dir)
+    main()
+  __init__.py:
+    e: menu,select,echo,md
+    menu(title,items,default,prompt_text,exit_option)
+    select(prompt_text,items,default)
+    echo(message,file,nl,err,color)
+    md(text)
+  rich_backend.py:
+    e: _FallbackConsole,is_rich_available,get_console,render_md,render_panel,render_syntax,render_table,print_md,print_panel,print_syntax,print_table
+    _FallbackConsole  # Simple console wrapper when Rich is not available....
+      __init__(1)  CC=1.0
+    is_rich_available()
+    get_console(stream,force_terminal,no_color)
+    render_md(text,stream,use_rich)
+    render_panel(content,title,style,stream)
+    render_syntax(code,language,theme,line_numbers,stream)
+    render_table(headers,rows,title,stream)
+    print_md(text)
+    print_panel(content)
+    print_syntax(code,language)
+    print_table(headers,rows)
+  progress.py:
+    e: ProgressBar,Spinner,LiveUpdate,StatusIndicator,_is_tty,_clear_line,_write_inline,progress,spinner,live,countdown
+    ProgressBar  # A customizable progress bar.
+
+Example:
+    bar = ProgressBar...
+      __init__(9)  CC=1.0
+    Spinner  # An animated spinner for indeterminate progress.
+
+Example:
+  ...
+      __init__(5)  CC=1.0
+    LiveUpdate  # Live-updating display that refreshes in place.
+
+Example:
+   ...
+      __init__(1)  CC=1.0
+    StatusIndicator  # A status indicator that shows step-by-step progress.
+
+Exampl...
+      __init__(0)  CC=1.0
+    _is_tty()
+    _clear_line()
+    _write_inline(text)
+    progress(iterable,label,total)
+    spinner(message,style)
+    live(initial)
+    countdown(seconds,message,on_complete)
+  themes.py:
+    e: Theme,_rgb_to_ansi,_color_256,_ansi_color,_check_no_color,_detect_color_support,get_theme,set_theme,register_theme,list_themes,is_no_color,get_color_support,color,init_theme_from_env
+    Theme  # Color theme definition....
+      get_color(1)  CC=2.0
+    _rgb_to_ansi(r,g,b)
+    _color_256(index)
+    _ansi_color(name)
+    _check_no_color()
+    _detect_color_support()
+    get_theme()
+    set_theme(name)
+    register_theme(theme)
+    list_themes()
+    is_no_color()
+    get_color_support()
+    color(name,text,bold,dim,use_theme)
+    init_theme_from_env()
+  examples/markdown_help.py:
+    e: cli,process,config,version
+    cli()
+    process(input,output,format,verbose,dry_run)
+    config(action,key,value)
+    version()
+  examples/simple_cli.py:
+    e: greet,cli,hello,info,status
+    greet(name,loud)
+    cli()
+    hello(name)
+    info()
+    status(format)
+  logger.py:
+    e: Logger,get_logger,set_logger,log_info,log_success,log_warning,log_error,log_action
+    Logger  # Markdown-aware logger that wraps output in codeblocks.
+
+All ...
+      __init__(4)  CC=2.0
+    get_logger(verbose)
+    set_logger(logger)
+    log_info(message)
+    log_success(message)
+    log_warning(message)
+    log_error(message)
+    log_action(action,message)
+  help.py:
+    e: _is_tty,_render_markdown_help,_strip_markdown_to_plain,_format_option_help,success,warning,error,info,echo_md
+    _is_tty()
+    _render_markdown_help(text,use_colors)
+    _strip_markdown_to_plain(text)
+    _format_option_help(help_text,use_colors)
+    success(message)
+    warning(message)
+    error(message)
+    info(message)
+    echo_md(text,err)
+  examples/phase3_progress.py:
+    e: demo_progress_bar,demo_spinners,demo_status_indicator,demo_live_update,demo_countdown,demo_combined
+    demo_progress_bar()
+    demo_spinners()
+    demo_status_indicator()
+    demo_live_update()
+    demo_countdown()
+    demo_combined()
+  examples/api_response.py:
+    e: handle_api_error
+    handle_api_error(response)
+  examples/logger_usage.py:
+    e: basic_usage,action_logging,progress_and_steps,exception_handling,grouped_output,llm_logging,mixed_output,real_world_example
+    basic_usage()
+    action_logging()
+    progress_and_steps()
+    exception_handling()
+    grouped_output()
+    llm_logging()
+    mixed_output()
+    real_world_example()
+  examples/config_viewer.py:
+    e: show_yaml_config,show_json_config,show_toml_config,show_env_config,show_config_diff,show_config_tree
+    show_yaml_config()
+    show_json_config()
+    show_toml_config()
+    show_env_config()
+    show_config_diff()
+    show_config_tree()
+  examples/cli_app.py:
+    e: cli,hello,status,example
+    cli()
+    hello(name,formal)
+    status()
+    example(language)
+  examples/phase4_themes.py:
+    e: demo_available_themes,demo_theme_switching,demo_theme_colors,demo_color_support,demo_custom_theme,demo_no_color,demo_styled_output
+    demo_available_themes()
+    demo_theme_switching()
+    demo_theme_colors()
+    demo_color_support()
+    demo_custom_theme()
+    demo_no_color()
+    demo_styled_output()
+  examples/phase5_devtools.py:
+    e: User,demo_debug,demo_inspect,demo_tree,demo_diff,demo_logging,demo_pretty_exceptions,demo_combined
+    User  # Sample user class for debugging....
+    demo_debug()
+    demo_inspect()
+    demo_tree()
+    demo_diff()
+    demo_logging()
+    demo_pretty_exceptions()
+    demo_combined()
+  examples/colored_logging.py:
+    e: main
+    main()
+  examples/custom_renderer.py:
+    e: main
+    main()
+  examples/phase1_features.py:
+    e: demo_tables,demo_panels,demo_blockquotes,demo_horizontal_rules,demo_checklists,demo_nested_lists,demo_combined
+    demo_tables()
+    demo_panels()
+    demo_blockquotes()
+    demo_horizontal_rules()
+    demo_checklists()
+    demo_nested_lists()
+    demo_combined()
+  decorators.py:
+  examples/one_liners.py:
+  examples/quickstart.py:
+  examples/basic.py:
+  examples/cli_colors.py:

@@ -75,14 +75,6 @@ clean:
 	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 	find . -type f -name "*.pyc" -delete
 
-build: clean
-	$(PYTHON) -m build
-
-publish-test: build
-	$(PYTHON) -m twine upload --repository testpypi dist/*
-
-publish: build
-	$(PYTHON) -m twine upload dist/*
 
 docs:
 	@echo "Documentation is in README.md and docs/"
@@ -133,6 +125,54 @@ examples-html: examples-md
 	$(PYTHON) tools/md_to_html.py $(EXAMPLES_OUT)
 	@echo "Opening HTML files in browser..."
 	@for html in $(EXAMPLES_OUT)/*.html; do xdg-open "$$html" >/dev/null 2>&1 || true; done
+
+
+# =============================================================================
+# Building
+# =============================================================================
+
+build:
+	rm -rf build/ dist/ *.egg-info
+	$(PYTHON) -m build
+	@echo "✓ Build complete - check dist/"
+
+# =============================================================================
+# Release
+# =============================================================================
+
+publish-test: build
+	@echo "🚀 Publishing to TestPyPI..."
+	$(PYTHON) -m venv publish-test-env
+	publish-test-env/bin/pip install twine
+	publish-test-env/bin/python -m twine upload --repository testpypi dist/*
+	rm -rf publish-test-env
+	@echo "✓ Published to TestPyPI"
+
+bump-patch:
+	@echo "🔢 Bumping patch version..."
+	$(PYTHON) scripts/bump_version.py patch 2>/dev/null || echo "Create scripts/bump_version.py or edit pyproject.toml manually"
+
+bump-minor:
+	@echo "🔢 Bumping minor version..."
+	$(PYTHON) scripts/bump_version.py minor 2>/dev/null || echo "Create scripts/bump_version.py or edit pyproject.toml manually"
+
+bump-major:
+	@echo "🔢 Bumping major version..."
+	$(PYTHON) scripts/bump_version.py major 2>/dev/null || echo "Create scripts/bump_version.py or edit pyproject.toml manually"
+
+publish: build
+	@echo "🚀 Publishing to PyPI..."
+	@echo "🔢 Bumping patch version..."
+	$(MAKE) bump-patch
+	@echo "🔨 Rebuilding package with new version..."
+	$(MAKE) build
+	@echo "📦 Publishing to PyPI..."
+	$(PYTHON) -m venv publish-env
+	publish-env/bin/pip install twine
+	publish-env/bin/python -m twine upload dist/*
+	rm -rf publish-env
+	@echo "✓ Published to PyPI"
+
 
 # Development shortcuts
 .PHONY: t l f c

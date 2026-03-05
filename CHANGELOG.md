@@ -39,6 +39,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Box/panel rendering
 - More language highlighters
 
+## [1.0.3] - 2026-03-05
+
+### Other
+- Update Makefile
+- Update publish-env/bin/docutils
+- Update publish-env/bin/keyring
+- Update publish-env/bin/markdown-it
+- Update publish-env/bin/normalizer
+- Update publish-env/bin/pygmentize
+- Update publish-env/bin/rst2html
+- Update publish-env/bin/rst2html4
+- Update publish-env/bin/rst2html5
+- Update publish-env/bin/rst2latex
+- ... and 8 more files
+
 ## [1.0.2] - 2026-03-05
 
 ### Docs

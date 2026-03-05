@@ -4,13 +4,13 @@ build-backend = "hatchling.build"
 
 [project]
 name = "clickmd"
-version = "1.0.2"
+version = "1.0.3"
 description = "Markdown rendering for CLI applications with syntax highlighting"
 readme = "README.md"
 license = "Apache-2.0"
 authors = [
     { name = "Reclapp Team", email = "contact@reclapp.io" },
-    "Tom Sapletta <tom@sapletta.com>",
+    { name = "Tom Sapletta", email = "tom@sapletta.com" },
 ]
 keywords = ["cli", "markdown", "terminal", "ansi", "colors", "syntax-highlighting"]
 classifiers = [

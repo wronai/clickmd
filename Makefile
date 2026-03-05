@@ -142,10 +142,7 @@ build:
 
 publish-test: build
 	@echo "🚀 Publishing to TestPyPI..."
-	$(PYTHON) -m venv publish-test-env
-	publish-test-env/bin/pip install twine
-	publish-test-env/bin/python -m twine upload --repository testpypi dist/*
-	rm -rf publish-test-env
+	$(PYTHON) -m twine upload --repository testpypi dist/*
 	@echo "✓ Published to TestPyPI"
 
 bump-patch:
@@ -162,21 +159,19 @@ bump-major:
 
 publish: build
 	@echo "🚀 Publishing to PyPI..."
-	@echo "🔢 Bumping patch version..."
-	$(MAKE) bump-patch
-	@echo "🔨 Rebuilding package with new version..."
-	$(MAKE) build
-	@echo "📦 Publishing to PyPI..."
-	$(PYTHON) -m venv publish-env
-	publish-env/bin/pip install twine
-	publish-env/bin/python -m twine upload dist/*
-	rm -rf publish-env
+	$(PYTHON) -m twine upload --skip-existing dist/*
+	@echo "✓ Published to PyPI"
+
+publish-new: bump-patch build
+	@echo "🚀 Publishing new version to PyPI..."
+	$(PYTHON) -m twine upload dist/*
 	@echo "✓ Published to PyPI"
 
 
 # Development shortcuts
-.PHONY: t l f c
+.PHONY: t l f c tets publish-new
 t: test
 l: lint
 f: format
 c: check
+tets: test

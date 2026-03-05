@@ -58,21 +58,27 @@ make check
 
 ```
 clickmd/
-├── __init__.py         # Main exports and md(), echo()
-├── renderer.py         # MarkdownRenderer class
-├── decorators.py       # Click decorator re-exports
+├── src/clickmd/          # Package source (src layout)
+│   ├── __init__.py       # Public API: md(), echo(), menu(), select()
+│   ├── renderer.py       # Core markdown renderer & syntax highlighting
+│   ├── decorators.py     # Click decorator re-exports
+│   ├── help.py           # Markdown help formatter for Click
+│   ├── logger.py         # Markdown-aware structured logger
+│   ├── progress.py       # Progress bars, spinners, live updates
+│   ├── themes.py         # Color themes & NO_COLOR support
+│   ├── devtools.py       # Debug, inspect, diff, tree tools
+│   ├── rich_backend.py   # Optional Rich integration
+│   └── py.typed          # PEP 561 type marker
 ├── tests/
 │   ├── test_renderer.py
 │   ├── test_core.py
-│   └── test_decorators.py
-├── examples/
-│   ├── basic.py
-│   ├── cli_app.py
-│   └── ...
+│   ├── test_decorators.py
+│   └── test_logger.py
+├── examples/             # 17 demo scripts
 ├── docs/
 │   ├── API.md
 │   └── CONTRIBUTING.md
-├── pyproject.toml
+├── pyproject.toml        # Project config (hatchling)
 ├── Makefile
 └── README.md
 ```

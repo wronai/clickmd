@@ -175,21 +175,89 @@ When `click` is installed, these decorators are available:
 
 - `CLICK_AVAILABLE: bool` - Whether Click is installed
 
+## Additional Features
+
+### Interactive Menus
+
+```python
+import clickmd
+
+choice = clickmd.menu("## Choose Provider", [
+    ("groq", "Groq — fast & free tier"),
+    ("openrouter", "OpenRouter — multi-model"),
+    ("ollama", "Ollama — local, no API key"),
+])
+```
+
+### Tables & Panels
+
+```python
+from clickmd import table, panel
+
+table(
+    headers=["Name", "Version", "Status"],
+    rows=[
+        ["clickmd", "1.1.0", "✅ OK"],
+        ["click", "8.1.7", "✅ OK"],
+    ],
+)
+
+panel("Deployment complete!", title="Success", style="green")
+```
+
+### Logger
+
+```python
+from clickmd import get_logger
+
+log = get_logger("myapp")
+log.info("Starting process...")
+log.success("Build complete!")
+log.warning("Deprecated API")
+log.error("Connection failed")
+```
+
+### Themes
+
+```python
+from clickmd import set_theme, list_themes
+
+list_themes()            # Show available themes
+set_theme("monokai")     # Switch theme
+```
+
+### Developer Tools
+
+```python
+from clickmd import debug, inspect_obj, diff, tree
+
+debug(my_variable)                    # Pretty-print with type info
+inspect_obj(my_object)                # Show object attributes
+diff("old text", "new text")          # Side-by-side diff
+tree("/path/to/dir")                  # Directory tree
+```
+
 ## Examples
 
-See the [examples/](examples/) directory for more usage examples:
+See the [examples/](examples/) directory for 17 demo scripts:
 
-- `examples/basic.py` - Basic markdown rendering
-- `examples/cli_app.py` - Full CLI application with Click
-- `examples/custom_renderer.py` - Custom renderer configuration
-- `examples/logging.py` - Log-style colored output
+- `basic.py` — Basic markdown rendering
+- `cli_app.py` — Full CLI application with Click
+- `custom_renderer.py` — Custom renderer configuration
+- `colored_logging.py` — Log-style colored output
+- `phase1_features.py` — Tables, panels, blockquotes, checklists
+- `phase3_progress.py` — Progress bars, spinners, live updates
+- `phase4_themes.py` — Theming system
+- `phase5_devtools.py` — Debug, inspect, diff, tree tools
+- `logger_usage.py` — Structured logging
+- `markdown_help.py` — Markdown help formatter for Click
 
 ## Project Structure
 
 ```
 clickmd/
-├── src/clickmd/          # Package source
-│   ├── __init__.py       # Public API & re-exports
+├── src/clickmd/          # Package source (src layout)
+│   ├── __init__.py       # Public API: md(), echo(), menu(), select()
 │   ├── renderer.py       # Core markdown renderer & syntax highlighting
 │   ├── decorators.py     # Click decorator re-exports
 │   ├── help.py           # Markdown help formatter for Click
@@ -200,7 +268,8 @@ clickmd/
 │   ├── rich_backend.py   # Optional Rich integration
 │   └── py.typed          # PEP 561 type marker
 ├── tests/                # Test suite (69 tests)
-├── examples/             # Demo scripts
+├── examples/             # 17 demo scripts
+├── docs/                 # API reference & contributing guide
 ├── scripts/              # Build & version tools
 ├── tools/                # Markdown-to-HTML converter
 ├── pyproject.toml        # Project config (hatchling)

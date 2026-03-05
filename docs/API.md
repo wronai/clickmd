@@ -195,6 +195,163 @@ The `log` language provides automatic coloring based on content:
 
 ---
 
+## Tables & Panels (Phase 1)
+
+### `table(headers, rows, style="rounded") -> None`
+
+Render a formatted table.
+
+```python
+from clickmd import table
+
+table(
+    headers=["Name", "Version"],
+    rows=[["clickmd", "1.1.0"], ["click", "8.1.7"]],
+)
+```
+
+### `panel(content, title=None, style="blue") -> None`
+
+Render a bordered panel.
+
+```python
+from clickmd import panel
+
+panel("Deployment complete!", title="Success", style="green")
+```
+
+### `blockquote(text) -> None`
+
+Render a blockquote.
+
+### `hr() -> None`
+
+Render a horizontal rule.
+
+### `checklist(items) -> None`
+
+Render a checklist with ✓/✗ markers.
+
+---
+
+## Logger
+
+### `get_logger(name) -> Logger`
+
+Get a markdown-aware logger.
+
+```python
+from clickmd import get_logger
+
+log = get_logger("myapp")
+log.info("Starting...")
+log.success("Done!")
+log.warning("Deprecated API")
+log.error("Connection failed")
+log.action("deploy", "Deploying to production")
+```
+
+### Module-level shortcuts
+
+- `log_info(msg)` / `log_success(msg)` / `log_warning(msg)` / `log_error(msg)` / `log_action(action, msg)`
+
+---
+
+## Progress & Spinners (Phase 3)
+
+### `progress(total, label="") -> ProgressBar`
+
+```python
+from clickmd import progress
+
+with progress(100, "Downloading") as bar:
+    for i in range(100):
+        bar.advance(1)
+```
+
+### `spinner(label="") -> Spinner`
+
+```python
+from clickmd import spinner
+
+with spinner("Loading..."):
+    time.sleep(2)
+```
+
+### `countdown(seconds, label="") -> None`
+
+Display a countdown timer.
+
+---
+
+## Themes (Phase 4)
+
+### `set_theme(name) -> None`
+
+Switch the active color theme.
+
+### `get_theme() -> Theme`
+
+Get the current theme.
+
+### `list_themes() -> list[str]`
+
+List available theme names.
+
+### `register_theme(name, theme) -> None`
+
+Register a custom theme.
+
+### `is_no_color() -> bool`
+
+Check if `NO_COLOR` environment variable is set.
+
+---
+
+## Developer Tools (Phase 5)
+
+### `debug(value, label=None) -> None`
+
+Pretty-print a value with type information.
+
+### `inspect_obj(obj) -> None`
+
+Show object attributes and methods.
+
+### `diff(old, new) -> None`
+
+Show a side-by-side diff of two strings.
+
+### `tree(path, max_depth=3) -> None`
+
+Display a directory tree.
+
+### `install_excepthook() -> None`
+
+Install pretty exception formatting.
+
+---
+
+## Interactive Prompts
+
+### `menu(title, items, default=1, prompt_text="Select", exit_option="Exit") -> int`
+
+Display a numbered menu and prompt for selection.
+
+```python
+import clickmd
+
+choice = clickmd.menu("## Choose", ["Option A", "Option B", "Option C"])
+```
+
+Returns 1-based index, 0 for exit, -1 on error.
+
+### `select(prompt_text, items, default=1) -> int`
+
+Inline selection without a title heading.
+
+---
+
 ## Utility Functions
 
 ### `strip_ansi(text: str) -> str`
@@ -202,7 +359,7 @@ The `log` language provides automatic coloring based on content:
 Remove ANSI escape codes from text.
 
 ```python
-from clickmd.renderer import strip_ansi
+from clickmd import strip_ansi
 
 clean = strip_ansi("\x1b[31mred text\x1b[0m")
 print(clean)  # "red text"

@@ -12,6 +12,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reduce cyclomatic complexity in `devtools.py` (CC=24 → ≤14)
 - Split high-CC functions: `_highlight_line`, `table`, `_format_debug_value`
 
+## [1.1.1] - 2026-03-05
+
+### Docs
+- Update CHANGELOG.md
+- Update README.md
+- Update docs/API.md
+- Update docs/CONTRIBUTING.md
+
+### Other
+- Update VERSION
+- Update project/analysis.yaml
+
 ## [1.1.0] - 2026-03-05
 
 ### Changed
@@ -20,6 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated coverage config to target `src/clickmd`
 
 ### Fixed
+- **Fixed PyPI package layout** — previous releases installed files flat at
+  `site-packages/` root instead of `site-packages/clickmd/`, making
+  `import clickmd` fail. Now correctly produces `clickmd/` package directory.
 - Fixed `pyproject.toml` authors field format (must be inline tables)
 - Fixed `publish-env/` directory polluting builds and analysis
 - Added `--skip-existing` flag to `make publish` to avoid duplicate upload errors
@@ -30,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `make publish-new` target: bumps version + builds + publishes
 - `make tets` alias for common typo
 - VERSION file sync in bump script
+- Updated documentation (README, API docs, CONTRIBUTING)
 
 ### Removed
 - Stale `publish-env/` and `venv/` directories from repo

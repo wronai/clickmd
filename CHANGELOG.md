@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reduce cyclomatic complexity in `devtools.py` (CC=24 → ≤14)
 - Split high-CC functions: `_highlight_line`, `table`, `_format_debug_value`
 
+## [1.1.4] - 2026-03-07
+
+### Other
+- Update venv
+
 ## [1.1.3] - 2026-03-07
 
 ## [1.1.2] - 2026-03-07

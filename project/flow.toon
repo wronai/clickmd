@@ -1,4 +1,4 @@
-# clickmd/flow | 221 func | 12 pipelines | 3 hub-types | 2026-03-05
+# clickmd/flow | 221 func | 12 pipelines | 3 hub-types | 2026-03-07
 
 PIPELINES[12] (Export:12):
   Src [Export]: str → MarkdownRenderer
@@ -16,6 +16,13 @@ PIPELINES[12] (Export:12):
               → _highlight_diff(line:str) → str         CC=6    pure
               → _c(color:str, text:str, bold:bool, dim:bool) → str CC=4    pure ■
               PURITY: 4/5 pure  BOTTLENECK: _highlight_line(CC=21)
+
+  Src [Export]: response → MarkdownRenderer
+              → handle_api_error(response)              CC=3    IO ▶
+              → md(text:str) → None                     CC=1    pure
+              → render_markdown(text:str, text_lang:str, stream, use_colors:bool) → None CC=1    pure
+              → get_renderer(stream, use_colors:bool) → MarkdownRenderer CC=2    pure ■
+              PURITY: 3/4 pure  BOTTLENECK: handle_api_error(CC=3)
 
   Src [Export]: ? → MarkdownRenderer
               → basic_usage()                           CC=1    pure ▶
@@ -75,13 +82,6 @@ PIPELINES[12] (Export:12):
 
   Src [Export]: ? → MarkdownRenderer
               → main()                                  CC=1    pure ▶
-              → md(text:str) → None                     CC=1    pure
-              → render_markdown(text:str, text_lang:str, stream, use_colors:bool) → None CC=1    pure
-              → get_renderer(stream, use_colors:bool) → MarkdownRenderer CC=2    pure ■
-              PURITY: 4/4 pure  BOTTLENECK: get_renderer(CC=2)
-
-  Src [Export]: ? → MarkdownRenderer
-              → show_yaml_config()                      CC=1    pure ▶
               → md(text:str) → None                     CC=1    pure
               → render_markdown(text:str, text_lang:str, stream, use_colors:bool) → None CC=1    pure
               → get_renderer(stream, use_colors:bool) → MarkdownRenderer CC=2    pure ■
@@ -151,6 +151,24 @@ CONTRACTS:
     _c(color:str, text:str, bold:bool, dim:bool) → str
       IN:  color:str, text:str, bold:bool, dim:bool
       OUT: str
+
+  Pipeline: Src
+    handle_api_error(response)
+      IN:  response
+      OUT: None
+      SIDE-EFFECT: IO(response.get, response.get, dumps)
+
+    md(text:str) → None
+      IN:  text:str
+      OUT: None
+
+    render_markdown(text:str, text_lang:str, stream, use_colors:bool) → None
+      IN:  text:str, text_lang:str, stream, use_colors:bool
+      OUT: None
+
+    get_renderer(stream, use_colors:bool) → MarkdownRenderer
+      IN:  stream, use_colors:bool
+      OUT: MarkdownRenderer
 
   Pipeline: Src
     basic_usage()
@@ -305,23 +323,6 @@ CONTRACTS:
       IN:  stream, use_colors:bool
       OUT: MarkdownRenderer
 
-  Pipeline: Src
-    show_yaml_config()
-      IN:  ()
-      OUT: None
-
-    md(text:str) → None
-      IN:  text:str
-      OUT: None
-
-    render_markdown(text:str, text_lang:str, stream, use_colors:bool) → None
-      IN:  text:str, text_lang:str, stream, use_colors:bool
-      OUT: None
-
-    get_renderer(stream, use_colors:bool) → MarkdownRenderer
-      IN:  stream, use_colors:bool
-      OUT: MarkdownRenderer
-
 
 DATA_TYPES (by cross-function usage) [168 annotated, 0 inferred / 221 functions]:
   str                  consumed:142 produced:39   !! HUB-TYPE → split interface
@@ -330,20 +331,20 @@ DATA_TYPES (by cross-function usage) [168 annotated, 0 inferred / 221 functions]
   TextIO               consumed:9   produced:0    input-heavy (read-only flow)
   list[str]            consumed:6   produced:1    input-heavy (read-only flow)
   list[list[str]]      consumed:4   produced:0    narrow scope
-  Theme                consumed:1   produced:1    narrow scope
-  logging.LogRecord    consumed:2   produced:0    narrow scope
   list[tuple[bool, str]] consumed:2   produced:0    narrow scope
   list                 consumed:2   produced:0    narrow scope
-  Literal[none, basic, 256, truecolor] consumed:0   produced:2    narrow scope
   Union[str, List[str]] consumed:2   produced:0    narrow scope
+  Literal[none, basic, 256, truecolor] consumed:0   produced:2    narrow scope
   Logger               consumed:1   produced:1    narrow scope
   MarkdownRenderer     consumed:1   produced:1    narrow scope
-  list[Literal[left, center, right]] consumed:1   produced:0    narrow scope
-  Literal[ascii, unicode, minimal, none] consumed:1   produced:0    narrow scope
-  BaseException        consumed:1   produced:0    narrow scope
-  LiveUpdate           consumed:0   produced:1    narrow scope
+  logging.LogRecord    consumed:2   produced:0    narrow scope
+  Theme                consumed:1   produced:1    narrow scope
+  str, Any             consumed:1   produced:0    narrow scope
+  Literal[default, info, warning, error, success] consumed:1   produced:0    narrow scope
+  Generator[T, None, None] consumed:0   produced:1    narrow scope
+  ProgressBar          consumed:0   produced:1    narrow scope
+  Path                 consumed:1   produced:0    narrow scope
   Generator[Spinner, None, None] consumed:0   produced:1    narrow scope
-  Exception            consumed:1   produced:0    narrow scope
 
   HUB TYPES (consumed ≥10):
     str → 142 consumers → split into:
@@ -354,14 +355,14 @@ DATA_TYPES (by cross-function usage) [168 annotated, 0 inferred / 221 functions]
       - (analyze consumers to suggest sub-interfaces)
 
 SIDE_EFFECTS:
-  IO:        handle_api_error, main, status, demo_theme_colors, bump_version, convert_directory, menu, echo, _FallbackConsole.print, _FallbackConsole.rule
-  Mutation:  demo_progress_bar, demo_live_update, demo_combined, markdown_to_html, get_console, _FallbackConsole.__init__, ProgressBar.__init__, ProgressBar.update, ProgressBar.set, ProgressBar._render
+  IO:        handle_api_error, main, demo_theme_colors, status, bump_version, convert_directory, menu, echo, _clear_line, _write_inline
+  Mutation:  demo_progress_bar, demo_live_update, demo_combined, markdown_to_html, ProgressBar.__init__, ProgressBar.update, ProgressBar.set, ProgressBar._render, progress, Spinner.__init__
   Pure:      basic_usage, action_logging, progress_and_steps, exception_handling, grouped_output, llm_logging, mixed_output, real_world_example, main, show_yaml_config
 
   PIPELINE PURITY:
     Src             ███░ 80% pure
     Src             ███░ 80% pure
-    Src             ████ 100% pure
+    Src             ███░ 75% pure
     Src             ████ 100% pure
     Src             ████ 100% pure
     Src             ████ 100% pure

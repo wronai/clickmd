@@ -3,7 +3,7 @@ project:
   name: clickmd
   repo: /home/tom/github/wronai/clickmd
   language: python
-  analyzed_at: '2026-03-05T21:30:49Z'
+  analyzed_at: '2026-03-07T21:32:13Z'
   tool: code2llm
   stats:
     files: 10
@@ -503,6 +503,11 @@ refactoring:
     effort: medium
 evolution:
 - date: '2026-03-05'
+  cc_avg: 3.5
+  critical: 13
+  lines: 5369
+  note: Automated analysis
+- date: '2026-03-07'
   cc_avg: 3.5
   critical: 13
   lines: 5369

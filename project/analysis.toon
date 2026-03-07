@@ -1,4 +1,4 @@
-# code2llm | 11f 4653L | py:11 | 2026-03-05
+# code2llm | 11f 4653L | py:11 | 2026-03-07
 # CC̄=3.5 | critical:13/221 | dups:0 | cycles:3
 
 HEALTH[7]:
@@ -238,6 +238,9 @@ All ...
     log_warning(message)
     log_error(message)
     log_action(action,message)
+  examples/api_response.py:
+    e: handle_api_error
+    handle_api_error(response)
   examples/logger_usage.py:
     e: basic_usage,action_logging,progress_and_steps,exception_handling,grouped_output,llm_logging,mixed_output,real_world_example
     basic_usage()
@@ -248,9 +251,6 @@ All ...
     llm_logging()
     mixed_output()
     real_world_example()
-  examples/api_response.py:
-    e: handle_api_error
-    handle_api_error(response)
   examples/config_viewer.py:
     e: show_yaml_config,show_json_config,show_toml_config,show_env_config,show_config_diff,show_config_tree
     show_yaml_config()
@@ -299,8 +299,8 @@ All ...
     demo_checklists()
     demo_nested_lists()
     demo_combined()
-  examples/one_liners.py:
   examples/basic.py:
-  examples/quickstart.py:
   examples/cli_colors.py:
+  examples/quickstart.py:
+  examples/one_liners.py:
   src/clickmd/decorators.py:

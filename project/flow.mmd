@@ -88,19 +88,6 @@ flowchart TD
         src__clickmd__select["select"]
         src__clickmd__echo("echo CC=12")
         src__clickmd__md["md"]
-        src__clickmd__rich_backend__is_rich_available["is_rich_available"]
-        src__clickmd__rich_backend__get_console("get_console CC=8")
-        src____init__["__init__"]
-        src__print["print"]
-        src__clickmd__rich_backend___FallbackConsole__rule["rule"]
-        src__clickmd__rich_backend__render_md["render_md"]
-        src__clickmd__rich_backend__render_panel["render_panel"]
-        src__clickmd__rich_backend__render_syntax["render_syntax"]
-        src__clickmd__rich_backend__render_table("render_table CC=14")
-        src__clickmd__rich_backend__print_md["print_md"]
-        src__clickmd__rich_backend__print_panel["print_panel"]
-        src__clickmd__rich_backend__print_syntax["print_syntax"]
-        src__clickmd__rich_backend__print_table["print_table"]
         src__clickmd__progress___is_tty["_is_tty"]
         src__clickmd__progress___clear_line["_clear_line"]
         src__clickmd__progress___write_inline["_write_inline"]
@@ -131,6 +118,19 @@ flowchart TD
         src__clickmd__progress__StatusIndicator__fail["fail"]
         src__clickmd__progress__StatusIndicator__skip["skip"]
         src__clickmd__progress__countdown["countdown"]
+        src__clickmd__rich_backend__is_rich_available["is_rich_available"]
+        src__clickmd__rich_backend__get_console("get_console CC=8")
+        src____init__["__init__"]
+        src__print["print"]
+        src__clickmd__rich_backend___FallbackConsole__rule["rule"]
+        src__clickmd__rich_backend__render_md["render_md"]
+        src__clickmd__rich_backend__render_panel["render_panel"]
+        src__clickmd__rich_backend__render_syntax["render_syntax"]
+        src__clickmd__rich_backend__render_table("render_table CC=14")
+        src__clickmd__rich_backend__print_md["print_md"]
+        src__clickmd__rich_backend__print_panel["print_panel"]
+        src__clickmd__rich_backend__print_syntax["print_syntax"]
+        src__clickmd__rich_backend__print_table["print_table"]
         src__clickmd__renderer__strip_ansi["strip_ansi"]
         src__clickmd__renderer__MarkdownRenderer____init__["__init__"]
         src__clickmd__renderer__MarkdownRenderer___c["_c"]
@@ -152,6 +152,7 @@ flowchart TD
         tools__md_to_html__convert_directory["convert_directory"]
         tools__md_to_html__main["main"]
     end
+    examples__api_response__handle_api_error --> src__clickmd__md
     examples__logger_usage__basic_usage --> src__clickmd__md
     examples__logger_usage__action_logging --> src__clickmd__md
     examples__logger_usage__progress_and_steps --> src__clickmd__md
@@ -167,14 +168,7 @@ flowchart TD
     examples__config_viewer__show_env_config --> src__clickmd__md
     examples__config_viewer__show_config_diff --> src__clickmd__md
     examples__config_viewer__show_config_tree --> src__clickmd__md
-    examples__api_response__handle_api_error --> src__clickmd__md
     examples__custom_renderer__main --> src__print
-    examples__phase3_progress__demo_progress_bar --> src__clickmd__md
-    examples__phase3_progress__demo_spinners --> src__clickmd__md
-    examples__phase3_progress__demo_status_indicator --> src__clickmd__md
-    examples__phase3_progress__demo_live_update --> src__clickmd__md
-    examples__phase3_progress__demo_countdown --> src__clickmd__md
-    examples__phase3_progress__demo_combined --> src__clickmd__md
     examples__phase1_features__demo_tables --> src__clickmd__md
     examples__phase1_features__demo_panels --> src__clickmd__md
     examples__phase1_features__demo_blockquotes --> src__clickmd__md
@@ -182,7 +176,12 @@ flowchart TD
     examples__phase1_features__demo_checklists --> src__clickmd__md
     examples__phase1_features__demo_nested_lists --> src__clickmd__md
     examples__phase1_features__demo_combined --> src__clickmd__md
-    examples__simple_cli__status --> src__clickmd__md
+    examples__phase3_progress__demo_progress_bar --> src__clickmd__md
+    examples__phase3_progress__demo_spinners --> src__clickmd__md
+    examples__phase3_progress__demo_status_indicator --> src__clickmd__md
+    examples__phase3_progress__demo_live_update --> src__clickmd__md
+    examples__phase3_progress__demo_countdown --> src__clickmd__md
+    examples__phase3_progress__demo_combined --> src__clickmd__md
     examples__phase4_themes__demo_available_themes --> src__clickmd__md
     examples__phase4_themes__demo_theme_switching --> src__clickmd__md
     examples__phase4_themes__demo_theme_colors --> src__clickmd__md
@@ -191,6 +190,7 @@ flowchart TD
     examples__phase4_themes__demo_custom_theme --> src__clickmd__md
     examples__phase4_themes__demo_no_color --> src__clickmd__md
     examples__phase4_themes__demo_styled_output --> src__clickmd__md
+    examples__simple_cli__status --> src__clickmd__md
     scripts__bump_version__bump_version --> src__print
     tools__md_to_html__convert_directory --> tools__md_to_html__markdown_to_html
     tools__md_to_html__main --> tools__md_to_html__convert_directory
@@ -199,17 +199,6 @@ flowchart TD
     src__clickmd__echo --> src__clickmd__renderer__get_renderer
     src__clickmd__echo --> src__print
     src__clickmd__md --> src__clickmd__renderer__render_markdown
-    src__clickmd__rich_backend___FallbackConsole__rule --> src__print
-    src__clickmd__rich_backend__render_md --> src__clickmd__rich_backend__get_console
-    src__clickmd__rich_backend__render_panel --> src__clickmd__rich_backend__get_console
-    src__clickmd__rich_backend__render_panel --> src__print
-    src__clickmd__rich_backend__render_syntax --> src__clickmd__rich_backend__get_console
-    src__clickmd__rich_backend__render_table --> src__clickmd__rich_backend__get_console
-    src__clickmd__rich_backend__render_table --> src__print
-    src__clickmd__rich_backend__print_md --> src__clickmd__rich_backend__render_md
-    src__clickmd__rich_backend__print_panel --> src__clickmd__rich_backend__render_panel
-    src__clickmd__rich_backend__print_syntax --> src__clickmd__rich_backend__render_syntax
-    src__clickmd__rich_backend__print_table --> src__clickmd__rich_backend__render_table
     src__clickmd__progress___clear_line --> src__clickmd__progress___is_tty
     src__clickmd__progress___write_inline --> src__clickmd__progress___is_tty
     src__clickmd__progress___write_inline --> src__print
@@ -247,6 +236,17 @@ flowchart TD
     src__clickmd__progress__countdown --> src__print
     src__clickmd__progress__countdown --> src__clickmd__progress___is_tty
     src__clickmd__progress__countdown --> src__clickmd__progress___write_inline
+    src__clickmd__rich_backend___FallbackConsole__rule --> src__print
+    src__clickmd__rich_backend__render_md --> src__clickmd__rich_backend__get_console
+    src__clickmd__rich_backend__render_panel --> src__clickmd__rich_backend__get_console
+    src__clickmd__rich_backend__render_panel --> src__print
+    src__clickmd__rich_backend__render_syntax --> src__clickmd__rich_backend__get_console
+    src__clickmd__rich_backend__render_table --> src__clickmd__rich_backend__get_console
+    src__clickmd__rich_backend__render_table --> src__print
+    src__clickmd__rich_backend__print_md --> src__clickmd__rich_backend__render_md
+    src__clickmd__rich_backend__print_panel --> src__clickmd__rich_backend__render_panel
+    src__clickmd__rich_backend__print_syntax --> src__clickmd__rich_backend__render_syntax
+    src__clickmd__rich_backend__print_table --> src__clickmd__rich_backend__render_table
     src__clickmd__renderer__MarkdownRenderer___writeln --> src__print
     src__render_markdown_with_fences --> src__clickmd__logger__Logger__flush
     src__clickmd__renderer__render_markdown --> src__clickmd__renderer__get_renderer
@@ -309,4 +309,4 @@ flowchart TD
     classDef highCC fill:#ff6b6b,stroke:#c92a2a,color:#fff
     classDef medCC fill:#ffd43b,stroke:#f08c00,color:#000
     class tools__md_to_html__markdown_to_html,src__clickmd__menu,src___highlight_line,src___highlight_log,src__clickmd__renderer__MarkdownRenderer__table,src__clickmd__devtools___format_debug_value highCC
-    class examples__markdown_help__config,scripts__bump_version__bump_version,src__clickmd__echo,src__clickmd__rich_backend__get_console,src__clickmd__rich_backend__render_table,src__clickmd__progress__ProgressBar___render,src__render_markdown_with_fences,src___highlight_yaml,src__clickmd__renderer__MarkdownRenderer__panel,src__clickmd__themes___detect_color_support,src__clickmd__devtools__inspect_obj,src__clickmd__devtools__diff,src__clickmd__devtools__tree medCC
+    class examples__markdown_help__config,scripts__bump_version__bump_version,src__clickmd__echo,src__clickmd__progress__ProgressBar___render,src__clickmd__rich_backend__get_console,src__clickmd__rich_backend__render_table,src__render_markdown_with_fences,src___highlight_yaml,src__clickmd__renderer__MarkdownRenderer__panel,src__clickmd__themes___detect_color_support,src__clickmd__devtools__inspect_obj,src__clickmd__devtools__diff,src__clickmd__devtools__tree medCC

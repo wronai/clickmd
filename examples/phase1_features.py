@@ -21,7 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 import clickmd
 
 
-def demo_tables():
+def demo_tables() -> None:
     """Demonstrate table rendering."""
     clickmd.md("# 📊 Tables\n")
     
@@ -51,7 +51,7 @@ def demo_tables():
     clickmd.table(headers2, rows2, align=["left", "center", "right"])
 
 
-def demo_panels():
+def demo_panels() -> None:
     """Demonstrate panel/box rendering."""
     clickmd.md("\n# 📦 Panels\n")
     
@@ -77,7 +77,7 @@ def demo_panels():
     clickmd.panel("Operation completed successfully!", title="Success", style="success")
 
 
-def demo_blockquotes():
+def demo_blockquotes() -> None:
     """Demonstrate blockquote rendering."""
     clickmd.md("\n# 💬 Blockquotes\n")
     
@@ -99,6 +99,10 @@ def demo_blockquotes():
     )
 
 
+# Constants for horizontal rule
+HR_WIDTH = 30
+
+
 def demo_horizontal_rules():
     """Demonstrate horizontal rule rendering."""
     clickmd.md("\n# ➖ Horizontal Rules\n")
@@ -110,7 +114,7 @@ def demo_horizontal_rules():
     clickmd.hr(char="=")
     
     clickmd.md("Custom width (30):")
-    clickmd.hr(width=30)
+    clickmd.hr(width=HR_WIDTH)
     
     clickmd.md("Dotted rule:")
     clickmd.hr(char="·")
@@ -197,9 +201,9 @@ def demo_combined():
 
 
 if __name__ == "__main__":
-    print("\n" + "=" * 60)
+    print(f"\n{'=' * 60}")
     print("clickmd Phase 1 Features Demo")
-    print("=" * 60 + "\n")
+    print(f"{'=' * 60}\n")
     
     demo_tables()
     demo_panels()
@@ -209,6 +213,6 @@ if __name__ == "__main__":
     demo_nested_lists()
     demo_combined()
     
-    print("\n" + "=" * 60)
+    print(f"\n{'=' * 60}")
     print("Demo Complete!")
-    print("=" * 60 + "\n")
+    print(f"{'=' * 60}\n")

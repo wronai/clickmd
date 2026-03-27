@@ -173,8 +173,8 @@ def render_panel(
         )
         
         width = 60
-        top = "┌" + "─" * (width - 2) + "┐"
-        bottom = "└" + "─" * (width - 2) + "┘"
+        top = f"┌{'─' * (width - 2)}┐"
+        bottom = f"└{'─' * (width - 2)}┘"
         
         if title:
             title_line = f"│ {renderer._c(border_style, title, bold=True):<{width-4}} │"
@@ -270,7 +270,7 @@ def render_table(
         # Print table
         if title:
             print(f"\n{title}", file=stream)
-            print("=" * sum(widths) + "=" * (len(widths) * 3 + 1), file=stream)
+            print(f"{'=' * sum(widths)}{'=' * (len(widths) * 3 + 1)}", file=stream)
         
         # Header
         header_line = "| " + " | ".join(h.ljust(widths[i]) for i, h in enumerate(headers)) + " |"

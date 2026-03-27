@@ -272,7 +272,6 @@ def echo(
     """
     if message is None:
         if CLICK_AVAILABLE:
-            from .decorators import _click
             _click.echo(message, file=file, nl=nl, err=err, color=color)
         else:
             print("", file=file or sys.stdout, end="\n" if nl else "")
@@ -290,7 +289,6 @@ def echo(
         return
 
     if CLICK_AVAILABLE:
-        from .decorators import _click
         _click.echo(message, file=file, nl=nl, err=err, color=color)
     else:
         output = file or (sys.stderr if err else sys.stdout)

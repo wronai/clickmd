@@ -14,12 +14,15 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import clickmd
 
-# Symulowana odpowiedź z API
+# Constants for API examples
+USER_ID = 123
+RATE_LIMIT = 100
+CURRENT_REQUESTS = 150
 api_response = {
     "status": "success",
     "data": {
         "user": {
-            "id": 123,
+            "id": USER_ID,
             "name": "Jan Kowalski",
             "email": "jan@example.com",
             "roles": ["admin", "user"]
@@ -101,12 +104,12 @@ clickmd.panel(
 
 clickmd.md("\n## 6. Obsługa błędów API\n")
 
-def handle_api_error(response):
+def handle_api_error(response) -> bool:
     """Przykład obsługi błędu API z clickmd."""
     if response.get("status") == "error":
         clickmd.error(f"API Error: {response.get('message', 'Unknown error')}")
         if "details" in response:
-            clickmd.md("```json\n" + json.dumps(response["details"], indent=2) + "\n```")
+            clickmd.md(f"```json\n{json.dumps(response['details'], indent=2)}\n```")
         return False
     
     clickmd.success("API request successful")
@@ -117,8 +120,8 @@ error_response = {
     "status": "error",
     "message": "Rate limit exceeded",
     "details": {
-        "limit": 100,
-        "current": 150,
+        "limit": RATE_LIMIT,
+        "current": CURRENT_REQUESTS,
         "reset_at": "2024-01-08T11:00:00Z"
     }
 }

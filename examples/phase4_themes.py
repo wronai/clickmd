@@ -24,7 +24,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 import clickmd
 
 
-def demo_available_themes():
+def demo_available_themes() -> None:
     """Show available themes."""
     clickmd.md("# 🎨 Available Themes\n")
     
@@ -44,7 +44,7 @@ def demo_available_themes():
     )
 
 
-def demo_theme_switching():
+def demo_theme_switching() -> None:
     """Demonstrate theme switching."""
     clickmd.md("\n# 🔄 Theme Switching Demo\n")
     
@@ -68,7 +68,7 @@ print(greet("World"))
     clickmd.set_theme("default")
 
 
-def demo_theme_colors():
+def demo_theme_colors() -> None:
     """Show theme color palette."""
     clickmd.md("\n# 🌈 Theme Colors\n")
     
@@ -216,9 +216,9 @@ def demo_styled_output():
 
 
 if __name__ == "__main__":
-    print("\n" + "=" * 60)
+    print(f"\n{'=' * 60}")
     print("clickmd Phase 4 Theming Demo")
-    print("=" * 60 + "\n")
+    print(f"{'=' * 60}\n")
     
     demo_available_themes()
     demo_theme_colors()
@@ -228,6 +228,6 @@ if __name__ == "__main__":
     demo_styled_output()
     demo_theme_switching()
     
-    print("\n" + "=" * 60)
+    print(f"\n{'=' * 60}")
     print("Demo Complete!")
-    print("=" * 60 + "\n")
+    print(f"{'=' * 60}\n")

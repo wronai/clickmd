@@ -15,7 +15,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 import clickmd
 
 
-def show_yaml_config():
+# Constants for configuration
+DATABASE_PORT = 5432
+POOL_MIN = 5
+POOL_MAX = 20
+PATH_TRUNCATE_LENGTH = 50
+
+
+def show_yaml_config() -> None:
     """Wyświetl przykładową konfigurację YAML."""
     
     clickmd.md("# 📄 Config Viewer\n")
@@ -44,7 +51,7 @@ features:
     clickmd.md(f"```yaml{yaml_config}```")
 
 
-def show_json_config():
+def show_json_config() -> None:
     """Wyświetl przykładową konfigurację JSON."""
     
     clickmd.md("\n## JSON Configuration\n")
@@ -65,7 +72,7 @@ def show_json_config():
     clickmd.md(f"```json\n{json_config}\n```")
 
 
-def show_toml_config():
+def show_toml_config() -> None:
     """Wyświetl przykładową konfigurację TOML."""
     
     clickmd.md("\n## TOML Configuration\n")
@@ -95,7 +102,7 @@ def show_env_config():
     import os
     
     env_vars = {
-        "PATH": os.environ.get("PATH", "")[:50] + "...",
+        "PATH": os.environ.get("PATH", "")[:PATH_TRUNCATE_LENGTH] + "...",
         "HOME": os.environ.get("HOME", ""),
         "USER": os.environ.get("USER", ""),
         "SHELL": os.environ.get("SHELL", ""),
@@ -138,11 +145,11 @@ def show_config_tree():
         "database": {
             "connection": {
                 "host": "localhost",
-                "port": 5432,
+                "port": DATABASE_PORT,
             },
             "pool": {
-                "min": 5,
-                "max": 20,
+                "min": POOL_MIN,
+                "max": POOL_MAX,
             }
         },
         "logging": {

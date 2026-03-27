@@ -5,12 +5,127 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.10] - 2026-03-27
+
+### Fixed
+- Fix ai-boilerplate issues (ticket-c95da8c6)
+- Fix smart-return-type issues (ticket-4a63bb84)
+- Fix ai-boilerplate issues (ticket-c747ca7f)
+- Fix smart-return-type issues (ticket-d769f192)
+- Fix string-concat issues (ticket-57e3d8e0)
+- Fix magic-numbers issues (ticket-94825d4d)
+- Fix smart-return-type issues (ticket-0168f8e2)
+- Fix ai-boilerplate issues (ticket-53059b80)
+- Fix smart-return-type issues (ticket-06d92cf4)
+- Fix ai-boilerplate issues (ticket-4f0c574e)
+- Fix smart-return-type issues (ticket-5dd7b435)
+- Fix string-concat issues (ticket-c8315ca9)
+- Fix magic-numbers issues (ticket-6ca64d3a)
+- Fix ai-boilerplate issues (ticket-28b6b34c)
+- Fix smart-return-type issues (ticket-fa055cac)
+- Fix ai-boilerplate issues (ticket-50c871ef)
+- Fix magic-numbers issues (ticket-66ed17ff)
+- Fix llm-generated-code issues (ticket-5b58d0b2)
+- Fix smart-return-type issues (ticket-1aaadf0b)
+- Fix string-concat issues (ticket-d4937303)
+- Fix magic-numbers issues (ticket-46e8d6d0)
+- Fix ai-boilerplate issues (ticket-8b31945f)
+- Fix smart-return-type issues (ticket-00132be6)
+- Fix ai-boilerplate issues (ticket-5ff588c2)
+- Fix smart-return-type issues (ticket-31ea3e2c)
+- Fix string-concat issues (ticket-6a04bc14)
+- Fix magic-numbers issues (ticket-e6c61740)
+- Fix llm-generated-code issues (ticket-22657a58)
+- Fix ai-boilerplate issues (ticket-513e7551)
+- Fix smart-return-type issues (ticket-59ee2805)
+- Fix string-concat issues (ticket-73a5027b)
+- Fix magic-numbers issues (ticket-5260374c)
+- Fix llm-generated-code issues (ticket-d2b2a109)
+- Fix ai-boilerplate issues (ticket-4b80e2c6)
+- Fix smart-return-type issues (ticket-f7eeee36)
+- Fix string-concat issues (ticket-5a3b4f5f)
+- Fix llm-generated-code issues (ticket-9d06d31c)
+- Fix ai-boilerplate issues (ticket-fa96b552)
+- Fix llm-generated-code issues (ticket-624cf3d6)
+- Fix smart-return-type issues (ticket-30b709d8)
+- Fix ai-boilerplate issues (ticket-e018eadf)
+- Fix smart-return-type issues (ticket-799a3959)
+- Fix string-concat issues (ticket-df6027c8)
+- Fix magic-numbers issues (ticket-ab5f00c5)
+- Fix llm-generated-code issues (ticket-bfc1a074)
+- Fix ai-boilerplate issues (ticket-d81f8bdc)
+- Fix smart-return-type issues (ticket-f29c901a)
+- Fix ai-boilerplate issues (ticket-94d25529)
+- Fix relative-imports issues (ticket-b0f44830)
+- Fix unused-imports issues (ticket-818fb035)
+- Fix duplicate-imports issues (ticket-eb7cc7b0)
+- Fix llm-generated-code issues (ticket-07dd8f0e)
+- Fix relative-imports issues (ticket-2a0f0a6d)
+- Fix smart-return-type issues (ticket-cc31310e)
+- Fix unused-imports issues (ticket-09ba1473)
+- Fix llm-generated-code issues (ticket-a859b000)
+- Fix relative-imports issues (ticket-bcf91efa)
+- Fix string-concat issues (ticket-59fad29c)
+- Fix unused-imports issues (ticket-d60d31f9)
+- Fix magic-numbers issues (ticket-b2d27952)
+- Fix llm-generated-code issues (ticket-55c2eaa6)
+- Fix relative-imports issues (ticket-6c3d3bc9)
+- Fix string-concat issues (ticket-cfc0581e)
+- Fix duplicate-imports issues (ticket-74799de7)
+- Fix llm-generated-code issues (ticket-be594676)
+- Fix relative-imports issues (ticket-549a34b1)
+- Fix string-concat issues (ticket-8b565c29)
+- Fix unused-imports issues (ticket-a96d7ffd)
+- Fix magic-numbers issues (ticket-36458c16)
+- Fix llm-generated-code issues (ticket-8d244f60)
+- Fix relative-imports issues (ticket-c48d5f62)
+- Fix string-concat issues (ticket-6398fe73)
+- Fix unused-imports issues (ticket-4d661d31)
+- Fix duplicate-imports issues (ticket-ff1fd927)
+- Fix llm-generated-code issues (ticket-4d312ad3)
+- Fix string-concat issues (ticket-c8a259ab)
+- Fix unused-imports issues (ticket-6891df01)
+- Fix wildcard-imports issues (ticket-23602243)
+- Fix magic-numbers issues (ticket-b3ae4dd2)
+- Fix llm-generated-code issues (ticket-7d547ce8)
+- Fix string-concat issues (ticket-5048aece)
+- Fix unused-imports issues (ticket-1dd48519)
+- Fix ai-boilerplate issues (ticket-b2bafc60)
+- Fix unused-imports issues (ticket-db6018e9)
+- Fix magic-numbers issues (ticket-f446c870)
+- Fix llm-generated-code issues (ticket-f1fac0cf)
+- Fix smart-return-type issues (ticket-396ee702)
+- Fix string-concat issues (ticket-2909a699)
+- Fix ai-boilerplate issues (ticket-c9cb012a)
+
 ## [Unreleased]
 
 ### Planned
 - Split `renderer.py` into smaller modules (highlighters, table, panel)
 - Reduce cyclomatic complexity in `devtools.py` (CC=24 → ≤14)
 - Split high-CC functions: `_highlight_line`, `table`, `_format_debug_value`
+
+## [1.1.5] - 2026-03-27
+
+### Docs
+- Update CHANGELOG.md
+- Update TODO.md
+- Update docs/README.md
+- Update project/README.md
+- Update project/context.md
+
+### Other
+- Update examples/api_response.py
+- Update examples/build_script.py
+- Update examples/cli_app.py
+- Update examples/colored_logging.py
+- Update examples/config_viewer.py
+- Update examples/custom_renderer.py
+- Update examples/logger_usage.py
+- Update examples/markdown_help.py
+- Update examples/one_liners.py
+- Update examples/phase1_features.py
+- ... and 25 more files
 
 ## [1.1.4] - 2026-03-07
 

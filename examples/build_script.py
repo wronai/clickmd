@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 import clickmd
 
 
-def build_project():
+def build_project() -> None:
     """Przykładowy skrypt budowania projektu."""
     
     clickmd.md("# 🔨 Build Project\n")
@@ -66,7 +66,7 @@ def build_project():
     )
 
 
-def deploy_preview():
+def deploy_preview() -> None:
     """Przykładowy skrypt deploymentu."""
     
     clickmd.md("\n# 🚀 Deploy Preview\n")

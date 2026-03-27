@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from clickmd import MarkdownRenderer, get_renderer
 
 
-def main():
+def main() -> None:
     # Default renderer (with colors to stdout)
     print("=== Default Renderer ===\n")
     renderer = MarkdownRenderer()

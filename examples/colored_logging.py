@@ -15,7 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from clickmd import md
 
 
-def main():
+def main() -> None:
     md("""
 # 📋 Application Log Output
 

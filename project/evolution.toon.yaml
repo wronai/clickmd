@@ -1,4 +1,4 @@
-# code2llm/evolution | 221 func | 22f | 2026-03-07
+# code2llm/evolution | 163 func | 9f | 2026-03-27
 
 NEXT[9] (ranked by impact):
   [1] !! SPLIT           src/clickmd/renderer.py
@@ -44,11 +44,35 @@ RISKS[3]:
   ⚠ Splitting src/clickmd/help.py may break 9 import paths
 
 METRICS-TARGET:
-  CC̄:          3.0 → ≤2.1
+  CC̄:          3.4 → ≤2.4
   max-CC:      28 → ≤14
   god-modules: 4 → 0
   high-CC(≥15): 6 → ≤3
   hub-types:   0 → ≤0
 
+PATTERNS (language parser shared logic):
+  _extract_declarations() in base.py — unified extraction for:
+    - TypeScript: interfaces, types, classes, functions, arrow funcs
+    - PHP: namespaces, traits, classes, functions, includes
+    - Ruby: modules, classes, methods, requires
+    - C++: classes, structs, functions, #includes
+    - C#: classes, interfaces, methods, usings
+    - Java: classes, interfaces, methods, imports
+    - Go: packages, functions, structs
+    - Rust: modules, functions, traits, use statements
+
+  Shared regex patterns per language:
+    - import: language-specific import/require/using patterns
+    - class: class/struct/trait declarations with inheritance
+    - function: function/method signatures with visibility
+    - brace_tracking: for C-family languages ({ })
+    - end_keyword_tracking: for Ruby (module/class/def...end)
+
+  Benefits:
+    - Consistent extraction logic across all languages
+    - Reduced code duplication (~70% reduction in parser LOC)
+    - Easier maintenance: fix once, apply everywhere
+    - Standardized FunctionInfo/ClassInfo models
+
 HISTORY:
-  prev CC̄=3.0 → now CC̄=3.0
+  prev CC̄=3.4 → now CC̄=3.4

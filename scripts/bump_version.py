@@ -5,7 +5,7 @@ import sys
 import re
 from pathlib import Path
 
-def bump_version(version_type):
+def bump_version(version_type) -> int:
     """Bump version in pyproject.toml"""
     pyproject_path = Path("pyproject.toml")
     

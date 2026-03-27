@@ -21,7 +21,7 @@ Usage:
 import sys
 import traceback
 from contextlib import contextmanager
-from typing import Any, Literal, Optional, TextIO
+from typing import Any, Generator, Literal, Optional, TextIO
 
 from .renderer import MarkdownRenderer, get_renderer
 
@@ -224,7 +224,7 @@ class Logger:
     # ========================================================================
     
     @contextmanager
-    def section(self, title: str = ""):
+    def section(self, title: str = "") -> Generator[None, None, None]:
         """
         Context manager for grouping logs into a single codeblock.
         

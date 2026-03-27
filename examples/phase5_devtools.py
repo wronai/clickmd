@@ -32,12 +32,18 @@ class User:
     active: bool = True
 
 
-def demo_debug():
+# Constants for demo values
+DEBUG_NUMBER = 42
+HTTP_STATUS_OK = 200
+SAMPLE_AGE = 30
+
+
+def demo_debug() -> None:
     """Demonstrate debug output."""
     clickmd.md("# 🔍 Debug Output\n")
     
     clickmd.md("## Simple Values\n")
-    clickmd.debug(42, name="integer")
+    clickmd.debug(DEBUG_NUMBER, name="integer")
     clickmd.debug(3.14159, name="float")
     clickmd.debug("Hello, World!", name="string")
     clickmd.debug(True, name="boolean")
@@ -45,7 +51,7 @@ def demo_debug():
     
     clickmd.md("\n## Collections\n")
     clickmd.debug([1, 2, 3, "four", 5.0], name="list")
-    clickmd.debug({"name": "Alice", "age": 30, "active": True}, name="dict")
+    clickmd.debug({"name": "Alice", "age": SAMPLE_AGE, "active": True}, name="dict")
     clickmd.debug({1, 2, 3}, name="set")
     
     clickmd.md("\n## Nested Structure\n")
@@ -62,11 +68,11 @@ def demo_debug():
     clickmd.debug(data, name="nested_data")
     
     clickmd.md("\n## Custom Object\n")
-    user = User(name="Alice", email="alice@example.com", age=30)
+    user = User(name="Alice", email="alice@example.com", age=SAMPLE_AGE)
     clickmd.debug(user, name="user_object")
 
 
-def demo_inspect():
+def demo_inspect() -> None:
     """Demonstrate object inspection."""
     clickmd.md("\n# 🔬 Object Inspection\n")
     
@@ -81,7 +87,7 @@ def demo_inspect():
     clickmd.inspect_obj(user)
 
 
-def demo_tree():
+def demo_tree() -> None:
     """Demonstrate tree view."""
     clickmd.md("\n# 🌳 Tree View\n")
     
@@ -182,7 +188,7 @@ def demo_combined():
     
     # Simulate API response
     response = {
-        "status": 200,
+        "status": HTTP_STATUS_OK,
         "data": {
             "users": [
                 {"id": 1, "name": "Alice", "email": "alice@example.com"},
@@ -208,9 +214,9 @@ def demo_combined():
 
 
 if __name__ == "__main__":
-    print("\n" + "=" * 60)
+    print(f"\n{'=' * 60}")
     print("clickmd Phase 5 Developer Tools Demo")
-    print("=" * 60 + "\n")
+    print(f"{'=' * 60}\n")
     
     demo_debug()
     demo_inspect()
@@ -220,6 +226,6 @@ if __name__ == "__main__":
     demo_pretty_exceptions()
     demo_combined()
     
-    print("\n" + "=" * 60)
+    print(f"\n{'=' * 60}")
     print("Demo Complete!")
-    print("=" * 60 + "\n")
+    print(f"{'=' * 60}\n")

@@ -24,7 +24,7 @@ if not clickmd.CLICK_AVAILABLE:
 
 
 @clickmd.group(cls=clickmd.MarkdownGroup)
-def cli():
+def cli() -> None:
     """
     # 🚀 My Awesome CLI
     
@@ -55,7 +55,7 @@ def cli():
                 help="Output format: `json`, `csv`, or `yaml`")
 @clickmd.option("--verbose", "-v", is_flag=True, help="Enable *verbose* output")
 @clickmd.option("--dry-run", is_flag=True, help="Run without making changes (**safe mode**)")
-def process(input: str, output: str, format: str, verbose: bool, dry_run: bool):
+def process(input: str, output: str, format: str, verbose: bool, dry_run: bool) -> None:
     """
     # Process Data
     
@@ -117,7 +117,7 @@ Processed **{input}** successfully!
 @clickmd.argument("action", type=clickmd.Choice(["get", "set", "list", "reset"]))
 @clickmd.argument("key", required=False)
 @clickmd.argument("value", required=False)
-def config(action: str, key: str, value: str):
+def config(action: str, key: str, value: str) -> None:
     """
     # Configuration Management
     

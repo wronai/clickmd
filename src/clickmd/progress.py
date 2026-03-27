@@ -28,11 +28,14 @@ import sys
 import threading
 import time
 from contextlib import contextmanager
-from typing import Any, Callable, Generator, Iterable, Iterator, Optional, TypeVar
+from typing import Any, Callable, Generator, Iterable, Optional, TypeVar
 
 from .renderer import MarkdownRenderer, get_renderer, strip_ansi
 
 T = TypeVar("T")
+
+# Constants
+DEFAULT_PROGRESS_WIDTH = 40
 
 
 # ============================================================================
@@ -94,7 +97,7 @@ class ProgressBar:
         self,
         total: int,
         label: str = "",
-        width: int = 40,
+        width: int = DEFAULT_PROGRESS_WIDTH,
         fill_char: str = "█",
         empty_char: str = "░",
         show_percent: bool = True,
@@ -136,7 +139,7 @@ class ProgressBar:
         filled = int(self.width * percent)
         empty = self.width - filled
         
-        bar = self.fill_char * filled + self.empty_char * empty
+        bar = f"{self.fill_char * filled}{self.empty_char * empty}"
         bar_colored = self._renderer._c(self.color, bar)
         
         parts = []

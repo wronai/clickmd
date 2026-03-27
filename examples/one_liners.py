@@ -14,6 +14,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import clickmd
 
+# Constants for progress bar
+PROGRESS_ITEMS = 20
+
+
 clickmd.md("# 📝 clickmd One-Liners\n")
 
 # ============================================================================
@@ -75,7 +79,7 @@ clickmd.panel("Ważna informacja!", title="Uwaga", style="warning")
 clickmd.md("\n## 6. Progress bar\n")
 
 import time
-for i in clickmd.progress(range(20), label="Processing"):
+for i in clickmd.progress(range(PROGRESS_ITEMS), label="Processing"):
     time.sleep(0.02)
 
 # ============================================================================

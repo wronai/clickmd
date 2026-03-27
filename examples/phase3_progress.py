@@ -21,18 +21,23 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 import clickmd
 
 
-def demo_progress_bar():
+# Constants for progress bar
+PROGRESS_ITEMS_TOTAL = 50
+PROGRESS_DOWNLOAD_STEPS = 30
+
+
+def demo_progress_bar() -> None:
     """Demonstrate progress bar."""
     clickmd.md("# 📊 Progress Bars\n")
     
     clickmd.md("## Basic Progress Bar\n")
-    items = range(50)
+    items = range(PROGRESS_ITEMS_TOTAL)
     for item in clickmd.progress(items, label="Processing"):
         time.sleep(0.02)
     
     clickmd.md("\n## Custom Progress Bar\n")
-    with clickmd.ProgressBar(total=30, label="Downloading", color="green") as bar:
-        for i in range(30):
+    with clickmd.ProgressBar(total=PROGRESS_DOWNLOAD_STEPS, label="Downloading", color="green") as bar:
+        for i in range(PROGRESS_DOWNLOAD_STEPS):
             time.sleep(0.03)
             bar.update(1)
     
@@ -42,7 +47,7 @@ def demo_progress_bar():
         time.sleep(0.1)
 
 
-def demo_spinners():
+def demo_spinners() -> None:
     """Demonstrate spinners."""
     clickmd.md("\n# 🔄 Spinners\n")
     
@@ -68,7 +73,7 @@ def demo_spinners():
     )
 
 
-def demo_status_indicator():
+def demo_status_indicator() -> None:
     """Demonstrate status indicator."""
     clickmd.md("\n# ✅ Status Indicator\n")
     
@@ -169,9 +174,9 @@ def demo_combined():
 
 
 if __name__ == "__main__":
-    print("\n" + "=" * 60)
+    print(f"\n{'=' * 60}")
     print("clickmd Phase 3 Progress Demo")
-    print("=" * 60 + "\n")
+    print(f"{'=' * 60}\n")
     
     demo_progress_bar()
     demo_spinners()
@@ -180,6 +185,6 @@ if __name__ == "__main__":
     demo_countdown()
     demo_combined()
     
-    print("\n" + "=" * 60)
+    print(f"\n{'=' * 60}")
     print("Demo Complete!")
-    print("=" * 60 + "\n")
+    print(f"{'=' * 60}\n")

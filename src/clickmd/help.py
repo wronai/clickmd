@@ -217,7 +217,7 @@ if CLICK_AVAILABLE:
                 rendered = _render_markdown_help(text, self.use_colors)
                 # Indent to match Click's formatting
                 lines = rendered.split("\n")
-                indented = "\n".join("  " + line if line.strip() else "" for line in lines)
+                indented = "\n".join(f"  {line}" if line.strip() else "" for line in lines)
                 self.write(indented + "\n")
             else:
                 # Standard Click text wrapping
@@ -514,7 +514,6 @@ def echo_md(text: str, err: bool = False) -> None:
     Example:
         clickmd.echo_md("# Hello\\n**Bold** and *italic*")
     """
-    import sys
     stream = sys.stderr if err else sys.stdout
     use_colors = hasattr(stream, "isatty") and stream.isatty()
     

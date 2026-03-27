@@ -1,0 +1,29 @@
+# redup/duplication | 2 groups | 24f 6792L | 2026-03-27
+
+SUMMARY:
+  files_scanned: 24
+  total_lines:   6792
+  dup_groups:    2
+  dup_fragments: 4
+  saved_lines:   28
+  scan_ms:       2820
+
+DUPLICATES[2] (ranked by impact):
+  [32863c608347d477]   STRU  cli  L=22 N=2 saved=22 sim=1.00
+      examples/simple_cli.py:0-21  (cli)
+      examples/markdown_help.py:0-25  (cli)
+  [ad61a685b1c5aa93]   EXAC  _is_tty  L=6 N=2 saved=6 sim=1.00
+      src/clickmd/progress.py:0-5  (_is_tty)
+      src/clickmd/help.py:0-5  (_is_tty)
+
+REFACTOR[2] (ranked by priority):
+  [1] ○ extract_function   → examples/utils/cli.py
+      WHY: 2 occurrences of 22-line block across 2 files — saves 22 lines
+      FILES: examples/markdown_help.py, examples/simple_cli.py
+  [2] ○ extract_function   → src/clickmd/utils/_is_tty.py
+      WHY: 2 occurrences of 6-line block across 2 files — saves 6 lines
+      FILES: src/clickmd/help.py, src/clickmd/progress.py
+
+METRICS-TARGET:
+  dup_groups:  2 → 0
+  saved_lines: 28 lines recoverable

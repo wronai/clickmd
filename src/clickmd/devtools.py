@@ -21,14 +21,12 @@ Usage:
     logging.basicConfig(handlers=[ClickmdHandler()])
 """
 
-import inspect
 import logging
-import os
 import sys
 import traceback
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Sequence, TextIO, Tuple, Union
+from typing import Any, Dict, List, Optional, TextIO, Tuple, Union
 
 from .renderer import MarkdownRenderer, get_renderer, strip_ansi
 

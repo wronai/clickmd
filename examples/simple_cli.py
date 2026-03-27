@@ -28,7 +28,7 @@ if not clickmd.CLICK_AVAILABLE:
 @clickmd.command(cls=clickmd.MarkdownCommand)
 @clickmd.argument("name")
 @clickmd.option("--loud", "-l", is_flag=True, help="Użyj **WIELKICH** liter")
-def greet(name, loud):
+def greet(name, loud) -> None:
     """
     # 👋 Powitanie
     
@@ -53,7 +53,7 @@ def greet(name, loud):
 # ============================================================================
 
 @clickmd.group(cls=clickmd.MarkdownGroup)
-def cli():
+def cli() -> None:
     """
     # 🛠️ Simple CLI Tool
     
@@ -71,13 +71,13 @@ def cli():
 
 @cli.command(cls=clickmd.MarkdownCommand)
 @clickmd.argument("name")
-def hello(name):
+def hello(name) -> None:
     """Przywitaj użytkownika."""
     clickmd.success(f"Hello, {name}!")
 
 
 @cli.command(cls=clickmd.MarkdownCommand)
-def info():
+def info() -> None:
     """
     # Informacje o systemie
     

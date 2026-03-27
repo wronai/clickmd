@@ -15,8 +15,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from clickmd import Logger, md
 
+# Constants for progress percentages
+PROGRESS_25 = 25
+PROGRESS_50 = 50
+PROGRESS_75 = 75
 
-def basic_usage():
+
+def basic_usage() -> None:
     """Basic Logger usage"""
     md("# Basic Logger Usage\n")
     
@@ -29,7 +34,7 @@ def basic_usage():
     log.error("Connection refused")
 
 
-def action_logging():
+def action_logging() -> None:
     """Action-based logging with emojis"""
     md("# Action Logging\n")
     
@@ -44,16 +49,16 @@ def action_logging():
     log.action("done", "All tasks completed")
 
 
-def progress_and_steps():
+def progress_and_steps() -> None:
     """Progress and step logging"""
     md("# Progress & Steps\n")
     
     log = Logger(verbose=True)
     
     # Progress bar style
-    log.progress("Installing", 25, 100)
-    log.progress("Building", 50, 100)
-    log.progress("Testing", 75, 100)
+    log.progress("Installing", PROGRESS_25, 100)
+    log.progress("Building", PROGRESS_50, 100)
+    log.progress("Testing", PROGRESS_75, 100)
     log.progress("Complete", 100, 100)
     
     # Step by step
@@ -195,9 +200,9 @@ def real_world_example():
 
 
 if __name__ == "__main__":
-    print("\n" + "=" * 60)
+    print(f"\n{'=' * 60}")
     print("clickmd Logger Examples")
-    print("=" * 60 + "\n")
+    print(f"{'=' * 60}\n")
     
     basic_usage()
     print("\n" + "-" * 40 + "\n")

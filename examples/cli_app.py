@@ -26,7 +26,7 @@ except ImportError:
 
 
 @click.group()
-def cli():
+def cli() -> None:
     """Example CLI application with clickmd."""
     pass
 
@@ -34,7 +34,7 @@ def cli():
 @cli.command()
 @click.option("--name", "-n", default="World", help="Name to greet")
 @click.option("--formal", "-f", is_flag=True, help="Use formal greeting")
-def hello(name: str, formal: bool):
+def hello(name: str, formal: bool) -> None:
     """Say hello with style."""
     if formal:
         click.md(f"""
@@ -61,7 +61,7 @@ features:
 
 
 @cli.command()
-def status():
+def status() -> None:
     """Show application status."""
     click.md("""
 ## 📊 Application Status

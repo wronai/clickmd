@@ -2,7 +2,6 @@
 
 import argparse
 import html
-import os
 import re
 from pathlib import Path
 
@@ -194,7 +193,8 @@ def markdown_to_html(markdown_text: str, title: str) -> str:
             out.append("<thead><tr>" + "".join([f"<th>{_inline_md_to_html(c)}</th>" for c in header]) + "</tr></thead>")
             out.append("<tbody>")
             for row in rows:
-                out.append("<tr>" + "".join([f"<td>{_inline_md_to_html(c)}</td>" for c in row]) + "</tr>")
+                row_cells = "".join([f"<td>{_inline_md_to_html(c)}</td>" for c in row])
+                out.append(f"<tr>{row_cells}</tr>")
             out.append("</tbody></table>")
             continue
 

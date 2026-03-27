@@ -58,9 +58,9 @@ def run_example(example_file: str, args: list[str] = None) -> tuple[bool, str]:
             timeout=10,
             env=env,
         )
-        return True, result.stdout + result.stderr
+        return True, f"{result.stdout}{result.stderr}"
     except subprocess.TimeoutExpired:
-        return False, "Timeout"
+        return False, f"Timeout after {timeout}s"
     except Exception as e:
         return False, str(e)
 
@@ -107,7 +107,7 @@ def _test_html_conversion(content: str, name: str) -> tuple[bool, str]:
         return False, str(e)
 
 
-def main():
+def main() -> int:
     """Run all tests."""
     print("=" * 60)
     print("Testing clickmd Examples - Markdown Output")
@@ -125,7 +125,7 @@ def main():
     results = []
     
     for example_file, args in EXAMPLES:
-        name = f"{example_file}" + (f" {' '.join(args)}" if args else "")
+        name = f"{example_file}{f' {' '.join(args)}' if args else ''}"
         print(f"Testing: {name}")
         
         # Run example

@@ -9,11 +9,16 @@ Core rendering engine for clickmd with support for:
 - Checklists, nested lists
 """
 
-import os
 import re
 import shutil
 import sys
 from typing import Literal, Optional
+
+
+# Constants
+DEFAULT_TERMINAL_WIDTH = 80
+MAX_PANEL_WIDTH = 76
+PANEL_PADDING = 4
 
 
 _COLORS = {
@@ -64,7 +69,7 @@ class MarkdownRenderer:
         try:
             return shutil.get_terminal_size().columns
         except Exception:
-            return 80
+            return DEFAULT_TERMINAL_WIDTH
 
     def _writeln(self, text: str) -> None:
         print(text, file=self._stream)
@@ -733,8 +738,8 @@ class MarkdownRenderer:
         
         # Calculate width
         term_width = self._get_terminal_width()
-        panel_width = width or min(term_width - 4, 76)
-        inner_width = panel_width - 4  # Account for borders and padding
+        panel_width = width or min(term_width - PANEL_PADDING, MAX_PANEL_WIDTH)
+        inner_width = panel_width - PANEL_PADDING  # Account for borders and padding
         
         # Box drawing characters
         tl, tr, bl, br = "┌", "┐", "└", "┘"

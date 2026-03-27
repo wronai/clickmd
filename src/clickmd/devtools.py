@@ -261,7 +261,7 @@ def _format_debug_value(
     # Strings
     if isinstance(obj, str):
         if len(obj) > 80:
-            obj = obj[:77] + "..."
+            obj = f"{obj[:77]}..."
         return renderer._c("green", repr(obj))
     
     # Lists/Tuples
@@ -564,7 +564,7 @@ def tree(
         else:
             value_str = repr(value) if not isinstance(value, str) else value
             if len(value_str) > 50:
-                value_str = value_str[:47] + "..."
+                value_str = f"{value_str[:47]}..."
             print(f"{prefix}{connector}{key_colored}: {renderer._c('green', value_str)}")
     
     # End codeblock at root level

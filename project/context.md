@@ -6,15 +6,15 @@
 - **Primary Language**: python
 - **Languages**: python: 27, shell: 1
 - **Analysis Mode**: static
-- **Total Functions**: 221
+- **Total Functions**: 241
 - **Total Classes**: 11
 - **Modules**: 28
-- **Entry Points**: 194
+- **Entry Points**: 201
 
 ## Architecture by Module
 
 ### src.clickmd.renderer
-- **Functions**: 43
+- **Functions**: 50
 - **Classes**: 1
 - **File**: `renderer.py`
 
@@ -29,7 +29,7 @@
 - **File**: `logger.py`
 
 ### src.clickmd.devtools
-- **Functions**: 15
+- **Functions**: 20
 - **Classes**: 2
 - **File**: `devtools.py`
 
@@ -37,6 +37,10 @@
 - **Functions**: 14
 - **Classes**: 1
 - **File**: `themes.py`
+
+### tools.md_to_html
+- **Functions**: 13
+- **File**: `md_to_html.py`
 
 ### src.clickmd.rich_backend
 - **Functions**: 13
@@ -64,21 +68,17 @@
 - **Classes**: 1
 - **File**: `phase5_devtools.py`
 
-### examples.config_viewer
-- **Functions**: 6
-- **File**: `config_viewer.py`
-
 ### examples.phase3_progress
 - **Functions**: 6
 - **File**: `phase3_progress.py`
 
+### examples.config_viewer
+- **Functions**: 6
+- **File**: `config_viewer.py`
+
 ### examples.simple_cli
 - **Functions**: 5
 - **File**: `simple_cli.py`
-
-### tools.md_to_html
-- **Functions**: 5
-- **File**: `md_to_html.py`
 
 ### examples.cli_app
 - **Functions**: 4
@@ -96,22 +96,13 @@
 - **Functions**: 1
 - **File**: `colored_logging.py`
 
-### examples.custom_renderer
+### examples.api_response
 - **Functions**: 1
-- **File**: `custom_renderer.py`
+- **File**: `api_response.py`
 
 ## Key Entry Points
 
 Main execution flows into the system:
-
-### src.clickmd.renderer.MarkdownRenderer.table
-> Render a table with configurable style.
-
-Args:
-    headers: Column headers
-    rows: Table rows (list of lists)
-    style: Border style - "ascii", "un
-- **Calls**: enumerate, self._get_table_chars, len, enumerate, len, self._writeln, self._writeln, enumerate
 
 ### src.clickmd.devtools.inspect_obj
 > Inspect an object showing its type, methods, and attributes.
@@ -135,9 +126,6 @@ Args:
 > Real-world evolution pipeline example
 - **Calls**: src.clickmd.md, Logger, log.heading, log.heading, log.llm, log.attempt, log.success, log.heading
 
-### src.clickmd.renderer.MarkdownRenderer._highlight_log
-- **Calls**: line.strip, trimmed.startswith, trimmed.startswith, trimmed.startswith, trimmed.startswith, trimmed.startswith, self._c, self._c
-
 ### src.clickmd.devtools.diff
 > Display a colored diff between two texts.
 
@@ -158,9 +146,6 @@ Args:
 
 ### src.clickmd.renderer.MarkdownRenderer._highlight_yaml
 - **Calls**: None.startswith, re.match, None.startswith, self._c, m.groups, self._c, self._c, value.strip
-
-### src.clickmd.renderer.MarkdownRenderer._highlight_line
-- **Calls**: None.lower, self._c, self._highlight_yaml, self._highlight_json, self._highlight_bash, self._highlight_js, self._highlight_python, self._highlight_markdown
 
 ### examples.phase3_progress.demo_combined
 > Demonstrate combined usage.
@@ -198,13 +183,13 @@ Handles **bold**, *italic*, `code` inline.
 > Demonstrate debug output.
 - **Calls**: clickmd.md, clickmd.md, clickmd.debug, clickmd.debug, clickmd.debug, clickmd.debug, clickmd.debug, clickmd.md
 
-### examples.phase1_features.demo_nested_lists
-> Demonstrate nested list rendering.
-- **Calls**: clickmd.md, clickmd.md, clickmd.get_renderer, renderer.list_item, renderer.list_item, renderer.list_item, renderer.list_item, renderer.list_item
-
 ### examples.phase3_progress.demo_spinners
 > Demonstrate spinners.
 - **Calls**: clickmd.md, clickmd.md, clickmd.md, clickmd.md, clickmd.md, clickmd.table, clickmd.spinner, time.sleep
+
+### examples.phase1_features.demo_nested_lists
+> Demonstrate nested list rendering.
+- **Calls**: clickmd.md, clickmd.md, clickmd.get_renderer, renderer.list_item, renderer.list_item, renderer.list_item, renderer.list_item, renderer.list_item
 
 ### src.clickmd.renderer.MarkdownRenderer._highlight_html
 > Highlight HTML/XML syntax.
@@ -222,6 +207,10 @@ Args:
 ### src.clickmd.renderer.MarkdownRenderer.render_markdown_with_fences
 - **Calls**: None.split, src.clickmd.logger.Logger.flush, self.codeblock, line.rstrip, re.match, None.join, m.group, self._writeln
 
+### src.clickmd.renderer.MarkdownRenderer._highlight_log
+> Highlight log lines based on patterns and emojis.
+- **Calls**: line.strip, emoji_patterns.items, trimmed.startswith, trimmed.startswith, self._c, trimmed.startswith, trimmed.startswith, self._c
+
 ### src.clickmd.renderer.MarkdownRenderer._highlight_json
 - **Calls**: re.sub, re.sub, re.sub, re.sub, re.sub, self._c, self._c, self._c
 
@@ -229,28 +218,38 @@ Args:
 > Highlight Ruby syntax.
 - **Calls**: None.startswith, re.sub, re.sub, re.sub, self._c, re.sub, line.strip, self._c
 
-### examples.phase1_features.demo_panels
-> Demonstrate panel/box rendering.
-- **Calls**: clickmd.md, clickmd.md, clickmd.panel, clickmd.md, clickmd.panel, clickmd.md, clickmd.panel, clickmd.md
-
 ### examples.phase3_progress.demo_progress_bar
 > Demonstrate progress bar.
 - **Calls**: clickmd.md, clickmd.md, range, clickmd.progress, clickmd.md, clickmd.md, clickmd.progress, time.sleep
+
+### examples.phase1_features.demo_panels
+> Demonstrate panel/box rendering.
+- **Calls**: clickmd.md, clickmd.md, clickmd.panel, clickmd.md, clickmd.panel, clickmd.md, clickmd.panel, clickmd.md
 
 ### src.clickmd.renderer.MarkdownRenderer._highlight_c
 > Highlight C/C++ syntax.
 - **Calls**: re.sub, re.sub, None.startswith, None.startswith, self._c, re.sub, self._c, self._c
 
+### src.clickmd.devtools.PrettyExceptionFormatter._format_frame
+> Format a single traceback frame.
+- **Calls**: self._shorten_path, self._renderer._c, lines.append, lines.append, self._renderer._c, self._highlight_python, self._renderer._c, self._renderer._c
+
+### examples.markdown_help.process
+> # Process Data
+
+Transform and process input files with **configurable** options.
+
+## Supported Formats
+
+| Format | Extension | Description |
+|--------
+- **Calls**: cli.command, clickmd.option, clickmd.option, clickmd.option, clickmd.option, clickmd.option, clickmd.success, clickmd.echo_md
+
 ## Process Flows
 
 Key execution flows identified:
 
-### Flow 1: table
-```
-table [src.clickmd.renderer.MarkdownRenderer]
-```
-
-### Flow 2: inspect_obj
+### Flow 1: inspect_obj
 ```
 inspect_obj [src.clickmd.devtools]
   └─ →> get_renderer
@@ -258,24 +257,24 @@ inspect_obj [src.clickmd.devtools]
   └─ →> print
 ```
 
-### Flow 3: main
+### Flow 2: main
 ```
 main [examples.custom_renderer]
   └─ →> print
   └─ →> print
 ```
 
-### Flow 4: _highlight_python
+### Flow 3: _highlight_python
 ```
 _highlight_python [src.clickmd.renderer.MarkdownRenderer]
 ```
 
-### Flow 5: format_exception
+### Flow 4: format_exception
 ```
 format_exception [src.clickmd.devtools.PrettyExceptionFormatter]
 ```
 
-### Flow 6: real_world_example
+### Flow 5: real_world_example
 ```
 real_world_example [examples.logger_usage]
   └─ →> md
@@ -283,31 +282,36 @@ real_world_example [examples.logger_usage]
           └─> get_renderer
 ```
 
-### Flow 7: _highlight_log
-```
-_highlight_log [src.clickmd.renderer.MarkdownRenderer]
-```
-
-### Flow 8: diff
+### Flow 6: diff
 ```
 diff [src.clickmd.devtools]
   └─ →> get_renderer
 ```
 
-### Flow 9: panel
+### Flow 7: panel
 ```
 panel [src.clickmd.renderer.MarkdownRenderer]
 ```
 
-### Flow 10: _highlight_yaml
+### Flow 8: _highlight_yaml
 ```
 _highlight_yaml [src.clickmd.renderer.MarkdownRenderer]
+```
+
+### Flow 9: demo_combined
+```
+demo_combined [examples.phase3_progress]
+```
+
+### Flow 10: bump_version
+```
+bump_version [scripts.bump_version]
 ```
 
 ## Key Classes
 
 ### src.clickmd.renderer.MarkdownRenderer
-- **Methods**: 35
+- **Methods**: 42
 - **Key Methods**: src.clickmd.renderer.MarkdownRenderer.__init__, src.clickmd.renderer.MarkdownRenderer._c, src.clickmd.renderer.MarkdownRenderer._get_terminal_width, src.clickmd.renderer.MarkdownRenderer._writeln, src.clickmd.renderer.MarkdownRenderer.heading, src.clickmd.renderer.MarkdownRenderer.codeblock, src.clickmd.renderer.MarkdownRenderer.render_markdown_with_fences, src.clickmd.renderer.MarkdownRenderer._highlight_line, src.clickmd.renderer.MarkdownRenderer._highlight_log, src.clickmd.renderer.MarkdownRenderer._highlight_markdown
 
 ### src.clickmd.logger.Logger
@@ -397,6 +401,14 @@ Transform and process input files with **configurable** options.
 ## Supported Forma
 - **Output to**: cli.command, clickmd.option, clickmd.option, clickmd.option, clickmd.option
 
+### tools.md_to_html._process_line
+> Process a single line and return the next line index.
+- **Output to**: line.rstrip, re.match, re.match, re.match, re.match
+
+### tools.md_to_html._process_table
+> Process a table and return the next line index after the table.
+- **Output to**: tools.md_to_html._flush_paragraph, tools.md_to_html._flush_list, None.append, None.append, None.append
+
 ### tools.md_to_html.convert_directory
 - **Output to**: sorted, md_dir.glob, md_path.with_suffix, md_path.read_text, tools.md_to_html.markdown_to_html
 
@@ -417,6 +429,26 @@ Handles **bold**, *italic*, `code` inline.
 > Format a value for debug output.
 - **Output to**: isinstance, isinstance, isinstance, isinstance, isinstance
 
+### src.clickmd.devtools._format_string
+> Format a string value.
+- **Output to**: renderer._c, len, repr
+
+### src.clickmd.devtools._format_sequence
+> Format a list or tuple.
+- **Output to**: enumerate, lines.append, None.join, len, renderer._c
+
+### src.clickmd.devtools._format_dict
+> Format a dictionary.
+- **Output to**: enumerate, lines.append, None.join, len, renderer._c
+
+### src.clickmd.devtools._format_set
+> Format a set or frozenset.
+- **Output to**: renderer._c, renderer._c, len, renderer._c, list
+
+### src.clickmd.devtools._format_object
+> Format an object with __dict__.
+- **Output to**: None.join, renderer._c, list, renderer._c, src.clickmd.devtools._format_debug_value
+
 ### src.clickmd.devtools.ClickmdHandler.format_record
 > Format a log record with styling.
 - **Output to**: self.LEVEL_STYLES.get, record.getMessage, parts.append, None.join, None.strftime
@@ -427,11 +459,6 @@ Handles **bold**, *italic*, `code` inline.
 - **Type**: recursion
 - **Confidence**: 0.90
 - **Functions**: src.clickmd.rich_backend._FallbackConsole.print
-
-### recursion__format_debug_value
-- **Type**: recursion
-- **Confidence**: 0.90
-- **Functions**: src.clickmd.devtools._format_debug_value
 
 ### recursion_tree
 - **Type**: recursion
@@ -457,8 +484,6 @@ Handles **bold**, *italic*, `code` inline.
 
 Functions exposed as public API (no underscore prefix):
 
-- `tools.md_to_html.markdown_to_html` - 94 calls
-- `src.clickmd.renderer.MarkdownRenderer.table` - 44 calls
 - `src.clickmd.devtools.inspect_obj` - 39 calls
 - `examples.custom_renderer.main` - 37 calls
 - `src.clickmd.menu` - 26 calls
@@ -472,13 +497,13 @@ Functions exposed as public API (no underscore prefix):
 - `scripts.bump_version.bump_version` - 19 calls
 - `examples.phase3_progress.demo_status_indicator` - 17 calls
 - `examples.phase5_devtools.demo_debug` - 16 calls
-- `examples.phase1_features.demo_nested_lists` - 15 calls
 - `examples.phase3_progress.demo_spinners` - 15 calls
+- `examples.phase1_features.demo_nested_lists` - 15 calls
 - `src.clickmd.rich_backend.render_panel` - 15 calls
 - `src.clickmd.progress.countdown` - 14 calls
 - `src.clickmd.renderer.MarkdownRenderer.render_markdown_with_fences` - 14 calls
-- `examples.phase1_features.demo_panels` - 13 calls
 - `examples.phase3_progress.demo_progress_bar` - 13 calls
+- `examples.phase1_features.demo_panels` - 13 calls
 - `examples.markdown_help.process` - 12 calls
 - `examples.phase3_progress.demo_live_update` - 12 calls
 - `src.clickmd.devtools.ClickmdHandler.format_record` - 12 calls
@@ -488,6 +513,8 @@ Functions exposed as public API (no underscore prefix):
 - `src.clickmd.renderer.MarkdownRenderer.codeblock` - 11 calls
 - `examples.phase5_devtools.demo_logging` - 11 calls
 - `examples.simple_cli.status` - 10 calls
+- `tools.md_to_html.markdown_to_html` - 10 calls
+- `src.clickmd.renderer.MarkdownRenderer.table` - 10 calls
 - `examples.phase1_features.demo_tables` - 9 calls
 - `examples.phase1_features.demo_horizontal_rules` - 9 calls
 - `src.clickmd.themes.color` - 9 calls
@@ -504,9 +531,6 @@ How components interact:
 
 ```mermaid
 graph TD
-    table --> enumerate
-    table --> _get_table_chars
-    table --> len
     inspect_obj --> get_renderer
     inspect_obj --> print
     main --> print
@@ -520,8 +544,6 @@ graph TD
     real_world_example --> Logger
     real_world_example --> heading
     real_world_example --> llm
-    _highlight_log --> strip
-    _highlight_log --> startswith
     diff --> get_renderer
     diff --> unified_diff
     diff --> isinstance
@@ -534,6 +556,11 @@ graph TD
     _highlight_yaml --> startswith
     _highlight_yaml --> match
     _highlight_yaml --> _c
+    _highlight_yaml --> groups
+    demo_combined --> md
+    demo_combined --> StatusIndicator
+    demo_combined --> start
+    demo_combined --> sleep
 ```
 
 ## Reverse Engineering Guidelines

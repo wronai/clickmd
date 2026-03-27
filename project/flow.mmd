@@ -19,12 +19,17 @@ flowchart TD
         src__clickmd__progress__Spinner__stop["stop"]
         src__clickmd__progress__Spinner____enter__["__enter__"]
         src__clickmd__progress__Spinner____exit__["__exit__"]
-        ...["+134 more"]
+        ...["+146 more"]
     end
 
     subgraph Core
+        tools__md_to_html___inline_md_to_html["_inline_md_to_html"]
         tools__md_to_html___escape_text["_escape_text"]
-        tools__md_to_html__markdown_to_html{{markdown_to_html CC=21}}
+        tools__md_to_html__markdown_to_html["markdown_to_html"]
+        tools__md_to_html___process_line("_process_line CC=12")
+        tools__md_to_html___process_table("_process_table CC=8")
+        tools__md_to_html___flush_paragraph["_flush_paragraph"]
+        tools__md_to_html__convert_directory["convert_directory"]
         tools__md_to_html__main["main"]
     end
 

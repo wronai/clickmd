@@ -1,21 +1,20 @@
-# code2llm | 12f 4680L | python:11,shell:1 | 2026-03-27
-# CC̄=3.5 | critical:6/221 | dups:0 | cycles:3
+# code2llm | 12f 4783L | python:11,shell:1 | 2026-03-27
+# CC̄=3.1 | critical:1/241 | dups:0 | cycles:6
 
-HEALTH[7]:
+HEALTH[6]:
   🔴 GOD   src/clickmd/progress.py = 514L, 4 classes, 30m, max CC=10
-  🟡 CC    markdown_to_html CC=21 (limit:15)
+  🔴 CYCLE Circular dependency detected: src.clickmd.devtools._format_debug_value -> src.clickmd.devtools._format_sequence. This indicates high coupling and may lead to infinite recursion or initialization issues.
+  🔴 CYCLE Circular dependency detected: src.clickmd.devtools._format_debug_value -> src.clickmd.devtools._format_dict. This indicates high coupling and may lead to infinite recursion or initialization issues.
+  🔴 CYCLE Circular dependency detected: src.clickmd.devtools._format_debug_value -> src.clickmd.devtools._format_set. This indicates high coupling and may lead to infinite recursion or initialization issues.
+  🔴 CYCLE Circular dependency detected: src.clickmd.devtools._format_debug_value -> src.clickmd.devtools._format_object. This indicates high coupling and may lead to infinite recursion or initialization issues.
   🟡 CC    menu CC=15 (limit:15)
-  🟡 CC    _highlight_line CC=21 (limit:15)
-  🟡 CC    _highlight_log CC=20 (limit:15)
-  🟡 CC    table CC=28 (limit:15)
-  🟡 CC    _format_debug_value CC=24 (limit:15)
 
 REFACTOR[3]:
   1. split src/clickmd/progress.py  (god module)
-  2. split 6 high-CC methods  (CC>15)
-  3. break 3 circular dependencies
+  2. split 1 high-CC methods  (CC>15)
+  3. break 6 circular dependencies
 
-PIPELINES[182]:
+PIPELINES[189]:
   [1] Src [basic_usage]: basic_usage → md → render_markdown → get_renderer
       PURITY: 100% pure
   [2] Src [action_logging]: action_logging → md → render_markdown → get_renderer
@@ -31,12 +30,12 @@ LAYERS:
   scripts/                        CC̄=9.0    ←in:0  →out:6
   │ bump_version                77L  0C    1m  CC=9      ←0
   │
-  tools/                          CC̄=5.6    ←in:0  →out:0
-  │ !! md_to_html                 248L  0C    5m  CC=21     ←0
+  tools/                          CC̄=3.6    ←in:0  →out:0
+  │ md_to_html                 268L  0C   13m  CC=12     ←0
   │
-  src/                            CC̄=3.4    ←in:0  →out:4
-  │ !! renderer                   905L  1C   43m  CC=28     ←6
-  │ !! devtools                   572L  2C   15m  CC=24     ←0
+  src/                            CC̄=3.0    ←in:0  →out:4
+  │ !! renderer                   969L  1C   50m  CC=11     ←6
+  │ !! devtools                   591L  2C   20m  CC=13     ←0
   │ !! help                       521L  0C    9m  CC=4      ←0
   │ !! progress                   514L  4C   30m  CC=10     ←0
   │ themes                     482L  1C   14m  CC=8      ←0
@@ -54,7 +53,7 @@ COUPLING:
   src.clickmd           ──           ←6           ←4  hub
       scripts            6           ──             
           src            4                        ──
-  CYCLES: 3
+  CYCLES: 6
   HUB: src.clickmd/ (fan-in=10)
 
 EXTERNAL:

@@ -205,6 +205,20 @@ def menu(
             ("ollama", "Ollama — local, no API key"),
         ])
     """
+    _render_menu(title, items, exit_option)
+    max_i = len(items)
+    range_hint = f"0-{max_i}" if exit_option is not None else f"1-{max_i}"
+    
+    while True:
+        choice = _get_user_choice(prompt_text, range_hint, default)
+        if _is_valid_choice(choice, max_i, exit_option):
+            return choice
+        lo = 0 if exit_option is not None else 1
+        md(f"> ⚠️ Invalid selection `{choice}`. Enter a number between {lo} and {max_i}.")
+
+
+def _render_menu(title: str, items: list, exit_option: Optional[str]) -> None:
+    """Render the menu display."""
     lines: list[str] = []
     heading = title if title.lstrip().startswith("#") else f"## {title}"
     lines.append(heading)
@@ -223,29 +237,29 @@ def menu(
     lines.append("")
     md("\n".join(lines))
 
-    max_i = len(items)
-    range_hint = f"0-{max_i}" if exit_option is not None else f"1-{max_i}"
 
-    while True:
-        if CLICK_AVAILABLE:
-            try:
-                val = prompt(f"{prompt_text} [{range_hint}]", default=str(default))
-                choice = int(str(val).strip())
-            except (ValueError, TypeError):
-                choice = -1
-            except Exception:
-                return -1
-        else:
-            try:
-                raw = input(f"{prompt_text} [{range_hint}] (default {default}): ").strip()
-                choice = int(raw) if raw else default
-            except (ValueError, EOFError, KeyboardInterrupt):
-                return 0
+def _get_user_choice(prompt_text: str, range_hint: str, default: int) -> int:
+    """Get user input and convert to integer."""
+    if CLICK_AVAILABLE:
+        try:
+            val = prompt(f"{prompt_text} [{range_hint}]", default=str(default))
+            return int(str(val).strip())
+        except (ValueError, TypeError):
+            return -1
+        except Exception:
+            return -1
+    else:
+        try:
+            raw = input(f"{prompt_text} [{range_hint}] (default {default}): ").strip()
+            return int(raw) if raw else default
+        except (ValueError, EOFError, KeyboardInterrupt):
+            return 0
 
-        lo = 0 if exit_option is not None else 1
-        if lo <= choice <= max_i:
-            return choice
-        md(f"> ⚠️ Invalid selection `{choice}`. Enter a number between {lo} and {max_i}.")
+
+def _is_valid_choice(choice: int, max_i: int, exit_option: Optional[str]) -> bool:
+    """Check if the user's choice is valid."""
+    lo = 0 if exit_option is not None else 1
+    return lo <= choice <= max_i
 
 
 def select(prompt_text: str, items: list, default: int = 1) -> int:

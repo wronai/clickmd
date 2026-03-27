@@ -1,56 +1,23 @@
-# clickmd | 12f 4680L | python:11,shell:1 | 2026-03-27
-# stats: 164 func | 0 cls | 12 mod | CC̄=3.5 | critical:6 | cycles:0
-# alerts[5]: fan-out markdown_to_html=29; CC MarkdownRenderer.table=28; fan-out MarkdownRenderer._highlight_line=21; CC _format_debug_value=24; CC MarkdownRenderer._highlight_line=21
-# hotspots[5]: markdown_to_html fan=29; MarkdownRenderer._highlight_line fan=21; _format_debug_value fan=16; render_table fan=14; bump_version fan=13
-# evolution: CC̄ 3.4→3.5 (regressed +0.1)
+# clickmd | 12f 4783L | python:11,shell:1 | 2026-03-27
+# stats: 184 func | 0 cls | 12 mod | CC̄=3.1 | critical:1 | cycles:0
+# alerts[5]: fan-out _process_line=17; CC menu=15; fan-out render_table=14; fan-out bump_version=13; fan-out menu=13
+# hotspots[5]: _process_line fan=17; render_table fan=14; bump_version fan=13; menu fan=13; MarkdownRenderer.render_markdown_with_fences fan=12
+# evolution: CC̄ 3.4→3.1 (improved -0.3)
 # Keys: M=modules, D=details, i=imports, e=exports, c=classes, f=functions, m=methods
 M[12]:
   project.sh,24
   scripts/bump_version.py,77
   src/clickmd/__init__.py,443
   src/clickmd/decorators.py,286
-  src/clickmd/devtools.py,572
+  src/clickmd/devtools.py,591
   src/clickmd/help.py,521
   src/clickmd/logger.py,302
   src/clickmd/progress.py,514
-  src/clickmd/renderer.py,905
+  src/clickmd/renderer.py,969
   src/clickmd/rich_backend.py,306
   src/clickmd/themes.py,482
-  tools/md_to_html.py,248
+  tools/md_to_html.py,268
 D:
-  src/clickmd/renderer.py:
-    e: MarkdownRenderer,strip_ansi,get_renderer,render_markdown,table,panel,blockquote,hr,checklist
-    MarkdownRenderer: __init__(2),_c(4),_get_terminal_width(0),_writeln(1),heading(2),codeblock(2),render_markdown_with_fences(2),_highlight_line(2),_highlight_log(1),_highlight_markdown(1),_highlight_yaml(1),_highlight_json(1),_highlight_bash(1),_highlight_js(1),_highlight_python(1),_highlight_html(1),_highlight_css(1),_highlight_sql(1),_highlight_toml(1),_highlight_go(1),_highlight_rust(1),_highlight_java(1),_highlight_c(1),_highlight_ruby(1),_highlight_php(1),_highlight_dockerfile(1),_highlight_diff(1),table(5),_get_table_chars(1),panel(5),blockquote(1),horizontal_rule(2),checklist(1),list_item(3),numbered_list(2)
-    strip_ansi(text)
-    get_renderer(stream;use_colors)
-    render_markdown(text;text_lang;stream;use_colors)
-    table(headers;rows)
-    panel(content)
-    blockquote(content)
-    hr(char;width)
-    checklist(items)
-  src/clickmd/devtools.py:
-    e: PrettyExceptionFormatter,ClickmdHandler,install_excepthook,uninstall_excepthook,debug,_format_debug_value,inspect_obj,diff,tree
-    PrettyExceptionFormatter: __init__(4),format_exception(3),_format_frame(2),_shorten_path(1),_highlight_python(1)  # Format exceptions with syntax highlighting and context.
-
-Fea...
-    ClickmdHandler(logging.Handler): __init__(5),emit(1),format_record(1)  # Logging handler that formats logs with clickmd styling.
-
-Usa...
-    install_excepthook(show_locals;context_lines)
-    uninstall_excepthook()
-    debug(obj;name;max_depth;max_items;stream;markdown_safe)
-    _format_debug_value(obj;renderer;depth;max_depth;max_items)
-    inspect_obj(obj;markdown_safe)
-    diff(old;new;old_name;new_name;markdown_safe)
-    tree(data;prefix;is_last;name;_is_root)
-  tools/md_to_html.py:
-    e: _inline_md_to_html,_escape_text,markdown_to_html,convert_directory,main
-    _inline_md_to_html(text)
-    _escape_text(text)
-    markdown_to_html(markdown_text;title)
-    convert_directory(md_dir)
-    main()
   src/clickmd/__init__.py:
     e: menu,select,echo,md
     menu(title;items;default;prompt_text;exit_option)
@@ -70,6 +37,52 @@ Usa...
     print_panel(content)
     print_syntax(code;language)
     print_table(headers;rows)
+  src/clickmd/devtools.py:
+    e: PrettyExceptionFormatter,ClickmdHandler,install_excepthook,uninstall_excepthook,debug,_format_debug_value,_format_string,_format_sequence,_format_dict,_format_set,_format_object,inspect_obj,diff,tree
+    PrettyExceptionFormatter: __init__(4),format_exception(3),_format_frame(2),_shorten_path(1),_highlight_python(1)  # Format exceptions with syntax highlighting and context.
+
+Fea...
+    ClickmdHandler(logging.Handler): __init__(5),emit(1),format_record(1)  # Logging handler that formats logs with clickmd styling.
+
+Usa...
+    install_excepthook(show_locals;context_lines)
+    uninstall_excepthook()
+    debug(obj;name;max_depth;max_items;stream;markdown_safe)
+    _format_debug_value(obj;renderer;depth;max_depth;max_items)
+    _format_string(obj;renderer)
+    _format_sequence(obj;renderer;depth;max_depth;max_items;indent)
+    _format_dict(obj;renderer;depth;max_depth;max_items;indent)
+    _format_set(obj;renderer;depth;max_depth;max_items;obj_type)
+    _format_object(obj;renderer;depth;max_depth;max_items;indent;obj_type)
+    inspect_obj(obj;markdown_safe)
+    diff(old;new;old_name;new_name;markdown_safe)
+    tree(data;prefix;is_last;name;_is_root)
+  tools/md_to_html.py:
+    e: _inline_md_to_html,_escape_text,markdown_to_html,_add_html_header,_process_line,_process_table,_is_table_row,_flush_code,_start_code,_flush_paragraph,_flush_list,convert_directory,main
+    _inline_md_to_html(text)
+    _escape_text(text)
+    markdown_to_html(markdown_text;title)
+    _add_html_header(out;title)
+    _process_line(lines;i;state)
+    _process_table(lines;i;state)
+    _is_table_row(s)
+    _flush_code(state)
+    _start_code(state;lang)
+    _flush_paragraph(state)
+    _flush_list(state)
+    convert_directory(md_dir)
+    main()
+  src/clickmd/renderer.py:
+    e: MarkdownRenderer,strip_ansi,get_renderer,render_markdown,table,panel,blockquote,hr,checklist
+    MarkdownRenderer: __init__(2),_c(4),_get_terminal_width(0),_writeln(1),heading(2),codeblock(2),render_markdown_with_fences(2),_highlight_line(2),_highlight_log(1),_highlight_markdown(1),_highlight_yaml(1),_highlight_json(1),_highlight_bash(1),_highlight_js(1),_highlight_python(1),_highlight_html(1),_highlight_css(1),_highlight_sql(1),_highlight_toml(1),_highlight_go(1),_highlight_rust(1),_highlight_java(1),_highlight_c(1),_highlight_ruby(1),_highlight_php(1),_highlight_dockerfile(1),_highlight_diff(1),table(5),_calculate_column_widths(3),_align_cell(3),_render_table_border(5),_render_table_top_border(2),_render_table_bottom_border(2),_render_table_header(4),_render_table_rows(5),_get_table_chars(1),panel(5),blockquote(1),horizontal_rule(2),checklist(1),list_item(3),numbered_list(2)
+    strip_ansi(text)
+    get_renderer(stream;use_colors)
+    render_markdown(text;text_lang;stream;use_colors)
+    table(headers;rows)
+    panel(content)
+    blockquote(content)
+    hr(char;width)
+    checklist(items)
   src/clickmd/progress.py:
     e: ProgressBar,Spinner,LiveUpdate,StatusIndicator,_is_tty,_clear_line,_write_inline,progress,spinner,live,countdown
     ProgressBar: __init__(9),update(1),set(1),_render(0),finish(1),__enter__(0),__exit__(0)  # A customizable progress bar.

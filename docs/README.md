@@ -1,7 +1,7 @@
 <!-- code2docs:start --># clickmd
 
-![version](https://img.shields.io/badge/version-0.1.0-blue) ![python](https://img.shields.io/badge/python-%3E%3D3.10-blue) ![coverage](https://img.shields.io/badge/coverage-unknown-lightgrey) ![functions](https://img.shields.io/badge/functions-233-green)
-> **233** functions | **11** classes | **28** files | CC̄ = 2.9
+![version](https://img.shields.io/badge/version-0.1.0-blue) ![python](https://img.shields.io/badge/python-%3E%3D3.10-blue) ![coverage](https://img.shields.io/badge/coverage-unknown-lightgrey) ![functions](https://img.shields.io/badge/functions-241-green)
+> **241** functions | **11** classes | **28** files | CC̄ = 2.8
 
 > Auto-generated project documentation from source code analysis.
 
@@ -149,7 +149,7 @@ Content outside the markers is preserved when regenerating. Enable this with `sy
 
 ```
 clickmd/
-    ├── config_viewer    ├── basic    ├── logger_usage    ├── colored_logging    ├── one_liners    ├── cli_colors    ├── cli_app    ├── custom_renderer    ├── markdown_help    ├── phase3_progress    ├── phase1_features    ├── phase4_themes    ├── simple_cli    ├── md_to_html    ├── bump_version    ├── quickstart        ├── progress    ├── clickmd/        ├── rich_backend    ├── api_response        ├── renderer        ├── decorators    ├── phase5_devtools        ├── logger├── project        ├── help        ├── themes        ├── devtools```
+    ├── config_viewer    ├── one_liners    ├── basic    ├── colored_logging    ├── api_response    ├── logger_usage    ├── cli_colors    ├── cli_app    ├── custom_renderer    ├── markdown_help    ├── phase3_progress    ├── phase1_features    ├── phase4_themes    ├── simple_cli    ├── bump_version    ├── md_to_html        ├── progress    ├── quickstart    ├── clickmd/        ├── rich_backend        ├── renderer        ├── decorators        ├── help        ├── logger├── project        ├── themes    ├── phase5_devtools        ├── devtools```
 
 ## API Overview
 
@@ -160,9 +160,9 @@ clickmd/
 - **`LiveUpdate`** — Live-updating display that refreshes in place.
 - **`StatusIndicator`** — A status indicator that shows step-by-step progress.
 - **`MarkdownRenderer`** — —
-- **`User`** — Sample user class for debugging.
 - **`Logger`** — Markdown-aware logger that wraps output in codeblocks.
 - **`Theme`** — Color theme definition.
+- **`User`** — Sample user class for debugging.
 - **`PrettyExceptionFormatter`** — Format exceptions with syntax highlighting and context.
 - **`ClickmdHandler`** — Logging handler that formats logs with clickmd styling.
 
@@ -174,6 +174,8 @@ clickmd/
 - `show_env_config()` — Wyświetl zmienne środowiskowe.
 - `show_config_diff()` — Pokaż różnicę między konfiguracjami.
 - `show_config_tree()` — Pokaż strukturę konfiguracji jako drzewo.
+- `main()` — —
+- `handle_api_error(response)` — Przykład obsługi błędu API z clickmd.
 - `basic_usage()` — Basic Logger usage
 - `action_logging()` — Action-based logging with emojis
 - `progress_and_steps()` — Progress and step logging
@@ -182,7 +184,6 @@ clickmd/
 - `llm_logging()` — LLM-specific logging
 - `mixed_output()` — Mixed markdown and log output
 - `real_world_example()` — Real-world evolution pipeline example
-- `main()` — —
 - `cli()` — Example CLI application with clickmd.
 - `hello(name, formal)` — Say hello with style.
 - `status()` — Show application status.
@@ -217,10 +218,10 @@ clickmd/
 - `hello(name)` — Przywitaj użytkownika.
 - `info()` — # Informacje o systemie
 - `status(format)` — Pokaż status aplikacji.
-- `markdown_to_html(markdown_text, title)` — —
+- `bump_version(version_type)` — Bump version in pyproject.toml
+- `markdown_to_html(markdown_text, title)` — Convert markdown text to HTML with basic formatting support.
 - `convert_directory(md_dir)` — —
 - `main()` — —
-- `bump_version(version_type)` — Bump version in pyproject.toml
 - `progress(iterable, label, total)` — Wrap an iterable with a progress bar.
 - `spinner(message, style)` — Context manager for a spinner.
 - `live(initial)` — Context manager for live-updating display.
@@ -239,7 +240,6 @@ clickmd/
 - `print_panel(content)` — Print a panel (alias for render_panel).
 - `print_syntax(code, language)` — Print syntax-highlighted code (alias for render_syntax).
 - `print_table(headers, rows)` — Print a table (alias for render_table).
-- `handle_api_error(response)` — Przykład obsługi błędu API z clickmd.
 - `strip_ansi(text)` — —
 - `get_renderer(stream, use_colors)` — —
 - `render_markdown(text, text_lang, stream, use_colors)` — —
@@ -248,13 +248,11 @@ clickmd/
 - `blockquote(content)` — Render a blockquote.
 - `hr(char, width)` — Render a horizontal rule.
 - `checklist(items)` — Render a checklist.
-- `demo_debug()` — Demonstrate debug output.
-- `demo_inspect()` — Demonstrate object inspection.
-- `demo_tree()` — Demonstrate tree view.
-- `demo_diff()` — Demonstrate diff visualization.
-- `demo_logging()` — Demonstrate logging handler.
-- `demo_pretty_exceptions()` — Demonstrate pretty exceptions.
-- `demo_combined()` — Demonstrate combined usage.
+- `success(message)` — Display a success message in a green panel.
+- `warning(message)` — Display a warning message in a yellow panel.
+- `error(message)` — Display an error message in a red panel.
+- `info(message)` — Display an info message in a blue panel.
+- `echo_md(text, err)` — Echo markdown-formatted text to the terminal.
 - `get_logger(verbose)` — Get or create the default logger
 - `set_logger(logger)` — Set the default logger
 - `log_info(message)` — —
@@ -262,11 +260,6 @@ clickmd/
 - `log_warning(message)` — —
 - `log_error(message)` — —
 - `log_action(action, message)` — —
-- `success(message)` — Display a success message in a green panel.
-- `warning(message)` — Display a warning message in a yellow panel.
-- `error(message)` — Display an error message in a red panel.
-- `info(message)` — Display an info message in a blue panel.
-- `echo_md(text, err)` — Echo markdown-formatted text to the terminal.
 - `get_theme()` — Get the current theme.
 - `set_theme(name)` — Set the current theme by name.
 - `register_theme(theme)` — Register a custom theme.
@@ -275,6 +268,13 @@ clickmd/
 - `get_color_support()` — Get detected terminal color support level.
 - `color(name, text, bold, dim)` — Apply color to text using current theme.
 - `init_theme_from_env()` — Initialize theme from environment variables.
+- `demo_debug()` — Demonstrate debug output.
+- `demo_inspect()` — Demonstrate object inspection.
+- `demo_tree()` — Demonstrate tree view.
+- `demo_diff()` — Demonstrate diff visualization.
+- `demo_logging()` — Demonstrate logging handler.
+- `demo_pretty_exceptions()` — Demonstrate pretty exceptions.
+- `demo_combined()` — Demonstrate combined usage.
 - `install_excepthook(show_locals, context_lines)` — Install pretty exception hook.
 - `uninstall_excepthook()` — Restore original exception hook.
 - `debug(obj, name, max_depth, max_items)` — Pretty-print an object for debugging.
@@ -312,7 +312,7 @@ clickmd/
 📄 `src.clickmd.renderer` (50 functions, 1 classes)
 📄 `src.clickmd.rich_backend` (13 functions, 1 classes)
 📄 `src.clickmd.themes` (14 functions, 1 classes)
-📄 `tools.md_to_html` (5 functions)
+📄 `tools.md_to_html` (13 functions)
 
 ## Requirements
 

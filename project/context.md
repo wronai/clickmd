@@ -6,7 +6,7 @@
 - **Primary Language**: python
 - **Languages**: python: 27, shell: 1
 - **Analysis Mode**: static
-- **Total Functions**: 241
+- **Total Functions**: 244
 - **Total Classes**: 11
 - **Modules**: 28
 - **Entry Points**: 201
@@ -55,26 +55,30 @@
 - **Functions**: 8
 - **File**: `logger_usage.py`
 
+### examples.phase4_themes
+- **Functions**: 7
+- **File**: `phase4_themes.py`
+
 ### examples.phase1_features
 - **Functions**: 7
 - **File**: `phase1_features.py`
 
-### examples.phase4_themes
+### src.clickmd
 - **Functions**: 7
-- **File**: `phase4_themes.py`
+- **File**: `__init__.py`
 
 ### examples.phase5_devtools
 - **Functions**: 7
 - **Classes**: 1
 - **File**: `phase5_devtools.py`
 
-### examples.phase3_progress
-- **Functions**: 6
-- **File**: `phase3_progress.py`
-
 ### examples.config_viewer
 - **Functions**: 6
 - **File**: `config_viewer.py`
+
+### examples.phase3_progress
+- **Functions**: 6
+- **File**: `phase3_progress.py`
 
 ### examples.simple_cli
 - **Functions**: 5
@@ -87,10 +91,6 @@
 ### examples.markdown_help
 - **Functions**: 4
 - **File**: `markdown_help.py`
-
-### src.clickmd
-- **Functions**: 4
-- **File**: `__init__.py`
 
 ### examples.colored_logging
 - **Functions**: 1
@@ -183,13 +183,13 @@ Handles **bold**, *italic*, `code` inline.
 > Demonstrate debug output.
 - **Calls**: clickmd.md, clickmd.md, clickmd.debug, clickmd.debug, clickmd.debug, clickmd.debug, clickmd.debug, clickmd.md
 
-### examples.phase3_progress.demo_spinners
-> Demonstrate spinners.
-- **Calls**: clickmd.md, clickmd.md, clickmd.md, clickmd.md, clickmd.md, clickmd.table, clickmd.spinner, time.sleep
-
 ### examples.phase1_features.demo_nested_lists
 > Demonstrate nested list rendering.
 - **Calls**: clickmd.md, clickmd.md, clickmd.get_renderer, renderer.list_item, renderer.list_item, renderer.list_item, renderer.list_item, renderer.list_item
+
+### examples.phase3_progress.demo_spinners
+> Demonstrate spinners.
+- **Calls**: clickmd.md, clickmd.md, clickmd.md, clickmd.md, clickmd.md, clickmd.table, clickmd.spinner, time.sleep
 
 ### src.clickmd.renderer.MarkdownRenderer._highlight_html
 > Highlight HTML/XML syntax.
@@ -218,13 +218,13 @@ Args:
 > Highlight Ruby syntax.
 - **Calls**: None.startswith, re.sub, re.sub, re.sub, self._c, re.sub, line.strip, self._c
 
-### examples.phase3_progress.demo_progress_bar
-> Demonstrate progress bar.
-- **Calls**: clickmd.md, clickmd.md, range, clickmd.progress, clickmd.md, clickmd.md, clickmd.progress, time.sleep
-
 ### examples.phase1_features.demo_panels
 > Demonstrate panel/box rendering.
 - **Calls**: clickmd.md, clickmd.md, clickmd.panel, clickmd.md, clickmd.panel, clickmd.md, clickmd.panel, clickmd.md
+
+### examples.phase3_progress.demo_progress_bar
+> Demonstrate progress bar.
+- **Calls**: clickmd.md, clickmd.md, range, clickmd.progress, clickmd.md, clickmd.md, clickmd.progress, time.sleep
 
 ### src.clickmd.renderer.MarkdownRenderer._highlight_c
 > Highlight C/C++ syntax.
@@ -486,7 +486,6 @@ Functions exposed as public API (no underscore prefix):
 
 - `src.clickmd.devtools.inspect_obj` - 39 calls
 - `examples.custom_renderer.main` - 37 calls
-- `src.clickmd.menu` - 26 calls
 - `src.clickmd.rich_backend.render_table` - 26 calls
 - `src.clickmd.devtools.PrettyExceptionFormatter.format_exception` - 26 calls
 - `examples.logger_usage.real_world_example` - 25 calls
@@ -497,13 +496,13 @@ Functions exposed as public API (no underscore prefix):
 - `scripts.bump_version.bump_version` - 19 calls
 - `examples.phase3_progress.demo_status_indicator` - 17 calls
 - `examples.phase5_devtools.demo_debug` - 16 calls
-- `examples.phase3_progress.demo_spinners` - 15 calls
 - `examples.phase1_features.demo_nested_lists` - 15 calls
+- `examples.phase3_progress.demo_spinners` - 15 calls
 - `src.clickmd.rich_backend.render_panel` - 15 calls
 - `src.clickmd.progress.countdown` - 14 calls
 - `src.clickmd.renderer.MarkdownRenderer.render_markdown_with_fences` - 14 calls
-- `examples.phase3_progress.demo_progress_bar` - 13 calls
 - `examples.phase1_features.demo_panels` - 13 calls
+- `examples.phase3_progress.demo_progress_bar` - 13 calls
 - `examples.markdown_help.process` - 12 calls
 - `examples.phase3_progress.demo_live_update` - 12 calls
 - `src.clickmd.devtools.ClickmdHandler.format_record` - 12 calls
@@ -518,12 +517,13 @@ Functions exposed as public API (no underscore prefix):
 - `examples.phase1_features.demo_tables` - 9 calls
 - `examples.phase1_features.demo_horizontal_rules` - 9 calls
 - `src.clickmd.themes.color` - 9 calls
+- `examples.config_viewer.show_env_config` - 8 calls
 - `examples.logger_usage.action_logging` - 8 calls
 - `examples.logger_usage.llm_logging` - 8 calls
 - `examples.logger_usage.mixed_output` - 8 calls
-- `examples.config_viewer.show_env_config` - 8 calls
 - `examples.phase4_themes.demo_custom_theme` - 8 calls
 - `tools.md_to_html.main` - 8 calls
+- `src.clickmd.progress.Spinner.stop` - 8 calls
 
 ## System Interactions
 

@@ -1,29 +1,27 @@
-# code2llm | 12f 4783L | python:11,shell:1 | 2026-03-27
-# CC̄=3.1 | critical:1/241 | dups:0 | cycles:6
+# code2llm | 12f 4797L | python:11,shell:1 | 2026-03-30
+# CC̄=3.1 | critical:0/244 | dups:0 | cycles:6
 
-HEALTH[6]:
+HEALTH[5]:
   🔴 GOD   src/clickmd/progress.py = 514L, 4 classes, 30m, max CC=10
+  🔴 CYCLE Circular dependency detected: src.clickmd.devtools._format_dict -> src.clickmd.devtools._format_debug_value. This indicates high coupling and may lead to infinite recursion or initialization issues.
   🔴 CYCLE Circular dependency detected: src.clickmd.devtools._format_debug_value -> src.clickmd.devtools._format_sequence. This indicates high coupling and may lead to infinite recursion or initialization issues.
-  🔴 CYCLE Circular dependency detected: src.clickmd.devtools._format_debug_value -> src.clickmd.devtools._format_dict. This indicates high coupling and may lead to infinite recursion or initialization issues.
   🔴 CYCLE Circular dependency detected: src.clickmd.devtools._format_debug_value -> src.clickmd.devtools._format_set. This indicates high coupling and may lead to infinite recursion or initialization issues.
   🔴 CYCLE Circular dependency detected: src.clickmd.devtools._format_debug_value -> src.clickmd.devtools._format_object. This indicates high coupling and may lead to infinite recursion or initialization issues.
-  🟡 CC    menu CC=15 (limit:15)
 
-REFACTOR[3]:
+REFACTOR[2]:
   1. split src/clickmd/progress.py  (god module)
-  2. split 1 high-CC methods  (CC>15)
-  3. break 6 circular dependencies
+  2. break 6 circular dependencies
 
 PIPELINES[189]:
-  [1] Src [basic_usage]: basic_usage → md → render_markdown → get_renderer
+  [1] Src [show_yaml_config]: show_yaml_config
       PURITY: 100% pure
-  [2] Src [action_logging]: action_logging → md → render_markdown → get_renderer
+  [2] Src [show_json_config]: show_json_config
       PURITY: 100% pure
-  [3] Src [progress_and_steps]: progress_and_steps → md → render_markdown → get_renderer
+  [3] Src [show_toml_config]: show_toml_config
       PURITY: 100% pure
-  [4] Src [exception_handling]: exception_handling → md → render_markdown → get_renderer
+  [4] Src [show_env_config]: show_env_config
       PURITY: 100% pure
-  [5] Src [grouped_output]: grouped_output → md → render_markdown → get_renderer
+  [5] Src [show_config_diff]: show_config_diff
       PURITY: 100% pure
 
 LAYERS:
@@ -39,7 +37,7 @@ LAYERS:
   │ !! help                       521L  0C    9m  CC=4      ←0
   │ !! progress                   514L  4C   30m  CC=10     ←0
   │ themes                     482L  1C   14m  CC=8      ←0
-  │ !! __init__                   443L  0C    4m  CC=15     ←9
+  │ __init__                   457L  0C    7m  CC=12     ←9
   │ rich_backend               306L  1C   13m  CC=14     ←10
   │ logger                     302L  1C   30m  CC=4      ←1
   │ decorators                 286L  0C    0m  CC=0.0    ←0

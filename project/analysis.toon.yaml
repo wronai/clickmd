@@ -4,9 +4,9 @@
 HEALTH[5]:
   🔴 GOD   src/clickmd/progress.py = 514L, 4 classes, 30m, max CC=10
   🔴 CYCLE Circular dependency detected: src.clickmd.devtools._format_sequence -> src.clickmd.devtools._format_debug_value. This indicates high coupling and may lead to infinite recursion or initialization issues.
+  🔴 CYCLE Circular dependency detected: src.clickmd.devtools._format_dict -> src.clickmd.devtools._format_debug_value. This indicates high coupling and may lead to infinite recursion or initialization issues.
+  🔴 CYCLE Circular dependency detected: src.clickmd.devtools._format_object -> src.clickmd.devtools._format_debug_value. This indicates high coupling and may lead to infinite recursion or initialization issues.
   🔴 CYCLE Circular dependency detected: src.clickmd.devtools._format_set -> src.clickmd.devtools._format_debug_value. This indicates high coupling and may lead to infinite recursion or initialization issues.
-  🔴 CYCLE Circular dependency detected: src.clickmd.devtools._format_debug_value -> src.clickmd.devtools._format_dict. This indicates high coupling and may lead to infinite recursion or initialization issues.
-  🔴 CYCLE Circular dependency detected: src.clickmd.devtools._format_debug_value -> src.clickmd.devtools._format_object. This indicates high coupling and may lead to infinite recursion or initialization issues.
 
 REFACTOR[2]:
   1. split src/clickmd/progress.py  (god module)
@@ -15,13 +15,13 @@ REFACTOR[2]:
 PIPELINES[189]:
   [1] Src [handle_api_error]: handle_api_error
       PURITY: 100% pure
-  [2] Src [basic_usage]: basic_usage → md → render_markdown → get_renderer
+  [2] Src [main]: main → md → render_markdown → get_renderer
       PURITY: 100% pure
-  [3] Src [action_logging]: action_logging → md → render_markdown → get_renderer
+  [3] Src [show_yaml_config]: show_yaml_config
       PURITY: 100% pure
-  [4] Src [progress_and_steps]: progress_and_steps → md → render_markdown → get_renderer
+  [4] Src [show_json_config]: show_json_config
       PURITY: 100% pure
-  [5] Src [exception_handling]: exception_handling → md → render_markdown → get_renderer
+  [5] Src [show_toml_config]: show_toml_config
       PURITY: 100% pure
 
 LAYERS:

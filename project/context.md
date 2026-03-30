@@ -72,13 +72,13 @@
 - **Classes**: 1
 - **File**: `phase5_devtools.py`
 
-### examples.phase3_progress
-- **Functions**: 6
-- **File**: `phase3_progress.py`
-
 ### examples.config_viewer
 - **Functions**: 6
 - **File**: `config_viewer.py`
+
+### examples.phase3_progress
+- **Functions**: 6
+- **File**: `phase3_progress.py`
 
 ### examples.simple_cli
 - **Functions**: 5
@@ -517,13 +517,13 @@ Functions exposed as public API (no underscore prefix):
 - `examples.phase1_features.demo_tables` - 9 calls
 - `examples.phase1_features.demo_horizontal_rules` - 9 calls
 - `src.clickmd.themes.color` - 9 calls
+- `examples.config_viewer.show_env_config` - 8 calls
 - `examples.logger_usage.action_logging` - 8 calls
 - `examples.logger_usage.llm_logging` - 8 calls
 - `examples.logger_usage.mixed_output` - 8 calls
-- `examples.config_viewer.show_env_config` - 8 calls
 - `examples.phase4_themes.demo_custom_theme` - 8 calls
 - `tools.md_to_html.main` - 8 calls
-- `src.clickmd.echo` - 8 calls
+- `src.clickmd.progress.Spinner.stop` - 8 calls
 
 ## System Interactions
 

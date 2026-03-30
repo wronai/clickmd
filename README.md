@@ -303,9 +303,15 @@ make publish
 Licensed under Apache-2.0.
 
 
+Licensed under Apache-2.0.
+
+
 Apache License 2.0 - see [LICENSE](LICENSE) for details.
 
 ## Author
+
+Tom Sapletta
+
 
 Tom Sapletta
 

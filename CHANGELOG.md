@@ -110,6 +110,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reduce cyclomatic complexity in `devtools.py` (CC=24 → ≤14)
 - Split high-CC functions: `_highlight_line`, `table`, `_format_debug_value`
 
+## [1.1.13] - 2026-04-07
+
+### Docs
+- Update README.md
+- Update TODO.md
+
+### Other
+- Update devtools.py
+- Update project/duplication.toon.yaml
+- Update project/validation.toon.yaml
+- Update project/verify/validation.toon.yaml
+- Update renderer.py
+
 ## [1.1.12] - 2026-03-30
 
 ### Docs

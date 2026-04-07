@@ -1,44 +1,17 @@
-# vallm batch | 86f | 36✓ 1⚠ 7✗ | 2026-03-30
+# vallm batch | 88f | 44✓ 1⚠ 1✗ | 2026-04-07
 
 SUMMARY:
-  scanned: 86  passed: 36 (41.9%)  warnings: 1  errors: 7  unsupported: 43
+  scanned: 88  passed: 44 (50.0%)  warnings: 1  errors: 1  unsupported: 43
 
 WARNINGS[1]{path,score}:
   src/clickmd/renderer.py,0.98
     issues[1]{rule,severity,message,line}:
       complexity.maintainability,warning,Low maintainability index: 11.5 (threshold: 20),
 
-ERRORS[7]{path,score}:
-  src/clickmd/__init__.py,0.69
-    issues[8]{rule,severity,message,line}:
-      python.import.resolvable,error,Module 'renderer' not found,17
-      python.import.resolvable,error,Module 'logger' not found,31
-      python.import.resolvable,error,Module 'decorators' not found,43
-      python.import.resolvable,error,Module 'help' not found,116
-      python.import.resolvable,error,Module 'rich_backend' not found,129
-      python.import.resolvable,error,Module 'progress' not found,140
-      python.import.resolvable,error,Module 'themes' not found,153
-      python.import.resolvable,error,Module 'devtools' not found,166
-  src/clickmd/rich_backend.py,0.88
-    issues[3]{rule,severity,message,line}:
-      python.import.resolvable,error,Module 'renderer' not found,126
-      python.import.resolvable,error,Module 'renderer' not found,169
-      python.import.resolvable,error,Module 'renderer' not found,225
-  src/clickmd/logger.py,0.91
-    issues[1]{rule,severity,message,line}:
-      python.import.resolvable,error,Module 'renderer' not found,26
+ERRORS[1]{path,score}:
   tools/test_examples_md.py,0.91
     issues[1]{rule,severity,message,line}:
       python.import.resolvable,error,Module 'tools.md_to_html' not found,21
-  src/clickmd/progress.py,0.93
-    issues[1]{rule,severity,message,line}:
-      python.import.resolvable,error,Module 'renderer' not found,33
-  src/clickmd/devtools.py,0.95
-    issues[1]{rule,severity,message,line}:
-      python.import.resolvable,error,Module 'renderer' not found,31
-  src/clickmd/help.py,0.95
-    issues[1]{rule,severity,message,line}:
-      python.import.resolvable,error,Module 'renderer' not found,39
 
 UNSUPPORTED[3]{bucket,count}:
   *.md,21

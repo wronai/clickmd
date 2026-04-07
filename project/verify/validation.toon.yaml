@@ -1,0 +1,41 @@
+# vallm batch | 86f | 36✓ 0⚠ 7✗ | 2026-03-31
+
+SUMMARY:
+  scanned: 86  passed: 36 (41.9%)  warnings: 0  errors: 7  unsupported: 43
+
+ERRORS[7]{path,score}:
+  src/clickmd/__init__.py,0.69
+    issues[8]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'renderer' not found,17
+      python.import.resolvable,error,Module 'logger' not found,31
+      python.import.resolvable,error,Module 'decorators' not found,43
+      python.import.resolvable,error,Module 'help' not found,116
+      python.import.resolvable,error,Module 'rich_backend' not found,129
+      python.import.resolvable,error,Module 'progress' not found,140
+      python.import.resolvable,error,Module 'themes' not found,153
+      python.import.resolvable,error,Module 'devtools' not found,166
+  src/clickmd/rich_backend.py,0.88
+    issues[3]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'renderer' not found,126
+      python.import.resolvable,error,Module 'renderer' not found,169
+      python.import.resolvable,error,Module 'renderer' not found,225
+  src/clickmd/logger.py,0.91
+    issues[1]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'renderer' not found,26
+  tools/test_examples_md.py,0.91
+    issues[1]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'tools.md_to_html' not found,21
+  src/clickmd/progress.py,0.93
+    issues[1]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'renderer' not found,33
+  src/clickmd/devtools.py,0.95
+    issues[1]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'renderer' not found,31
+  src/clickmd/help.py,0.95
+    issues[1]{rule,severity,message,line}:
+      python.import.resolvable,error,Module 'renderer' not found,39
+
+UNSUPPORTED[3]{bucket,count}:
+  *.md,21
+  *.txt,1
+  other,21

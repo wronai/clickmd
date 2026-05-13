@@ -1,16 +1,14 @@
 # Changelog
 
+## [Unreleased]
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.10] - 2026-03-30
-
 ### Fixed
 - Fix wildcard-imports issues (ticket-1cea757e)
-
-## [0.1.10] - 2026-03-27
 
 ### Fixed
 - Fix ai-boilerplate issues (ticket-c95da8c6)
@@ -103,14 +101,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix string-concat issues (ticket-2909a699)
 - Fix ai-boilerplate issues (ticket-c9cb012a)
 
-## [Unreleased]
-
 ### Planned
 - Split `renderer.py` into smaller modules (highlighters, table, panel)
 - Reduce cyclomatic complexity in `devtools.py` (CC=24 → ≤14)
 - Split high-CC functions: `_highlight_line`, `table`, `_format_debug_value`
-
-## [1.1.14] - 2026-04-08
 
 ### Docs
 - Update README.md
@@ -133,8 +127,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update project/flow.png
 - ... and 7 more files
 
-## [1.1.13] - 2026-04-07
-
 ### Docs
 - Update README.md
 - Update TODO.md
@@ -146,8 +138,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update project/verify/validation.toon.yaml
 - Update renderer.py
 
-## [1.1.12] - 2026-03-30
-
 ### Docs
 - Update TODO.md
 - Update project/context.md
@@ -155,45 +145,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Other
 - Update project/analysis.toon.yaml
 
-## [1.1.11] - 2026-03-30
-
 ### Docs
 - Update TODO.md
 - Update project/context.md
 
 ### Other
 - Update project/analysis.toon.yaml
-
-## [1.1.10] - 2026-03-30
-
-### Docs
-- Update TODO.md
 
 ### Other
 - Update .pyqual/ruff.json
-
-## [1.1.9] - 2026-03-27
 
 ### Docs
 - Update TODO.md
 - Update docs/README.md
 - Update project/README.md
 - Update project/context.md
-
-### Other
-- Update project/analysis.toon.yaml
-- Update project/calls.mmd
-- Update project/calls.png
-- Update project/compact_flow.mmd
-- Update project/compact_flow.png
-- Update project/duplication.toon.yaml
-- Update project/evolution.toon.yaml
-- Update project/flow.mmd
-- Update project/flow.png
-- Update project/index.html
-- ... and 3 more files
-
-## [1.1.8] - 2026-03-27
 
 ### Docs
 - Update TODO.md
@@ -213,18 +179,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update project/project.toon.yaml
 - ... and 2 more files
 
-## [1.1.7] - 2026-03-27
-
-### Docs
-- Update TODO.md
-
 ### Other
 - Update tools/md_to_html.py
 - Update tools/test_examples_md.py
-
-## [1.1.6] - 2026-03-27
-
-## [1.1.5] - 2026-03-27
 
 ### Docs
 - Update CHANGELOG.md
@@ -246,15 +203,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update examples/phase1_features.py
 - ... and 25 more files
 
-## [1.1.4] - 2026-03-07
-
-### Other
-- Update venv
-
-## [1.1.3] - 2026-03-07
-
-## [1.1.2] - 2026-03-07
-
 ### Docs
 - Update project/README.md
 - Update project/context.md
@@ -272,8 +220,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update project/evolution.toon
 - ... and 7 more files
 
-## [1.1.1] - 2026-03-05
-
 ### Docs
 - Update CHANGELOG.md
 - Update README.md
@@ -283,8 +229,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Other
 - Update VERSION
 - Update project/analysis.yaml
-
-## [1.1.0] - 2026-03-05
 
 ### Changed
 - **BREAKING (internal)**: Moved package source to `src/clickmd/` layout
@@ -310,19 +254,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - Stale `publish-env/` and `venv/` directories from repo
 
-## [1.0.3] - 2026-03-05
-
 ### Fixed
 - Simplified Makefile publish targets (removed temporary venv creation)
 - Installed `build` and `twine` as dev dependencies
 
-## [1.0.2] - 2026-03-05
-
 ### Fixed
 - Fixed `pyproject.toml` authors format for hatchling compatibility
 - Added project analysis files
-
-## [1.0.1] - 2026-03-05
 
 ### Added
 - Phase 1: Tables, panels, blockquotes, horizontal rules, checklists
@@ -342,8 +280,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Supports custom output streams
 - Type hints (`py.typed` marker)
 
-## [1.0.0] - 2024-01-07
-
 ### Added
 - Initial release
 - `md()` function for markdown rendering
@@ -351,3 +287,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `MarkdownRenderer` class with syntax highlighting
 - Supported languages: Python, TypeScript/JavaScript, JSON, YAML, Bash, Markdown, Log
 - Click decorators re-export (optional dependency)
+
+- feat(docs): add code quality metrics with 5 supporting modules
+- feat(docs): implement deep code analysis engine with 4 supporting modules
+- feat(docs): implement code analysis engine
+- refactor(docs): restructure and refactor code analysis engine
+- feat(goal): add CLI interface
+- feat(goal): implement deep code analysis engine with 6 supporting modules
+- feat(build): add code relationship mapping with 4 supporting modules
+- feat(examples): CLI interface improvements
+- chore(config): CLI interface configuration updates
+

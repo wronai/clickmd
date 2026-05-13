@@ -40,10 +40,6 @@ if __name__ == "__main__":
 
 
 
-## YAML Configuration
-
-
-```yaml
 # Application configuration
 app:
   name: clickmd

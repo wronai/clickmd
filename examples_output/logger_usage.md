@@ -215,9 +215,6 @@ clickmd Logger Examples
 
 ----------------------------------------
 
-# Mixed Markdown & Logs
-
-
 ## Generation Status
 
 
@@ -251,9 +248,6 @@ clickmd Logger Examples
 
 
 ----------------------------------------
-
-# Real-World Example: Evolution Pipeline
-
 
 # 🧬 Evolution Mode
 

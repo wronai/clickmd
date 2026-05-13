@@ -19,7 +19,14 @@ Environment variables:
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+CONSTANT_60 = 60
+
+
+CONSTANT_60 = CONSTANT_60
+
+
+if __name__ == "__main__":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import clickmd
 
@@ -27,7 +34,7 @@ import clickmd
 def demo_available_themes() -> None:
     """Show available themes."""
     clickmd.md("# 🎨 Available Themes\n")
-    
+
     themes = clickmd.list_themes()
     clickmd.table(
         headers=["Theme", "Description"],
@@ -40,14 +47,14 @@ def demo_available_themes() -> None:
             ["solarized_light", "Solarized light variant"],
             ["github", "GitHub-style colors"],
             ["gruvbox", "Retro groove color scheme"],
-        ]
+        ],
     )
 
 
 def demo_theme_switching() -> None:
     """Demonstrate theme switching."""
     clickmd.md("\n# 🔄 Theme Switching Demo\n")
-    
+
     sample_code = '''
 def greet(name: str) -> str:
     """Generate greeting."""
@@ -56,14 +63,14 @@ def greet(name: str) -> str:
 # Call the function
 print(greet("World"))
 '''
-    
+
     for theme_name in ["default", "monokai", "dracula", "nord"]:
         clickmd.set_theme(theme_name)
         theme = clickmd.get_theme()
-        
+
         clickmd.md(f"\n## Theme: {theme.name}\n")
         clickmd.md(f"```python{sample_code}```")
-    
+
     # Reset to default
     clickmd.set_theme("default")
 
@@ -71,10 +78,10 @@ print(greet("World"))
 def demo_theme_colors() -> None:
     """Show theme color palette."""
     clickmd.md("\n# 🌈 Theme Colors\n")
-    
+
     clickmd.set_theme("default")
     theme = clickmd.get_theme()
-    
+
     color_samples = [
         ("text", "Regular text"),
         ("heading", "Heading color"),
@@ -88,29 +95,29 @@ def demo_theme_colors() -> None:
         ("error", "Error messages"),
         ("info", "Info messages"),
     ]
-    
+
     clickmd.md("## Default Theme Colors\n")
     for color_name, description in color_samples:
         colored = clickmd.color(color_name, f"■ {description}")
         print(f"  {colored} ({color_name})")
 
 
-def demo_color_support():
+def demo_color_support() -> None:
     """Show terminal color support detection."""
     clickmd.md("\n# 🖥️ Terminal Color Support\n")
-    
+
     support = clickmd.get_color_support()
     no_color = clickmd.is_no_color()
-    
+
     clickmd.table(
         headers=["Check", "Result"],
         rows=[
             ["Color Support Level", support],
             ["NO_COLOR Active", "Yes" if no_color else "No"],
             ["CLICKMD_THEME", clickmd.get_theme().name],
-        ]
+        ],
     )
-    
+
     clickmd.md("""
 ## Color Support Levels
 
@@ -121,10 +128,10 @@ def demo_color_support():
 """)
 
 
-def demo_custom_theme():
+def demo_custom_theme() -> None:
     """Demonstrate custom theme creation."""
     clickmd.md("\n# ✨ Custom Theme\n")
-    
+
     # Create custom theme
     custom = clickmd.Theme(
         name="my_custom",
@@ -142,21 +149,20 @@ def demo_custom_theme():
         border="bright_magenta",
         custom={
             "special": "bright_white",
-        }
+        },
     )
-    
+
     # Register and use
     clickmd.register_theme(custom)
     clickmd.set_theme("my_custom")
-    
+
     clickmd.md("## Custom Theme Applied\n")
     clickmd.panel(
-        "This panel uses custom theme colors!\n"
-        "The border should be bright magenta.",
+        "This panel uses custom theme colors!\nThe border should be bright magenta.",
         title="Custom Panel",
-        style="info"
+        style="info",
     )
-    
+
     clickmd.md("""
 ```python
 # Custom theme code highlighting
@@ -165,15 +171,15 @@ def custom_function():
     return f"Result: {value}"
 ```
 """)
-    
+
     # Reset
     clickmd.set_theme("default")
 
 
-def demo_no_color():
+def demo_no_color() -> None:
     """Demonstrate NO_COLOR behavior."""
     clickmd.md("\n# 🚫 NO_COLOR Standard\n")
-    
+
     clickmd.md("""
 clickmd respects the [NO_COLOR](https://no-color.org/) standard:
 
@@ -188,7 +194,7 @@ export CLICKMD_NO_COLOR=1
 When `NO_COLOR` is set, all color output is disabled
 and text is rendered in plain format.
 """)
-    
+
     is_active = clickmd.is_no_color()
     if is_active:
         clickmd.warning("NO_COLOR is currently active!")
@@ -196,30 +202,29 @@ and text is rendered in plain format.
         clickmd.success("Colors are enabled.")
 
 
-def demo_styled_output():
+def demo_styled_output() -> None:
     """Show styled output with current theme."""
     clickmd.md("\n# 📋 Styled Output Examples\n")
-    
+
     clickmd.success("Operation completed successfully!")
     clickmd.warning("This action cannot be undone.")
     clickmd.error("Connection failed: timeout.")
     clickmd.info("Processing 42 items...")
-    
+
     clickmd.hr()
-    
+
     clickmd.panel(
-        "Welcome to clickmd theming!\n"
-        "Your terminal supports beautiful colors.",
+        "Welcome to clickmd theming!\nYour terminal supports beautiful colors.",
         title="🎉 Welcome",
-        style="success"
+        style="success",
     )
 
 
 if __name__ == "__main__":
-    print(f"\n{'=' * 60}")
+    print(f"\n{'=' * CONSTANT_60}")
     print("clickmd Phase 4 Theming Demo")
-    print(f"{'=' * 60}\n")
-    
+    print(f"{'=' * CONSTANT_60}\n")
+
     demo_available_themes()
     demo_theme_colors()
     demo_color_support()
@@ -227,7 +232,7 @@ if __name__ == "__main__":
     demo_no_color()
     demo_styled_output()
     demo_theme_switching()
-    
-    print(f"\n{'=' * 60}")
+
+    print(f"\n{'=' * CONSTANT_60}")
     print("Demo Complete!")
-    print(f"{'=' * 60}\n")
+    print(f"{'=' * CONSTANT_60}\n")

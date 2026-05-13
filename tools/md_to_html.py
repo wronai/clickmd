@@ -5,7 +5,6 @@ import html
 import re
 from pathlib import Path
 
-
 _BOLD_RE = re.compile(r"\*\*([^*]+)\*\*")
 _ITALIC_RE = re.compile(r"\*([^*]+)\*")
 _LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
@@ -15,22 +14,24 @@ _INLINE_CODE_RE = re.compile(r"`([^`]+)`")
 def _inline_md_to_html(text: str) -> str:
     """Convert inline markdown to HTML."""
     # Process in order: code first (to protect content), then bold, italic, links
-    
+
     # Inline code - protect content
     def _code(m: re.Match[str]) -> str:
         return f"<code>{html.escape(m.group(1))}</code>"
-    
+
     result = _INLINE_CODE_RE.sub(_code, text)
-    
+
     # Bold
     result = _BOLD_RE.sub(lambda m: f"<strong>{html.escape(m.group(1))}</strong>", result)
-    
+
     # Italic (but not inside code)
     result = _ITALIC_RE.sub(lambda m: f"<em>{m.group(1)}</em>", result)
-    
+
     # Links
-    result = _LINK_RE.sub(lambda m: f'<a href="{html.escape(m.group(2), quote=True)}">{m.group(1)}</a>', result)
-    
+    result = _LINK_RE.sub(
+        lambda m: f'<a href="{html.escape(m.group(2), quote=True)}">{m.group(1)}</a>', result
+    )
+
     return result
 
 
@@ -45,7 +46,7 @@ def _escape_text(text: str) -> str:
 def markdown_to_html(markdown_text: str, title: str) -> str:
     """Convert markdown text to HTML with basic formatting support."""
     lines = (markdown_text or "").splitlines()
-    
+
     # Initialize state
     state = {
         "out": [],
@@ -56,34 +57,34 @@ def markdown_to_html(markdown_text: str, title: str) -> str:
         "in_list": False,
         "list_items": [],
     }
-    
+
     # Add HTML header
     _add_html_header(state["out"], title)
-    
+
     # Process each line
     i = 0
     while i < len(lines):
         i = _process_line(lines, i, state)
-    
+
     # Flush remaining content
     _flush_paragraph(state)
     _flush_list(state)
     _flush_code(state)
-    
+
     # Close HTML
     state["out"].append("</body>")
     state["out"].append("</html>")
-    
+
     return "\n".join(state["out"])
 
 
 def _add_html_header(out: list[str], title: str) -> None:
     """Add the HTML head section with styles."""
     out.append("<!doctype html>")
-    out.append("<html lang=\"en\">")
+    out.append('<html lang="en">')
     out.append("<head>")
-    out.append("  <meta charset=\"utf-8\" />")
-    out.append("  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />")
+    out.append('  <meta charset="utf-8" />')
+    out.append('  <meta name="viewport" content="width=device-width, initial-scale=1" />')
     out.append(f"  <title>{html.escape(title)}</title>")
     out.append(
         "  <style>\n"
@@ -107,7 +108,7 @@ def _process_line(lines: list[str], i: int, state: dict) -> int:
     """Process a single line and return the next line index."""
     line = lines[i]
     stripped = line.rstrip("\n")
-    
+
     # Code fences
     fence = re.match(r"^(`{3,})(.*)$", stripped.strip())
     if fence:
@@ -118,12 +119,12 @@ def _process_line(lines: list[str], i: int, state: dict) -> int:
         else:
             _flush_code(state)
         return i + 1
-    
+
     # Inside code block
     if state["in_code"]:
         state["code_buf"].append(stripped)
         return i + 1
-    
+
     # Headings
     m = re.match(r"^(#{1,6})\s+(.*)$", stripped)
     if m:
@@ -132,7 +133,7 @@ def _process_line(lines: list[str], i: int, state: dict) -> int:
         level = len(m.group(1))
         state["out"].append(f"<h{level}>{_inline_md_to_html(m.group(2).strip())}</h{level}>")
         return i + 1
-    
+
     # List items
     list_match = re.match(r"^[-*]\s+(.*)$", stripped.strip())
     if list_match:
@@ -140,25 +141,29 @@ def _process_line(lines: list[str], i: int, state: dict) -> int:
         state["in_list"] = True
         state["list_items"].append(list_match.group(1))
         return i + 1
-    
+
     ordered_match = re.match(r"^\d+\.\s+(.*)$", stripped.strip())
     if ordered_match:
         _flush_paragraph(state)
         state["in_list"] = True
         state["list_items"].append(ordered_match.group(1))
         return i + 1
-    
+
     # Tables
-    if _is_table_row(stripped) and i + 1 < len(lines) and re.match(r"^\|\s*[:-]-+.*\|$", lines[i + 1].strip()):
+    if (
+        _is_table_row(stripped)
+        and i + 1 < len(lines)
+        and re.match(r"^\|\s*[:-]-+.*\|$", lines[i + 1].strip())
+    ):
         i = _process_table(lines, i, state)
         return i
-    
+
     # Blank line
     if not stripped.strip():
         _flush_paragraph(state)
         _flush_list(state)
         return i + 1
-    
+
     # Regular text
     if state["in_list"]:
         _flush_list(state)
@@ -170,24 +175,28 @@ def _process_table(lines: list[str], i: int, state: dict) -> int:
     """Process a table and return the next line index after the table."""
     _flush_paragraph(state)
     _flush_list(state)
-    
+
     header = [c.strip() for c in lines[i].strip()[1:-1].split("|")]
     i += 2  # Skip header and separator
-    
+
     rows = []
     while i < len(lines) and _is_table_row(lines[i]):
         row = [c.strip() for c in lines[i].strip()[1:-1].split("|")]
         rows.append(row)
         i += 1
-    
+
     state["out"].append("<table>")
-    state["out"].append("<thead><tr>" + "".join([f"<th>{_inline_md_to_html(c)}</th>" for c in header]) + "</tr></thead>")
+    state["out"].append(
+        "<thead><tr>"
+        + "".join([f"<th>{_inline_md_to_html(c)}</th>" for c in header])
+        + "</tr></thead>"
+    )
     state["out"].append("<tbody>")
     for row in rows:
         row_cells = "".join([f"<td>{_inline_md_to_html(c)}</td>" for c in row])
         state["out"].append(f"<tr>{row_cells}</tr>")
     state["out"].append("</tbody></table>")
-    
+
     return i
 
 
@@ -203,7 +212,7 @@ def _flush_code(state: dict) -> None:
         return
     code = "\n".join(state["code_buf"])
     state["out"].append(
-        f"<pre><code class=\"language-{html.escape(state['code_lang'])}\">{html.escape(code)}</code></pre>"
+        f'<pre><code class="language-{html.escape(state["code_lang"])}">{html.escape(code)}</code></pre>'
     )
     state["in_code"] = False
     state["code_lang"] = ""

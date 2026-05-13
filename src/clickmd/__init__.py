@@ -14,102 +14,89 @@ import re
 import sys
 from typing import Any, Optional
 
-from .renderer import (
-    get_renderer,
-    render_markdown,
-    MarkdownRenderer,
-    strip_ansi,
-    # Phase 1 features
-    table,
-    panel,
-    blockquote,
-    hr,
-    checklist,
-)
-
-# Logger for automatic markdown wrapping
-from .logger import (
-    Logger,
-    get_logger,
-    set_logger,
-    log_info,
-    log_success,
-    log_warning,
-    log_error,
-    log_action,
-)
-
 # Re-export decorators - complete Click API
 from .decorators import (
+    BOOL,
     CLICK_AVAILABLE,
-    _click,
-    # Decorators
-    group,
-    command,
-    option,
-    argument,
-    pass_context,
-    pass_obj,
-    make_pass_decorator,
-    confirmation_option,
-    help_option,
-    password_option,
-    version_option,
+    FLOAT,
+    INT,
     # Parameter types
     STRING,
-    INT,
-    FLOAT,
-    BOOL,
-    UUID,
     UNPROCESSED,
+    UUID,
+    Abort,
+    Argument,
+    BadArgumentUsage,
+    BadOptionUsage,
+    BadParameter,
     Choice,
-    Path,
-    File,
-    DateTime,
-    IntRange,
-    FloatRange,
-    Tuple,
-    ParamType,
+    # Exceptions
+    ClickException,
+    Command,
+    CommandCollection,
     # Core classes
     Context,
-    Command,
+    DateTime,
+    File,
+    FileError,
+    FloatRange,
     Group,
-    Option,
-    Argument,
-    Parameter,
     HelpFormatter,
-    CommandCollection,
+    IntRange,
+    MissingParameter,
+    NoSuchOption,
+    Option,
+    Parameter,
+    ParamType,
+    Path,
+    Tuple,
+    UsageError,
+    _click,
+    argument,
+    clear,
     # Utility functions
     click_echo,
-    secho,
-    style,
-    unstyle,
-    echo_via_pager,
-    clear,
-    prompt,
+    command,
     confirm,
-    getchar,
-    pause,
+    confirmation_option,
+    echo_via_pager,
     edit,
-    progressbar,
-    open_file,
     format_filename,
     get_app_dir,
     get_binary_stream,
-    get_text_stream,
     get_current_context,
+    get_text_stream,
+    getchar,
+    # Decorators
+    group,
+    help_option,
     launch,
+    make_pass_decorator,
+    open_file,
+    option,
+    pass_context,
+    pass_obj,
+    password_option,
+    pause,
+    progressbar,
+    prompt,
+    secho,
+    style,
+    unstyle,
+    version_option,
     wrap_text,
-    # Exceptions
-    ClickException,
-    Abort,
-    UsageError,
-    BadParameter,
-    BadOptionUsage,
-    BadArgumentUsage,
-    FileError,
-    MissingParameter,
-    NoSuchOption,
+)
+
+# Phase 5: Dev Tools
+from .devtools import (
+    ClickmdHandler,
+    PrettyExceptionFormatter,
+    debug,
+    diff,
+    inspect_obj,
+    install_excepthook,
+    tree,
+    uninstall_excepthook,
 )
 
 # Markdown help for Click (require click installed)
@@ -117,63 +104,74 @@ from .help import (
     MarkdownCommand,
     MarkdownGroup,
     MarkdownHelpFormatter,
+    echo_md,
+    error,
+    info,
     markdown_help,
     success,
     warning,
-    error,
-    info,
-    echo_md,
+)
+
+# Logger for automatic markdown wrapping
+from .logger import (
+    Logger,
+    get_logger,
+    log_action,
+    log_error,
+    log_info,
+    log_success,
+    log_warning,
+    set_logger,
+)
+
+# Phase 3: Progress, spinners, live updates
+from .progress import (
+    SPINNERS,
+    LiveUpdate,
+    ProgressBar,
+    Spinner,
+    StatusIndicator,
+    countdown,
+    live,
+    progress,
+    spinner,
+)
+from .renderer import (
+    MarkdownRenderer,
+    blockquote,
+    checklist,
+    get_renderer,
+    hr,
+    panel,
+    render_markdown,
+    strip_ansi,
+    # Phase 1 features
+    table,
 )
 
 # Optional Rich backend
 from .rich_backend import (
     RICH_AVAILABLE,
-    is_rich_available,
     get_console,
+    is_rich_available,
     render_md,
     render_panel,
     render_syntax,
     render_table,
 )
 
-# Phase 3: Progress, spinners, live updates
-from .progress import (
-    ProgressBar,
-    progress,
-    Spinner,
-    spinner,
-    LiveUpdate,
-    live,
-    StatusIndicator,
-    countdown,
-    SPINNERS,
-)
-
 # Phase 4: Theming
 from .themes import (
-    Theme,
     THEMES,
-    get_theme,
-    set_theme,
-    register_theme,
-    list_themes,
-    is_no_color,
-    get_color_support,
+    Theme,
     color,
+    get_color_support,
+    get_theme,
+    is_no_color,
+    list_themes,
+    register_theme,
+    set_theme,
 )
-
-# Phase 5: Dev Tools
-from .devtools import (
-    PrettyExceptionFormatter,
-    install_excepthook,
-    uninstall_excepthook,
-    debug,
-    inspect_obj,
-    ClickmdHandler,
-    diff,
-    tree,
-)
-
 
 _MD_HINT_RE = re.compile(r"(^|\n)\s*#{1,6}\s|```|\*\*|\[[^\]]+\]\([^)]+\)")
 
@@ -208,7 +206,7 @@ def menu(
     _render_menu(title, items, exit_option)
     max_i = len(items)
     range_hint = f"0-{max_i}" if exit_option is not None else f"1-{max_i}"
-    
+
     while True:
         choice = _get_user_choice(prompt_text, range_hint, default)
         if _is_valid_choice(choice, max_i, exit_option):
@@ -281,7 +279,7 @@ def echo(
 ) -> None:
     """
     Smart echo that auto-detects markdown and renders it with colors.
-    
+
     Works without click installed - falls back to print().
     """
     if message is None:

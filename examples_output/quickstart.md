@@ -1,4 +1,3 @@
-# 🚀 Hello clickmd!
 ## To jest nagłówek
 Zwykły tekst bez markdown - bez renderowania
 Pogrubiony tekst z *kursywą*

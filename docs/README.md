@@ -9,8 +9,6 @@
 **License:** Apache-2.0[(LICENSE)](./LICENSE)  
 **Repository:** [https://github.com/wronai/clickmd](https://github.com/wronai/clickmd)
 
-## Installation
-
 ### From PyPI
 
 ```bash
@@ -34,11 +32,6 @@ pip install clickmd[dev]    # development tools
 pip install clickmd[all]    # all optional features
 ```
 
-## Quick Start
-
-### CLI Usage
-
-```bash
 # Generate full documentation for your project
 clickmd ./my-project
 
@@ -150,8 +143,6 @@ Content outside the markers is preserved when regenerating. Enable this with `sy
 ```
 clickmd/
 ├── project├── renderer├── devtools    ├── one_liners    ├── config_viewer    ├── api_response    ├── quickstart    ├── basic    ├── colored_logging    ├── cli_colors    ├── cli_app    ├── custom_renderer    ├── logger_usage    ├── markdown_help    ├── phase3_progress    ├── phase4_themes    ├── phase1_features    ├── simple_cli    ├── clickmd/        ├── progress        ├── rich_backend        ├── renderer        ├── decorators        ├── help        ├── logger    ├── md_to_html    ├── bump_version        ├── themes    ├── phase5_devtools        ├── devtools```
-
-## API Overview
 
 ### Classes
 
@@ -327,21 +318,14 @@ clickmd/
 - Tom Softreck <tom@sapletta.com>
 - Tom Sapletta <tom-sapletta-com@users.noreply.github.com>
 
-We welcome contributions! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+We welcome contributions! Please see [CONTRIBUTING.md](https://github.com/wronai/clickmd/blob/main/CONTRIBUTING.md) for guidelines.
 
-### Development Setup
-
-```bash
 # Clone the repository
 git clone https://github.com/wronai/clickmd
 cd clickmd
 
 # Install in development mode
 pip install -e ".[dev]"
-
-# Run tests
-pytest
-```
 
 ## Documentation
 
@@ -356,15 +340,15 @@ pytest
 | Output | Description | Link |
 |--------|-------------|------|
 | `README.md` | Project overview (this file) | — |
-| `docs/api.md` | Consolidated API reference | [View](./docs/api.md) |
-| `docs/modules.md` | Module reference with metrics | [View](./docs/modules.md) |
-| `docs/architecture.md` | Architecture with diagrams | [View](./docs/architecture.md) |
-| `docs/dependency-graph.md` | Dependency graphs | [View](./docs/dependency-graph.md) |
-| `docs/coverage.md` | Docstring coverage report | [View](./docs/coverage.md) |
-| `docs/getting-started.md` | Getting started guide | [View](./docs/getting-started.md) |
-| `docs/configuration.md` | Configuration reference | [View](./docs/configuration.md) |
-| `docs/api-changelog.md` | API change tracking | [View](./docs/api-changelog.md) |
-| `CONTRIBUTING.md` | Contribution guidelines | [View](./CONTRIBUTING.md) |
+| `docs/api.md` | Consolidated API reference | [View](https://github.com/wronai/clickmd/blob/main/docs/api.md) |
+| `docs/modules.md` | Module reference with metrics | [View](https://github.com/wronai/clickmd/blob/main/docs/modules.md) |
+| `docs/architecture.md` | Architecture with diagrams | [View](https://github.com/wronai/clickmd/blob/main/docs/architecture.md) |
+| `docs/dependency-graph.md` | Dependency graphs | [View](https://github.com/wronai/clickmd/blob/main/docs/dependency-graph.md) |
+| `docs/coverage.md` | Docstring coverage report | [View](https://github.com/wronai/clickmd/blob/main/docs/coverage.md) |
+| `docs/getting-started.md` | Getting started guide | [View](https://github.com/wronai/clickmd/blob/main/docs/getting-started.md) |
+| `docs/configuration.md` | Configuration reference | [View](https://github.com/wronai/clickmd/blob/main/docs/configuration.md) |
+| `docs/api-changelog.md` | API change tracking | [View](https://github.com/wronai/clickmd/blob/main/docs/api-changelog.md) |
+| `CONTRIBUTING.md` | Contribution guidelines | [View](https://github.com/wronai/clickmd/blob/main/CONTRIBUTING.md) |
 | `examples/` | Usage examples | [Browse](./examples) |
 | `mkdocs.yml` | MkDocs configuration | — |
 

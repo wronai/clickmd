@@ -2,16 +2,11 @@
 
 Thank you for your interest in contributing to clickmd! This document provides guidelines and instructions for contributing.
 
-## Development Setup
-
 ### Prerequisites
 
 - Python 3.10 or higher
 - Git
 
-### Installation
-
-```bash
 # Clone the repository
 git clone https://github.com/wronai/clickmd.git
 cd clickmd
@@ -19,39 +14,12 @@ cd clickmd
 # Create virtual environment (recommended)
 python -m venv venv
 source venv/bin/activate  # Linux/macOS
-# or: venv\Scripts\activate  # Windows
-
 # Install development dependencies
 pip install -e ".[dev,click]"
 ```
 
-### Running Tests
-
-```bash
-# Run all tests
-make test
-
-# Run with coverage
-make test-cov
-
 # Run specific test file
 pytest tests/test_renderer.py -v
-```
-
-### Code Quality
-
-```bash
-# Run linter
-make lint
-
-# Format code
-make format
-
-# Type checking
-make type-check
-
-# All checks
-make check
 ```
 
 ## Project Structure
@@ -82,8 +50,6 @@ clickmd/
 ├── Makefile
 └── README.md
 ```
-
-## Coding Guidelines
 
 ### Style
 
@@ -154,14 +120,9 @@ def _highlight_newlang(self, line: str) -> str:
 Releases are managed by maintainers:
 
 ```bash
-# Update version in pyproject.toml
 # Commit and tag
 git tag v1.0.1
 git push --tags
-
-# Build and publish
-make publish
-```
 
 ## Questions?
 

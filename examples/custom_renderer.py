@@ -11,7 +11,8 @@ import sys
 from io import StringIO
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+if __name__ == "__main__":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from clickmd import MarkdownRenderer, get_renderer
 
@@ -35,7 +36,7 @@ def main() -> None:
     stream_renderer = MarkdownRenderer(stream=buffer, use_colors=False)
     stream_renderer.heading(2, "Captured Output")
     stream_renderer.codeblock("json", '{"captured": true}')
-    
+
     print(f"Captured {len(buffer.getvalue())} characters:")
     print(buffer.getvalue())
 
@@ -43,20 +44,20 @@ def main() -> None:
     print("\n=== Using get_renderer() ===\n")
     r = get_renderer(use_colors=True)
     r.heading(1, "Helper Function")
-    
+
     # Direct highlighting methods
     print("\n=== Direct Highlighting ===\n")
     r = MarkdownRenderer(use_colors=True)
-    
+
     print("YAML line:")
     print(r._highlight_yaml("  name: clickmd"))
-    
+
     print("\nJSON line:")
     print(r._highlight_json('  "key": "value",'))
-    
+
     print("\nPython/JS line:")
     print(r._highlight_js("const x = 'hello';"))
-    
+
     print("\nBash line:")
     print(r._highlight_bash("echo hello world"))
 

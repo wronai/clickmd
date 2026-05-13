@@ -10,6 +10,7 @@ Run: python examples/quickstart.py
 
 import sys
 from pathlib import Path
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import clickmd
@@ -62,7 +63,7 @@ clickmd.table(
     rows=[
         ["clickmd", "1.5.0", "✅ aktywny"],
         ["Python", "3.12", "✅ aktywny"],
-    ]
+    ],
 )
 
 # ============================================================================
@@ -70,8 +71,7 @@ clickmd.table(
 # ============================================================================
 
 clickmd.panel(
-    "clickmd to zero-dependency biblioteka\n"
-    "do renderowania markdown w terminalu.",
+    "clickmd to zero-dependency biblioteka\ndo renderowania markdown w terminalu.",
     title="ℹ️ Info",
-    style="info"
+    style="info",
 )

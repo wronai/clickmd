@@ -1,11 +1,3 @@
-# 📝 clickmd One-Liners
-
-## 1. Zamień print() na clickmd
-
-Hello from clickmd!
-# To jest nagłówek
-✅ Operacja udana!
-
 ## 2. Kolorowe statusy
 
 ✅ Zapisano plik

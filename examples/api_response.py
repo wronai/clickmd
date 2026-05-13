@@ -10,6 +10,7 @@ Run: python examples/api_response.py
 
 import sys
 from pathlib import Path
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import clickmd
@@ -25,13 +26,10 @@ api_response = {
             "id": USER_ID,
             "name": "Jan Kowalski",
             "email": "jan@example.com",
-            "roles": ["admin", "user"]
+            "roles": ["admin", "user"],
         },
-        "metadata": {
-            "request_id": "abc-123-xyz",
-            "timestamp": "2024-01-08T10:30:00Z"
-        }
-    }
+        "metadata": {"request_id": "abc-123-xyz", "timestamp": "2024-01-08T10:30:00Z"},
+    },
 }
 
 # ============================================================================
@@ -50,6 +48,7 @@ clickmd.debug(api_response, name="API Response")
 clickmd.md("\n## 2. JSON z kolorowaniem\n")
 
 import json
+
 json_str = json.dumps(api_response, indent=2)
 
 clickmd.md(f"""
@@ -71,8 +70,7 @@ users = [
 ]
 
 clickmd.table(
-    headers=["ID", "Imię", "Rola"],
-    rows=[[str(u["id"]), u["name"], u["role"]] for u in users]
+    headers=["ID", "Imię", "Rola"], rows=[[str(u["id"]), u["name"], u["role"]] for u in users]
 )
 
 # ============================================================================
@@ -91,11 +89,9 @@ clickmd.md("\n## 5. Panel z podsumowaniem\n")
 
 user = api_response["data"]["user"]
 clickmd.panel(
-    f"Użytkownik: {user['name']}\n"
-    f"Email: {user['email']}\n"
-    f"Role: {', '.join(user['roles'])}",
+    f"Użytkownik: {user['name']}\nEmail: {user['email']}\nRole: {', '.join(user['roles'])}",
     title="👤 Profil użytkownika",
-    style="info"
+    style="info",
 )
 
 # ============================================================================
@@ -104,6 +100,7 @@ clickmd.panel(
 
 clickmd.md("\n## 6. Obsługa błędów API\n")
 
+
 def handle_api_error(response) -> bool:
     """Przykład obsługi błędu API z clickmd."""
     if response.get("status") == "error":
@@ -111,9 +108,10 @@ def handle_api_error(response) -> bool:
         if "details" in response:
             clickmd.md(f"```json\n{json.dumps(response['details'], indent=2)}\n```")
         return False
-    
+
     clickmd.success("API request successful")
     return True
+
 
 # Symulacja błędu
 error_response = {
@@ -122,8 +120,8 @@ error_response = {
     "details": {
         "limit": RATE_LIMIT,
         "current": CURRENT_REQUESTS,
-        "reset_at": "2024-01-08T11:00:00Z"
-    }
+        "reset_at": "2024-01-08T11:00:00Z",
+    },
 }
 
 handle_api_error(error_response)

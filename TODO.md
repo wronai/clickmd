@@ -8,7 +8,6 @@
 
 ## ✅ Completed Tasks
 
-- [x] scripts/bump_version.py:71 - module execution block
 
 ## 📋 Current Issues
 
@@ -22,24 +21,12 @@
 - [ ] examples/config_viewer.py:97 - Function 'show_env_config' missing return type (suggested: -> None)
 - [ ] examples/config_viewer.py:118 - Function 'show_config_diff' missing return type (suggested: -> None)
 - [ ] examples/config_viewer.py:135 - Function 'show_config_tree' missing return type (suggested: -> None)
-- [x] examples/config_viewer.py:105 - String concatenation can be converted to f-string
-- [x] examples/config_viewer.py:19 - Magic number: 5432 - use named constant
-- [x] examples/config_viewer.py:21 - Magic number: 20 - use named constant
-- [x] examples/config_viewer.py:22 - Magic number: 50 - use named constant
-- [x] examples/config_viewer.py:164 - module execution block
 - [ ] examples/custom_renderer.py:81 - module execution block
 - [ ] examples/markdown_help.py:175 - Function 'version' missing return type (suggested: -> None)
 - [ ] examples/markdown_help.py:194 - module execution block
 - [ ] examples/logger_usage.py:72 - Function 'exception_handling' missing return type (suggested: -> None)
 - [ ] examples/logger_usage.py:91 - Function 'grouped_output' missing return type (suggested: -> None)
 - [ ] examples/logger_usage.py:112 - Function 'llm_logging' missing return type (suggested: -> None)
-- [x] examples/logger_usage.py:208 - String concatenation can be converted to f-string
-- [x] examples/logger_usage.py:211 - String concatenation can be converted to f-string
-- [x] examples/logger_usage.py:214 - String concatenation can be converted to f-string
-- [x] examples/logger_usage.py:19 - Magic number: 25 - use named constant
-- [x] examples/logger_usage.py:20 - Magic number: 50 - use named constant
-- [x] examples/logger_usage.py:21 - Magic number: 75 - use named constant
-- [x] examples/logger_usage.py:202 - module execution block
 - [ ] examples/one_liners.py:18 - Magic number: 20 - use named constant
 - [ ] examples/one_liners.py:1 - High comment-to-code ratio: 27/42
 - [ ] examples/phase1_features.py:106 - Function 'demo_horizontal_rules' missing return type (suggested: -> None)
@@ -60,15 +47,6 @@
 - [ ] examples/phase3_progress.py:103 - Function 'demo_live_update' missing return type (suggested: -> None)
 - [ ] examples/phase3_progress.py:127 - Function 'demo_countdown' missing return type (suggested: -> None)
 - [ ] examples/phase3_progress.py:133 - Function 'demo_combined' missing return type (suggested: -> None)
-- [x] examples/phase3_progress.py:70 - String concatenation can be converted to f-string
-- [x] examples/phase3_progress.py:118 - String concatenation can be converted to f-string
-- [x] examples/phase3_progress.py:110 - String concatenation can be converted to f-string
-- [x] examples/phase3_progress.py:25 - Magic number: 50 - use named constant
-- [x] examples/phase3_progress.py:26 - Magic number: 30 - use named constant
-- [x] examples/phase3_progress.py:29 - Example function in production code
-- [x] examples/phase3_progress.py:50 - Example function in production code
-- [x] examples/phase3_progress.py:76 - Example function in production code
-- [x] examples/phase3_progress.py:176 - module execution block
 - [ ] examples/quickstart.py:1 - High comment-to-code ratio: 21/38
 - [ ] examples/phase5_devtools.py:120 - Function 'demo_diff' missing return type (suggested: -> None)
 - [ ] examples/phase5_devtools.py:138 - Function 'demo_logging' missing return type (suggested: -> None)
@@ -156,3 +134,31 @@
 ---
 
 *To execute all tasks, run: `prefact -a --execute-todos`*
+
+## Done (moved to CHANGELOG)
+
+- [x] scripts/bump_version.py:71 - module execution block
+- [x] examples/config_viewer.py:105 - String concatenation can be converted to f-string
+- [x] examples/config_viewer.py:19 - Magic number: 5432 - use named constant
+- [x] examples/config_viewer.py:21 - Magic number: 20 - use named constant
+- [x] examples/config_viewer.py:22 - Magic number: 50 - use named constant
+- [x] examples/config_viewer.py:164 - module execution block
+- [x] examples/logger_usage.py:208 - String concatenation can be converted to f-string
+- [x] examples/logger_usage.py:211 - String concatenation can be converted to f-string
+- [x] examples/logger_usage.py:214 - String concatenation can be converted to f-string
+- [x] examples/logger_usage.py:19 - Magic number: 25 - use named constant
+- [x] examples/logger_usage.py:20 - Magic number: 50 - use named constant
+- [x] examples/logger_usage.py:21 - Magic number: 75 - use named constant
+- [x] examples/logger_usage.py:202 - module execution block
+
+## Done (moved to CHANGELOG)
+
+- [x] examples/phase3_progress.py:70 - String concatenation can be converted to f-string
+- [x] examples/phase3_progress.py:118 - String concatenation can be converted to f-string
+- [x] examples/phase3_progress.py:110 - String concatenation can be converted to f-string
+- [x] examples/phase3_progress.py:25 - Magic number: 50 - use named constant
+- [x] examples/phase3_progress.py:26 - Magic number: 30 - use named constant
+- [x] examples/phase3_progress.py:29 - Example function in production code
+- [x] examples/phase3_progress.py:50 - Example function in production code
+- [x] examples/phase3_progress.py:76 - Example function in production code
+- [x] examples/phase3_progress.py:176 - module execution block

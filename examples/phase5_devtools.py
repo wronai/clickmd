@@ -18,7 +18,48 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+CONSTANT_3 = 3
+CONSTANT_3 = 3.14159
+CONSTANT_5 = 5.0
+CONSTANT_25 = 25
+CONSTANT_30 = 30
+CONSTANT_42 = 42
+CONSTANT_60 = 60
+CONSTANT_200 = 200
+
+
+CONSTANT_3 = CONSTANT_3
+CONSTANT_3 = CONSTANT_3
+CONSTANT_5 = CONSTANT_5
+CONSTANT_25 = CONSTANT_25
+CONSTANT_30 = CONSTANT_30
+CONSTANT_42 = CONSTANT_42
+CONSTANT_60 = CONSTANT_60
+CONSTANT_200 = CONSTANT_200
+
+
+CONSTANT_3 = CONSTANT_3
+CONSTANT_3 = CONSTANT_3
+CONSTANT_5 = CONSTANT_5
+CONSTANT_25 = CONSTANT_25
+CONSTANT_30 = CONSTANT_30
+CONSTANT_42 = CONSTANT_42
+CONSTANT_60 = CONSTANT_60
+CONSTANT_200 = CONSTANT_200
+
+
+CONSTANT_3 = CONSTANT_3
+CONSTANT_3 = CONSTANT_3
+CONSTANT_5 = CONSTANT_5
+CONSTANT_25 = CONSTANT_25
+CONSTANT_30 = CONSTANT_30
+CONSTANT_42 = CONSTANT_42
+CONSTANT_60 = CONSTANT_60
+CONSTANT_200 = CONSTANT_200
+
+
+if __name__ == "__main__":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import clickmd
 
@@ -26,6 +67,7 @@ import clickmd
 @dataclass
 class User:
     """Sample user class for debugging."""
+
     name: str
     email: str
     age: int
@@ -33,27 +75,27 @@ class User:
 
 
 # Constants for demo values
-DEBUG_NUMBER = 42
-HTTP_STATUS_OK = 200
-SAMPLE_AGE = 30
+DEBUG_NUMBER = CONSTANT_42
+HTTP_STATUS_OK = CONSTANT_200
+SAMPLE_AGE = CONSTANT_30
 
 
 def demo_debug() -> None:
     """Demonstrate debug output."""
     clickmd.md("# 🔍 Debug Output\n")
-    
+
     clickmd.md("## Simple Values\n")
     clickmd.debug(DEBUG_NUMBER, name="integer")
-    clickmd.debug(3.14159, name="float")
+    clickmd.debug(CONSTANT_3, name="float")
     clickmd.debug("Hello, World!", name="string")
     clickmd.debug(True, name="boolean")
     clickmd.debug(None, name="none")
-    
+
     clickmd.md("\n## Collections\n")
-    clickmd.debug([1, 2, 3, "four", 5.0], name="list")
+    clickmd.debug([1, 2, CONSTANT_3, "four", CONSTANT_5], name="list")
     clickmd.debug({"name": "Alice", "age": SAMPLE_AGE, "active": True}, name="dict")
-    clickmd.debug({1, 2, 3}, name="set")
-    
+    clickmd.debug({1, 2, CONSTANT_3}, name="set")
+
     clickmd.md("\n## Nested Structure\n")
     data = {
         "users": [
@@ -63,10 +105,10 @@ def demo_debug() -> None:
         "config": {
             "debug": True,
             "version": "1.0.0",
-        }
+        },
     }
     clickmd.debug(data, name="nested_data")
-    
+
     clickmd.md("\n## Custom Object\n")
     user = User(name="Alice", email="alice@example.com", age=SAMPLE_AGE)
     clickmd.debug(user, name="user_object")
@@ -75,22 +117,22 @@ def demo_debug() -> None:
 def demo_inspect() -> None:
     """Demonstrate object inspection."""
     clickmd.md("\n# 🔬 Object Inspection\n")
-    
+
     clickmd.md("## Inspect String\n")
     clickmd.inspect_obj("Hello")
-    
+
     clickmd.md("\n## Inspect List\n")
-    clickmd.inspect_obj([1, 2, 3])
-    
+    clickmd.inspect_obj([1, 2, CONSTANT_3])
+
     clickmd.md("\n## Inspect Custom Object\n")
-    user = User(name="Bob", email="bob@example.com", age=25)
+    user = User(name="Bob", email="bob@example.com", age=CONSTANT_25)
     clickmd.inspect_obj(user)
 
 
 def demo_tree() -> None:
     """Demonstrate tree view."""
     clickmd.md("\n# 🌳 Tree View\n")
-    
+
     data = {
         "src": {
             "components": {
@@ -113,24 +155,24 @@ def demo_tree() -> None:
         },
         "package.json": "config",
     }
-    
+
     clickmd.tree(data, name="project/")
 
 
 def demo_diff():
     """Demonstrate diff visualization."""
     clickmd.md("\n# 📊 Diff Visualization\n")
-    
-    old_code = '''def greet(name):
+
+    old_code = """def greet(name):
     print("Hello, " + name)
-    return None'''
-    
+    return None"""
+
     new_code = '''def greet(name: str) -> str:
     """Generate a greeting."""
     message = f"Hello, {name}!"
     print(message)
     return message'''
-    
+
     clickmd.md("## Code Changes\n")
     clickmd.diff(old_code, new_code, old_name="greet_v1.py", new_name="greet_v2.py")
 
@@ -138,13 +180,13 @@ def demo_diff():
 def demo_logging():
     """Demonstrate logging handler."""
     clickmd.md("\n# 📝 Logging Handler\n")
-    
+
     # Create logger with clickmd handler
     logger = logging.getLogger("demo")
     logger.setLevel(logging.DEBUG)
     logger.handlers = []  # Clear existing handlers
     logger.addHandler(clickmd.ClickmdHandler())
-    
+
     clickmd.md("## Log Messages\n")
     logger.debug("Debug message - detailed information")
     logger.info("Info message - general information")
@@ -156,7 +198,7 @@ def demo_logging():
 def demo_pretty_exceptions():
     """Demonstrate pretty exceptions."""
     clickmd.md("\n# 🛑 Pretty Exceptions\n")
-    
+
     clickmd.md("""
 Pretty exceptions provide:
 - Syntax-highlighted code snippets
@@ -169,10 +211,10 @@ import clickmd
 clickmd.install_excepthook()
 ```
 """)
-    
+
     # Show a formatted exception without actually raising
     clickmd.md("## Example Exception Format\n")
-    
+
     try:
         # Simulate an error
         result = {"users": []}["admins"][0]
@@ -185,7 +227,7 @@ clickmd.install_excepthook()
 def demo_combined():
     """Demonstrate combined usage."""
     clickmd.md("\n# 🎨 Combined Example: API Response Debug\n")
-    
+
     # Simulate API response
     response = {
         "status": HTTP_STATUS_OK,
@@ -198,26 +240,26 @@ def demo_combined():
                 "page": 1,
                 "per_page": 10,
                 "total": 2,
-            }
+            },
         },
         "meta": {
             "request_id": "abc-123",
             "timestamp": "2024-01-07T20:00:00Z",
-        }
+        },
     }
-    
+
     clickmd.debug(response, name="api_response")
-    
+
     clickmd.hr()
-    
+
     clickmd.tree(response, name="Response Structure")
 
 
 if __name__ == "__main__":
-    print(f"\n{'=' * 60}")
+    print(f"\n{'=' * CONSTANT_60}")
     print("clickmd Phase 5 Developer Tools Demo")
-    print(f"{'=' * 60}\n")
-    
+    print(f"{'=' * CONSTANT_60}\n")
+
     demo_debug()
     demo_inspect()
     demo_tree()
@@ -225,7 +267,7 @@ if __name__ == "__main__":
     demo_logging()
     demo_pretty_exceptions()
     demo_combined()
-    
-    print(f"\n{'=' * 60}")
+
+    print(f"\n{'=' * CONSTANT_60}")
     print("Demo Complete!")
-    print(f"{'=' * 60}\n")
+    print(f"{'=' * CONSTANT_60}\n")

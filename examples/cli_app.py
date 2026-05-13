@@ -12,11 +12,12 @@ Run: python examples/cli_app.py --help
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+if __name__ == "__main__":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 try:
     import clickmd as click
-    
+
     if not click.CLICK_AVAILABLE:
         print("This example requires Click. Install with: pip install click")
         exit(1)
@@ -90,7 +91,7 @@ def status() -> None:
 def example(language: str):
     """Show code example for a language."""
     examples = {
-        "python": '''
+        "python": """
 ## 🐍 Python Example
 
 ```python
@@ -107,8 +108,8 @@ class User:
 user = User("Alice", "alice@example.com")
 print(user.greet())
 ```
-''',
-        "javascript": '''
+""",
+        "javascript": """
 ## 🟨 JavaScript Example
 
 ```javascript
@@ -120,8 +121,8 @@ const greet = async (name) => {
 
 greet("Alice").then(console.log);
 ```
-''',
-        "bash": '''
+""",
+        "bash": """
 ## 🐚 Bash Example
 
 ```bash
@@ -136,9 +137,9 @@ greet() {
 # Main
 greet "$@"
 ```
-'''
+""",
     }
-    
+
     click.md(examples[language])
 
 

@@ -1,18 +1,31 @@
 """Tests for clickmd.logger module"""
 
 import io
-import pytest
 
 from clickmd.logger import (
     Logger,
     get_logger,
-    set_logger,
+    log_action,
+    log_error,
     log_info,
     log_success,
     log_warning,
-    log_error,
-    log_action,
+    set_logger,
 )
+
+MAX_3 = 3
+CONSTANT_5 = 5
+CONSTANT_50 = 50
+
+
+MAX_3 = MAX_3
+CONSTANT_5 = CONSTANT_5
+CONSTANT_50 = CONSTANT_50
+
+
+MAX_RETRIES = MAX_3
+CONSTANT_5 = CONSTANT_5
+CONSTANT_50 = CONSTANT_50
 
 
 class TestLogger:
@@ -63,21 +76,21 @@ class TestLogger:
 
     def test_progress_outputs(self, capsys):
         log = Logger(verbose=True)
-        log.progress("Building", 50, 100)
+        log.progress("Building", CONSTANT_50, 100)
         captured = capsys.readouterr()
         assert "50%" in captured.out
         assert "Building" in captured.out
 
     def test_step_outputs(self, capsys):
         log = Logger(verbose=True)
-        log.step(2, 5, "processing")
+        log.step(2, CONSTANT_5, "processing")
         captured = capsys.readouterr()
         assert "[2/5]" in captured.out
         assert "processing" in captured.out
 
     def test_attempt_outputs(self, capsys):
         log = Logger(verbose=True)
-        log.attempt(1, 3, "generation")
+        log.attempt(1, MAX_RETRIES, "generation")
         captured = capsys.readouterr()
         assert "1/3" in captured.out
         assert "generation" in captured.out
@@ -141,7 +154,12 @@ class TestLoggerHeading:
         log.heading(2, "Section")
         captured = capsys.readouterr()
         # Heading should be outside codeblock
-        assert "```log" not in captured.out or captured.out.index("## Section") < captured.out.find("```log") if "```log" in captured.out else True
+        assert (
+            "```log" not in captured.out
+            or captured.out.index("## Section") < captured.out.find("```log")
+            if "```log" in captured.out
+            else True
+        )
 
 
 class TestGlobalLogger:

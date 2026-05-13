@@ -12,6 +12,7 @@ Run: python examples/simple_cli.py --help
 
 import sys
 from pathlib import Path
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import clickmd
@@ -25,17 +26,18 @@ if not clickmd.CLICK_AVAILABLE:
 # NAJPROSTSZE CLI - jedna komenda
 # ============================================================================
 
+
 @clickmd.command(cls=clickmd.MarkdownCommand)
 @clickmd.argument("name")
 @clickmd.option("--loud", "-l", is_flag=True, help="Użyj **WIELKICH** liter")
 def greet(name, loud) -> None:
     """
     # 👋 Powitanie
-    
+
     Wyświetla powitanie dla podanej osoby.
-    
+
     ## Przykłady
-    
+
     ```bash
     python simple_cli.py greet Alice
     python simple_cli.py greet Bob --loud
@@ -44,7 +46,7 @@ def greet(name, loud) -> None:
     message = f"Hello, {name}!"
     if loud:
         message = message.upper()
-    
+
     clickmd.success(message)
 
 
@@ -52,15 +54,16 @@ def greet(name, loud) -> None:
 # CLI Z GRUPĄ KOMEND
 # ============================================================================
 
+
 @clickmd.group(cls=clickmd.MarkdownGroup)
 def cli() -> None:
     """
     # 🛠️ Simple CLI Tool
-    
+
     Przykładowe narzędzie CLI z **clickmd**.
-    
+
     ## Szybki start
-    
+
     ```bash
     simple_cli.py greet Alice
     simple_cli.py info
@@ -80,18 +83,18 @@ def hello(name) -> None:
 def info() -> None:
     """
     # Informacje o systemie
-    
+
     Wyświetla informacje o środowisku.
     """
     import platform
-    
+
     clickmd.table(
         headers=["Właściwość", "Wartość"],
         rows=[
             ["Python", platform.python_version()],
             ["System", platform.system()],
             ["clickmd", "1.5.0"],
-        ]
+        ],
     )
 
 
@@ -100,7 +103,7 @@ def info() -> None:
 def status(format):
     """
     Pokaż status aplikacji.
-    
+
     Formaty: `json`, `yaml`, `table`
     """
     data = {
@@ -108,18 +111,16 @@ def status(format):
         "uptime": "2h 30m",
         "memory": "128 MB",
     }
-    
+
     if format == "json":
         import json
+
         clickmd.md(f"```json\n{json.dumps(data, indent=2)}\n```")
     elif format == "yaml":
         yaml_str = "\n".join(f"{k}: {v}" for k, v in data.items())
         clickmd.md(f"```yaml\n{yaml_str}\n```")
     else:
-        clickmd.table(
-            headers=["Key", "Value"],
-            rows=[[k, v] for k, v in data.items()]
-        )
+        clickmd.table(headers=["Key", "Value"], rows=[[k, v] for k, v in data.items()])
 
 
 if __name__ == "__main__":

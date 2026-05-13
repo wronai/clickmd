@@ -1,5 +1,3 @@
-# System Architecture Analysis
-
 ## Overview
 
 - **Project**: /home/tom/github/semcod/clickmd
@@ -10,8 +8,6 @@
 - **Total Classes**: 11
 - **Modules**: 30
 - **Entry Points**: 201
-
-## Architecture by Module
 
 ### src.clickmd.renderer
 - **Functions**: 50
@@ -312,8 +308,6 @@ _render [src.clickmd.progress.ProgressBar]
   └─ →> _is_tty
 ```
 
-## Key Classes
-
 ### src.clickmd.renderer.MarkdownRenderer
 - **Methods**: 42
 - **Key Methods**: src.clickmd.renderer.MarkdownRenderer.__init__, src.clickmd.renderer.MarkdownRenderer._c, src.clickmd.renderer.MarkdownRenderer._get_terminal_width, src.clickmd.renderer.MarkdownRenderer._writeln, src.clickmd.renderer.MarkdownRenderer.heading, src.clickmd.renderer.MarkdownRenderer.codeblock, src.clickmd.renderer.MarkdownRenderer.render_markdown_with_fences, src.clickmd.renderer.MarkdownRenderer._highlight_line, src.clickmd.renderer.MarkdownRenderer._highlight_log, src.clickmd.renderer.MarkdownRenderer._highlight_markdown
@@ -456,8 +450,6 @@ Handles **bold**, *italic*, `code` inline.
 ### src.clickmd.devtools.ClickmdHandler.format_record
 > Format a log record with styling.
 - **Output to**: self.LEVEL_STYLES.get, record.getMessage, parts.append, None.join, None.strftime
-
-## Behavioral Patterns
 
 ### recursion_print
 - **Type**: recursion

@@ -13,7 +13,8 @@ Run: python examples/markdown_help.py --help
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+if __name__ == "__main__":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import clickmd
 
@@ -27,22 +28,22 @@ if not clickmd.CLICK_AVAILABLE:
 def cli() -> None:
     """
     # 🚀 My Awesome CLI
-    
+
     A **powerful** command-line tool for data processing.
-    
+
     ## Features
-    
+
     - Fast and efficient processing
     - Multiple output formats
     - Extensible plugin system
-    
+
     ## Quick Start
-    
+
     ```bash
     mycli process input.csv --output results.json
     mycli config set api_key YOUR_KEY
     ```
-    
+
     For more information, visit https://example.com/docs
     """
     pass
@@ -50,52 +51,59 @@ def cli() -> None:
 
 @cli.command(cls=clickmd.MarkdownCommand)
 @clickmd.option("--input", "-i", required=True, help="Input file path (**required**)")
-@clickmd.option("--output", "-o", default="output.json", help="Output file path (default: `output.json`)")
-@clickmd.option("--format", "-f", type=clickmd.Choice(["json", "csv", "yaml"]), default="json",
-                help="Output format: `json`, `csv`, or `yaml`")
+@clickmd.option(
+    "--output", "-o", default="output.json", help="Output file path (default: `output.json`)"
+)
+@clickmd.option(
+    "--format",
+    "-f",
+    type=clickmd.Choice(["json", "csv", "yaml"]),
+    default="json",
+    help="Output format: `json`, `csv`, or `yaml`",
+)
 @clickmd.option("--verbose", "-v", is_flag=True, help="Enable *verbose* output")
 @clickmd.option("--dry-run", is_flag=True, help="Run without making changes (**safe mode**)")
 def process(input: str, output: str, format: str, verbose: bool, dry_run: bool) -> None:
     """
     # Process Data
-    
+
     Transform and process input files with **configurable** options.
-    
+
     ## Supported Formats
-    
+
     | Format | Extension | Description |
     |--------|-----------|-------------|
     | JSON   | `.json`   | JavaScript Object Notation |
     | CSV    | `.csv`    | Comma-Separated Values |
     | YAML   | `.yaml`   | YAML Ain't Markup Language |
-    
+
     ## Examples
-    
+
     ```bash
     # Basic usage
     mycli process -i data.csv -o result.json
-    
+
     # With verbose output
     mycli process -i data.csv -v --format yaml
-    
+
     # Dry run (no changes)
     mycli process -i data.csv --dry-run
     ```
-    
+
     ## Notes
-    
+
     - Large files may take longer to process
     - Use `--verbose` to see progress
     """
     clickmd.success(f"Processing {input}")
-    
+
     if dry_run:
         clickmd.warning("Dry run mode - no changes will be made")
-    
+
     if verbose:
         clickmd.info(f"Output format: {format}")
         clickmd.info(f"Output file: {output}")
-    
+
     # Simulate processing
     clickmd.echo_md(f"""
 ## Results
@@ -120,28 +128,28 @@ Processed **{input}** successfully!
 def config(action: str, key: str, value: str) -> None:
     """
     # Configuration Management
-    
+
     Manage application configuration with **persistent** storage.
-    
+
     ## Actions
-    
+
     - `get` - Get a configuration value
     - `set` - Set a configuration value
     - `list` - List all configuration
     - `reset` - Reset to defaults
-    
+
     ## Examples
-    
+
     ```bash
     # List all config
     mycli config list
-    
+
     # Get a value
     mycli config get api_key
-    
+
     # Set a value
     mycli config set api_key YOUR_SECRET_KEY
-    
+
     # Reset to defaults
     mycli config reset
     ```
@@ -175,7 +183,7 @@ theme: default
 def version():
     """
     # Version Information
-    
+
     Display version and system information.
     """
     clickmd.echo_md("""

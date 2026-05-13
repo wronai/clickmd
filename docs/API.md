@@ -1,7 +1,3 @@
-# clickmd API Reference
-
-## Core Functions
-
 ### `md(text: str) -> None`
 
 Render markdown text with syntax highlighting to stdout.
@@ -67,8 +63,6 @@ renderer.codeblock("python", "x = 1")
 
 ---
 
-## MarkdownRenderer Class
-
 ### Constructor
 
 ```python
@@ -78,8 +72,6 @@ MarkdownRenderer(use_colors: bool = True, stream=None)
 **Parameters:**
 - `use_colors` - Enable ANSI color codes (auto-disabled for non-TTY)
 - `stream` - Output stream (default: sys.stdout)
-
-### Methods
 
 #### `heading(level: int, text: str) -> None`
 
@@ -188,8 +180,6 @@ def process(name, path):
 
 ---
 
-## Syntax Highlighting
-
 ### Supported Languages
 
 | Category | Language ID | Aliases |
@@ -230,8 +220,6 @@ The `log` language provides automatic coloring based on content:
 
 ---
 
-## Tables & Panels (Phase 1)
-
 ### `table(headers, rows, style="rounded") -> None`
 
 Render a formatted table.
@@ -269,8 +257,6 @@ Render a checklist with ✓/✗ markers.
 
 ---
 
-## Logger
-
 ### `get_logger(name) -> Logger`
 
 Get a markdown-aware logger.
@@ -291,8 +277,6 @@ log.action("deploy", "Deploying to production")
 - `log_info(msg)` / `log_success(msg)` / `log_warning(msg)` / `log_error(msg)` / `log_action(action, msg)`
 
 ---
-
-## Progress & Spinners (Phase 3)
 
 ### `progress(total, label="") -> ProgressBar`
 
@@ -319,8 +303,6 @@ Display a countdown timer.
 
 ---
 
-## Themes (Phase 4)
-
 ### `set_theme(name) -> None`
 
 Switch the active color theme.
@@ -342,8 +324,6 @@ Register a custom theme.
 Check if `NO_COLOR` environment variable is set.
 
 ---
-
-## Developer Tools (Phase 5)
 
 ### `debug(value, label=None) -> None`
 
@@ -367,8 +347,6 @@ Install pretty exception formatting.
 
 ---
 
-## Interactive Prompts
-
 ### `menu(title, items, default=1, prompt_text="Select", exit_option="Exit") -> int`
 
 Display a numbered menu and prompt for selection.
@@ -386,8 +364,6 @@ Returns 1-based index, 0 for exit, -1 on error.
 Inline selection without a title heading.
 
 ---
-
-## Utility Functions
 
 ### `strip_ansi(text: str) -> str`
 

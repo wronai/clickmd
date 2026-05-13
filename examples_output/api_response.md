@@ -1,5 +1,3 @@
-# 📡 Formatowanie odpowiedzi API
-
 ## 1. Debug output
 
 🔍 API Response

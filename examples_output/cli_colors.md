@@ -47,9 +47,6 @@ Success: Application started
 ```
 
 
-## Markdown w komunikatach
-
-
 ### Podsumowanie instalacji
 
 Zainstalowano 3 pakiety:
@@ -59,8 +56,6 @@ Zainstalowano 3 pakiety:
 
 Uruchom `clickmd --help` aby rozpocząć.
 
-
-## Porównanie kodu
 
 ### Bez clickmd (ANSI escape codes):
 

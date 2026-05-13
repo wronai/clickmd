@@ -1,9 +1,3 @@
-# 📄 Config Viewer
-
-## YAML Configuration
-
-
-```yaml
 # Application settings
 app:
   name: MyApp

@@ -8,12 +8,14 @@ Run: python examples/basic.py
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+if __name__ == "__main__":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from clickmd import md, echo
 
 # Simple markdown rendering
-md("""
+    md("""
 # Welcome to clickmd! 🎨
 
 This is a **beautiful** markdown renderer for your CLI applications.
@@ -27,7 +29,7 @@ This is a **beautiful** markdown renderer for your CLI applications.
 """)
 
 # Code block example
-md("""
+    md("""
 ## Python Code Example
 
 ```python
@@ -41,7 +43,7 @@ if __name__ == "__main__":
 """)
 
 # JSON example
-md("""
+    md("""
 ## JSON Data
 
 ```json
@@ -56,7 +58,7 @@ md("""
 """)
 
 # YAML example
-md("""
+    md("""
 ## YAML Configuration
 
 ```yaml
@@ -73,14 +75,14 @@ dependencies:
 """)
 
 # Smart echo - auto-detects markdown
-print("\n--- Using echo() ---\n")
+    print("\n--- Using echo() ---\n")
 
-echo("## This is detected as markdown")
-echo("Regular text without markdown markers")
-echo("**Bold text** is also detected")
+    echo("## This is detected as markdown")
+    echo("Regular text without markdown markers")
+    echo("**Bold text** is also detected")
 
 # Log-style output
-md("""
+    md("""
 ## Status Log
 
 ```log

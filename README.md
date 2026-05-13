@@ -9,11 +9,13 @@
 
 ## AI Cost Tracking
 
-![AI Cost](https://img.shields.io/badge/AI%20Cost-$2.25-green) ![AI Model](https://img.shields.io/badge/AI%20Model-openrouter%2Fqwen%2Fqwen3-coder-next-lightgrey)
+![PyPI](https://img.shields.io/badge/pypi-costs-blue) ![Version](https://img.shields.io/badge/version-0.1.31-blue) ![Python](https://img.shields.io/badge/python-3.9+-blue) ![License](https://img.shields.io/badge/license-Apache--2.0-green)
+![AI Cost](https://img.shields.io/badge/AI%20Cost-$4.91-orange) ![Human Time](https://img.shields.io/badge/Human%20Time-9.3h-blue) ![Model](https://img.shields.io/badge/Model-openrouter%2Fqwen%2Fqwen3--coder--next-lightgrey)
 
-This project uses AI-generated code. Total cost: **$2.2500** with **15** AI commits.
+- 🤖 **LLM usage:** $4.9091 (21 commits)
+- 👤 **Human dev:** ~$930 (9.3h @ $100/h, 30min dedup)
 
-Generated on 2026-04-08 using [openrouter/qwen/qwen3-coder-next](https://openrouter.ai/models/openrouter/qwen/qwen3-coder-next)
+Generated on 2026-04-20 using [openrouter/qwen/qwen3-coder-next](https://openrouter.ai/qwen/qwen3-coder-next)
 
 ---
 
@@ -30,12 +32,6 @@ Generated on 2026-04-08 using [openrouter/qwen/qwen3-coder-next](https://openrou
 - 🖱️ **Optional Click integration** for CLI decorators
 - ✨ **Optional Rich backend** for enhanced rendering
 
-## Installation
-
-```bash
-# Core package (no dependencies)
-pip install clickmd
-
 # With Click support
 pip install clickmd[click]
 
@@ -46,15 +42,11 @@ pip install clickmd[rich]
 pip install clickmd[all]
 ```
 
-## Quick Start
-
 ### Basic Usage (No Dependencies)
 
 ```python
 from clickmd import md, echo
 
-# Render markdown with syntax highlighting
-md("""
 # Hello World
 
 This is **bold** and this is a [link](https://example.com).
@@ -94,8 +86,6 @@ if __name__ == "__main__":
     cli()
 ```
 
-## Features
-
 ### Syntax Highlighting
 
 `clickmd` provides syntax highlighting for 25+ languages:
@@ -115,8 +105,6 @@ if __name__ == "__main__":
 from clickmd import md
 
 md("""
-# Heading 1
-## Heading 2
 ### Heading 3
 
 **Bold text** and regular text.
@@ -163,8 +151,6 @@ md("""
 ```
 """)
 ```
-
-## API Reference
 
 ### Core Functions (No Dependencies)
 
@@ -301,8 +287,6 @@ When `rich` is installed:
 | `CLICK_AVAILABLE: bool` | Whether Click is installed |
 | `RICH_AVAILABLE: bool` | Whether Rich is installed |
 
-## Usage Examples
-
 ### Interactive Menus
 
 ```python
@@ -402,18 +386,12 @@ clickmd/
 └── Makefile              # Dev commands
 ```
 
-## Development
-
-```bash
 # Clone the repository
 git clone https://github.com/wronai/clickmd.git
 cd clickmd
 
 # Install development dependencies
 pip install -e ".[dev,all]"
-
-# Run tests
-make test
 
 # Run linter & format
 make lint
@@ -427,9 +405,6 @@ make publish
 ## License
 
 Licensed under Apache-2.0.
-## Author
-
-Tom Sapletta
 ## Contributing
 
 Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) first.
@@ -438,3 +413,20 @@ Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md)
 
 - [Click](https://click.palletsprojects.com/) - Python CLI framework
 - [Rich](https://github.com/Textualize/rich) - Rich text and beautiful formatting
+
+<!-- taskill:status:start -->
+
+## Status
+
+_Last updated by [taskill](https://github.com/oqlos/taskill) at 2026-04-25 18:20 UTC_
+
+| Metric | Value |
+|---|---|
+| HEAD | `f7e7a83` |
+| Coverage | — |
+| Failing tests | — |
+| Commits in last cycle | 0 |
+
+> No changes since the last taskill run: there are no new commits and no changed files. TODO.md remains unchanged.
+
+<!-- taskill:status:end -->

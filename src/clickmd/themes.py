@@ -10,9 +10,9 @@ Provides customizable color themes with:
 
 Usage:
     from clickmd import set_theme, get_theme
-    
+
     set_theme("monokai")
-    
+
     # Or via environment
     # export CLICKMD_THEME=dracula
 """
@@ -21,7 +21,6 @@ import os
 import sys
 from dataclasses import dataclass, field
 from typing import Dict, Literal
-
 
 # ============================================================================
 # COLOR CODES
@@ -104,21 +103,22 @@ def _ansi_color(name: str) -> str:
 # THEME DATACLASS
 # ============================================================================
 
+
 @dataclass
 class Theme:
     """Color theme definition."""
-    
+
     name: str
-    
+
     # Text colors
     text: str = "white"
     text_dim: str = "gray"
     text_muted: str = "gray"
-    
+
     # Headings
     heading: str = "cyan"
     heading_bold: bool = True
-    
+
     # Code
     keyword: str = "magenta"
     string: str = "green"
@@ -127,28 +127,28 @@ class Theme:
     function: str = "blue"
     variable: str = "white"
     operator: str = "white"
-    
+
     # UI elements
     success: str = "green"
     warning: str = "yellow"
     error: str = "red"
     info: str = "cyan"
-    
+
     # Tables and panels
     border: str = "gray"
     border_accent: str = "cyan"
-    
+
     # Progress
     progress_fill: str = "cyan"
     progress_empty: str = "gray"
-    
+
     # Links
     link: str = "blue"
     link_url: str = "gray"
-    
+
     # Custom colors (for extension)
     custom: Dict[str, str] = field(default_factory=dict)
-    
+
     def get_color(self, name: str) -> str:
         """Get color value by name."""
         if name in self.custom:
@@ -176,7 +176,6 @@ THEMES: Dict[str, Theme] = {
         info="cyan",
         border="gray",
     ),
-    
     "monokai": Theme(
         name="monokai",
         text="white",
@@ -196,9 +195,8 @@ THEMES: Dict[str, Theme] = {
         custom={
             "class": "bright_green",
             "decorator": "bright_red",
-        }
+        },
     ),
-    
     "dracula": Theme(
         name="dracula",
         text="white",
@@ -219,9 +217,8 @@ THEMES: Dict[str, Theme] = {
         custom={
             "class": "bright_cyan",
             "constant": "bright_magenta",
-        }
+        },
     ),
-    
     "nord": Theme(
         name="nord",
         text="white",
@@ -244,9 +241,8 @@ THEMES: Dict[str, Theme] = {
             "aurora_green": "green",
             "aurora_yellow": "yellow",
             "aurora_red": "red",
-        }
+        },
     ),
-    
     "solarized_dark": Theme(
         name="solarized_dark",
         text="white",
@@ -264,7 +260,6 @@ THEMES: Dict[str, Theme] = {
         info="cyan",
         border="gray",
     ),
-    
     "solarized_light": Theme(
         name="solarized_light",
         text="black",
@@ -282,7 +277,6 @@ THEMES: Dict[str, Theme] = {
         info="cyan",
         border="gray",
     ),
-    
     "github": Theme(
         name="github",
         text="white",
@@ -300,7 +294,6 @@ THEMES: Dict[str, Theme] = {
         info="blue",
         border="gray",
     ),
-    
     "gruvbox": Theme(
         name="gruvbox",
         text="white",
@@ -331,40 +324,38 @@ _no_color: bool = False
 
 def _check_no_color() -> bool:
     """Check if NO_COLOR is set (https://no-color.org/)."""
-    return (
-        os.environ.get("NO_COLOR") is not None or
-        os.environ.get("CLICKMD_NO_COLOR") is not None
-    )
+    return os.environ.get("NO_COLOR") is not None or os.environ.get("CLICKMD_NO_COLOR") is not None
 
 
 def _detect_color_support() -> Literal["none", "basic", "256", "truecolor"]:
     """Detect terminal color support level."""
     if _check_no_color():
         return "none"
-    
+
     if not sys.stdout.isatty():
         return "none"
-    
+
     # Check COLORTERM for true color
     colorterm = os.environ.get("COLORTERM", "").lower()
     if colorterm in ("truecolor", "24bit"):
         return "truecolor"
-    
+
     # Check TERM for 256 color
     term = os.environ.get("TERM", "").lower()
     if "256color" in term or "256-color" in term:
         return "256"
-    
+
     # Check for basic color support
     if term and term != "dumb":
         return "basic"
-    
+
     return "none"
 
 
 # ============================================================================
 # PUBLIC API
 # ============================================================================
+
 
 def get_theme() -> Theme:
     """Get the current theme."""
@@ -374,26 +365,26 @@ def get_theme() -> Theme:
 def set_theme(name: str) -> None:
     """
     Set the current theme by name.
-    
+
     Args:
         name: Theme name (default, monokai, dracula, nord, solarized_dark, etc.)
-    
+
     Raises:
         ValueError: If theme name is not found
     """
     global _current_theme
-    
+
     if name not in THEMES:
         available = ", ".join(THEMES.keys())
         raise ValueError(f"Unknown theme '{name}'. Available: {available}")
-    
+
     _current_theme = THEMES[name]
 
 
 def register_theme(theme: Theme) -> None:
     """
     Register a custom theme.
-    
+
     Args:
         theme: Theme instance to register
     """
@@ -424,55 +415,55 @@ def color(
 ) -> str:
     """
     Apply color to text using current theme.
-    
+
     Args:
         name: Color name (from theme or ANSI color name)
         text: Text to colorize
         bold: Apply bold
         dim: Apply dim
         use_theme: Use theme color mapping
-    
+
     Returns:
         Colorized text string
     """
     if _check_no_color():
         return text
-    
+
     # Get color from theme if requested
     if use_theme:
         theme = get_theme()
         color_name = theme.get_color(name)
     else:
         color_name = name
-    
+
     # Build escape sequence
     codes = []
     if bold:
         codes.append("1")
     if dim:
         codes.append("2")
-    
+
     # Get color code
     if color_name in ANSI_COLORS:
         codes.append(str(ANSI_COLORS[color_name]))
     else:
         codes.append("37")  # Default to white
-    
+
     if not codes:
         return text
-    
+
     prefix = f"\x1b[{';'.join(codes)}m"
     reset = "\x1b[0m"
-    
+
     return f"{prefix}{text}{reset}"
 
 
 def init_theme_from_env() -> None:
     """Initialize theme from environment variables."""
     global _no_color
-    
+
     _no_color = _check_no_color()
-    
+
     theme_name = os.environ.get("CLICKMD_THEME", "default")
     if theme_name in THEMES:
         set_theme(theme_name)

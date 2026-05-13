@@ -10,6 +10,7 @@ Run: python examples/one_liners.py
 
 import sys
 from pathlib import Path
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import clickmd
@@ -29,7 +30,7 @@ clickmd.md("## 1. Zamień print() na clickmd\n")
 # Zamiast: print("Hello")
 clickmd.echo("Hello from clickmd!")
 
-# Zamiast: print("# Heading") 
+# Zamiast: print("# Heading")
 clickmd.md("# To jest nagłówek")
 
 # Zamiast: print("\033[92mSuccess\033[0m")
@@ -41,10 +42,10 @@ clickmd.success("Operacja udana!")
 
 clickmd.md("\n## 2. Kolorowe statusy\n")
 
-clickmd.success("Zapisano plik")      # Zielony ✅
+clickmd.success("Zapisano plik")  # Zielony ✅
 clickmd.warning("Dysk prawie pełny")  # Żółty ⚠️
-clickmd.error("Brak połączenia")      # Czerwony 🛑
-clickmd.info("Przetwarzanie...")      # Niebieski ℹ️
+clickmd.error("Brak połączenia")  # Czerwony 🛑
+clickmd.info("Przetwarzanie...")  # Niebieski ℹ️
 
 # ============================================================================
 # KOD - syntax highlighting w jednej linii
@@ -79,6 +80,7 @@ clickmd.panel("Ważna informacja!", title="Uwaga", style="warning")
 clickmd.md("\n## 6. Progress bar\n")
 
 import time
+
 for i in clickmd.progress(range(PROGRESS_ITEMS), label="Processing"):
     time.sleep(0.02)
 

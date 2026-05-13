@@ -10,16 +10,15 @@ Usage:
     python tools/test_examples_md.py --html  # Generate HTML files
 """
 
+import os
 import subprocess
 import sys
-import os
 from pathlib import Path
 
 # Add parent to path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from tools.md_to_html import markdown_to_html
-
 
 EXAMPLES = [
     ("quickstart.py", []),
@@ -42,14 +41,14 @@ def run_example(example_file: str, args: list[str] = None) -> tuple[bool, str]:
     """Run an example and capture output."""
     args = args or []
     example_path = Path(__file__).parent.parent / "examples" / example_file
-    
+
     if not example_path.exists():
         return False, f"File not found: {example_path}"
-    
+
     env = os.environ.copy()
     env["PYTHONPATH"] = str(Path(__file__).resolve().parents[2])
     env["NO_COLOR"] = "1"  # Disable ANSI colors for clean markdown
-    
+
     try:
         result = subprocess.run(
             [sys.executable, str(example_path)] + args,
@@ -68,26 +67,26 @@ def run_example(example_file: str, args: list[str] = None) -> tuple[bool, str]:
 def check_markdown_structure(content: str) -> list[str]:
     """Check markdown content for common issues."""
     issues = []
-    
+
     lines = content.split("\n")
     in_codeblock = False
     codeblock_count = 0
-    
+
     for i, line in enumerate(lines, 1):
         # Track codeblocks
         if line.strip().startswith("```"):
             in_codeblock = not in_codeblock
             codeblock_count += 1
-        
+
         # Check for unescaped box-drawing characters outside codeblocks
         box_chars = "┌┐└┘├┤┬┴┼─│"
         if not in_codeblock and any(c in line for c in box_chars):
             issues.append(f"Line {i}: Box-drawing chars outside codeblock: {line[:50]}...")
-    
+
     # Check for unclosed codeblocks
     if codeblock_count % 2 != 0:
         issues.append(f"Unclosed codeblock (found {codeblock_count} markers)")
-    
+
     return issues
 
 
@@ -95,13 +94,13 @@ def _test_html_conversion(content: str, name: str) -> tuple[bool, str]:
     """Test that markdown converts to valid HTML."""
     try:
         html = markdown_to_html(content, title=name)
-        
+
         # Basic HTML validation
         if "<html" not in html:
             return False, "Missing <html> tag"
         if "</html>" not in html:
             return False, "Missing </html> tag"
-        
+
         return True, html
     except Exception as e:
         return False, str(e)
@@ -113,60 +112,60 @@ def main() -> int:
     print("Testing clickmd Examples - Markdown Output")
     print("=" * 60)
     print()
-    
+
     generate_html = "--html" in sys.argv
     output_dir = Path(__file__).parent.parent / "examples_output"
-    
+
     if generate_html:
         output_dir.mkdir(exist_ok=True)
         print(f"HTML output directory: {output_dir}")
         print()
-    
+
     results = []
-    
+
     for example_file, args in EXAMPLES:
         name = f"{example_file}{f' {' '.join(args)}' if args else ''}"
         print(f"Testing: {name}")
-        
+
         # Run example
         success, output = run_example(example_file, args)
         if not success:
             print(f"  ❌ Failed to run: {output}")
             results.append((name, False, output))
             continue
-        
+
         # Check markdown structure
         issues = check_markdown_structure(output)
         if issues:
-            print(f"  ⚠️  Markdown issues:")
+            print("  ⚠️  Markdown issues:")
             for issue in issues[:3]:
                 print(f"      - {issue}")
             results.append((name, False, "\n".join(issues)))
             continue
-        
+
         # Test HTML conversion
         html_ok, html_result = _test_html_conversion(output, name)
         if not html_ok:
             print(f"  ❌ HTML conversion failed: {html_result}")
             results.append((name, False, html_result))
             continue
-        
+
         print(f"  ✅ OK ({len(output)} chars)")
         results.append((name, True, ""))
-        
+
         # Save files if requested
         if generate_html:
             safe_name = example_file.replace(".py", "")
             if args:
                 safe_name += "_" + "_".join(a.replace("-", "") for a in args)
-            
+
             md_file = output_dir / f"{safe_name}.md"
             html_file = output_dir / f"{safe_name}.html"
-            
+
             md_file.write_text(output)
             html_file.write_text(html_result)
             print(f"      Saved: {md_file.name}, {html_file.name}")
-    
+
     # Summary
     print()
     print("=" * 60)
@@ -174,16 +173,15 @@ def main() -> int:
     failed = len(results) - passed
     print(f"Results: {passed} passed, {failed} failed")
     print("=" * 60)
-    
+
     if failed > 0:
         print("\nFailed tests:")
         for name, ok, error in results:
             if not ok:
                 print(f"  - {name}: {error[:100]}")
         return 1
-    
+
     return 0
 
 
 sys.exit(main())
-

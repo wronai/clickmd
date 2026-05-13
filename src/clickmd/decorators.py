@@ -7,7 +7,7 @@ The core clickmd.md() and clickmd.echo() work without click.
 
 Usage:
     import clickmd
-    
+
     @clickmd.command()
     @clickmd.option("--name", "-n", type=clickmd.STRING)
     @clickmd.option("--count", "-c", type=clickmd.IntRange(1, 100))
@@ -18,7 +18,7 @@ Usage:
 
 try:
     import click as _click
-    
+
     # ==========================================================================
     # DECORATORS
     # ==========================================================================
@@ -29,13 +29,13 @@ try:
     pass_context = _click.pass_context
     pass_obj = _click.pass_obj
     make_pass_decorator = _click.make_pass_decorator
-    
+
     # Option decorators
     confirmation_option = _click.confirmation_option
     help_option = _click.help_option
     password_option = _click.password_option
     version_option = _click.version_option
-    
+
     # ==========================================================================
     # PARAMETER TYPES
     # ==========================================================================
@@ -46,7 +46,7 @@ try:
     BOOL = _click.BOOL
     UUID = _click.UUID
     UNPROCESSED = _click.UNPROCESSED
-    
+
     # Complex types
     Choice = _click.Choice
     Path = _click.Path
@@ -55,10 +55,10 @@ try:
     IntRange = _click.IntRange
     FloatRange = _click.FloatRange
     Tuple = _click.Tuple
-    
+
     # Base type class
     ParamType = _click.ParamType
-    
+
     # ==========================================================================
     # CORE CLASSES
     # ==========================================================================
@@ -70,7 +70,7 @@ try:
     Parameter = _click.Parameter
     HelpFormatter = _click.HelpFormatter
     CommandCollection = _click.CommandCollection
-    
+
     # ==========================================================================
     # UTILITY FUNCTIONS
     # ==========================================================================
@@ -81,31 +81,31 @@ try:
     unstyle = _click.unstyle
     echo_via_pager = _click.echo_via_pager
     clear = _click.clear
-    
+
     # Input
     prompt = _click.prompt
     confirm = _click.confirm
     getchar = _click.getchar
     pause = _click.pause
     edit = _click.edit
-    
+
     # Progress
     progressbar = _click.progressbar
-    
+
     # Files and paths
     open_file = _click.open_file
     format_filename = _click.format_filename
     get_app_dir = _click.get_app_dir
     get_binary_stream = _click.get_binary_stream
     get_text_stream = _click.get_text_stream
-    
+
     # Context
     get_current_context = _click.get_current_context
-    
+
     # System
     launch = _click.launch
     wrap_text = _click.wrap_text
-    
+
     # ==========================================================================
     # EXCEPTIONS
     # ==========================================================================
@@ -118,17 +118,19 @@ try:
     FileError = _click.FileError
     MissingParameter = _click.MissingParameter
     NoSuchOption = _click.NoSuchOption
-    
+
     CLICK_AVAILABLE = True
 
 except ImportError:
     _click = None  # type: ignore
     CLICK_AVAILABLE = False
-    
+
     # Stub implementations when click is not available
     def _not_available(*args, **kwargs):
-        raise ImportError("click is required for CLI decorators. Install with: pip install clickmd[click]")
-    
+        raise ImportError(
+            "click is required for CLI decorators. Install with: pip install clickmd[click]"
+        )
+
     # Decorators
     group = _not_available
     command = _not_available
@@ -141,7 +143,7 @@ except ImportError:
     help_option = _not_available
     password_option = _not_available
     version_option = _not_available
-    
+
     # Utility functions
     click_echo = _not_available
     secho = _not_available
@@ -163,12 +165,12 @@ except ImportError:
     get_current_context = _not_available
     launch = _not_available
     wrap_text = _not_available
-    
+
     # Stub classes
     class _StubClass:
         def __init__(self, *args, **kwargs):
             raise ImportError("click is required. Install with: pip install clickmd[click]")
-    
+
     # Types
     STRING = _StubClass
     INT = _StubClass
@@ -184,7 +186,7 @@ except ImportError:
     FloatRange = _StubClass
     Tuple = _StubClass
     ParamType = _StubClass
-    
+
     # Core classes
     Context = _StubClass
     Command = _StubClass
@@ -194,27 +196,43 @@ except ImportError:
     Parameter = _StubClass
     HelpFormatter = _StubClass
     CommandCollection = _StubClass
-    
+
     # Exceptions
-    class ClickException(Exception): pass
-    class Abort(Exception): pass
-    class UsageError(Exception): pass
-    class BadParameter(Exception): pass
-    class BadOptionUsage(Exception): pass
-    class BadArgumentUsage(Exception): pass
-    class FileError(Exception): pass
-    class MissingParameter(Exception): pass
-    class NoSuchOption(Exception): pass
+    class ClickException(Exception):
+        pass
+
+    class Abort(Exception):
+        pass
+
+    class UsageError(Exception):
+        pass
+
+    class BadParameter(Exception):
+        pass
+
+    class BadOptionUsage(Exception):
+        pass
+
+    class BadArgumentUsage(Exception):
+        pass
+
+    class FileError(Exception):
+        pass
+
+    class MissingParameter(Exception):
+        pass
+
+    class NoSuchOption(Exception):
+        pass
 
 
 __all__ = [
     # Meta
     "CLICK_AVAILABLE",
     "_click",
-    
     # Decorators
     "group",
-    "command", 
+    "command",
     "option",
     "argument",
     "pass_context",
@@ -224,7 +242,6 @@ __all__ = [
     "help_option",
     "password_option",
     "version_option",
-    
     # Parameter types
     "STRING",
     "INT",
@@ -240,7 +257,6 @@ __all__ = [
     "FloatRange",
     "Tuple",
     "ParamType",
-    
     # Core classes
     "Context",
     "Command",
@@ -250,7 +266,6 @@ __all__ = [
     "Parameter",
     "HelpFormatter",
     "CommandCollection",
-    
     # Utility functions
     "click_echo",
     "secho",
@@ -272,7 +287,6 @@ __all__ = [
     "get_current_context",
     "launch",
     "wrap_text",
-    
     # Exceptions
     "ClickException",
     "Abort",

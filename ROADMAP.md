@@ -187,8 +187,6 @@ Plan wdrożenia funkcji w kolejności priorytetów. Każda faza kończy się wyd
 
 ---
 
-## 🏗️ Refaktoryzacja techniczna
-
 ### Architektura
 - [ ] Wydzielenie `Parser` jako osobnej klasy
 - [ ] Wzorzec Visitor dla renderowania elementów
